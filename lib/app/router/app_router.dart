@@ -6,14 +6,16 @@ import 'package:flutter_pin_example/features/settings/view/settings_view.dart';
 import 'package:go_router/go_router.dart';
 
 final class AppRouter {
-  AppRouter();
+  AppRouter({required this.isPinEnabled});
+
+  final bool isPinEnabled;
 
   final GlobalKey<NavigatorState> _rootNavigatorKey =
       GlobalKey<NavigatorState>();
 
   late final GoRouter router = GoRouter(
     navigatorKey: _rootNavigatorKey,
-    initialLocation: '/location',
+    initialLocation: isPinEnabled ? '/pin' : '/home',
     routes: [
       GoRoute(
         path: '/pin',
