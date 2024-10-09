@@ -6,6 +6,7 @@ import 'package:flutter_pin_example/app/core/app_initializer.dart';
 import 'package:flutter_pin_example/app/dependencies/dependencies.dart';
 import 'package:flutter_pin_example/app/logging/error.dart';
 import 'package:flutter_pin_example/app/router/app_router.dart';
+import 'package:flutter_pin_example/app/widgets/inherited_dependencies.dart';
 
 void main() async {
   runZonedGuarded(
@@ -19,7 +20,10 @@ void main() async {
       final isPinCodeSet = dependencies.pinCodeController.isPinCodeSet;
       final RouterConfig<Object> router =
           AppRouter(isPinEnabled: isPinCodeSet).router;
-      runApp(App(router: router));
+      runApp(InheritedDependencies(
+        dependencies: dependencies,
+        child: App(router: router),
+      ));
     },
     logError,
   );
