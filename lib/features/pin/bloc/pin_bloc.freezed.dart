@@ -18,33 +18,51 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PinEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialize,
+    required TResult Function(String key) input,
+    required TResult Function() erase,
+    required TResult Function() giveUp,
+    required TResult Function() tryBiometrics,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialize,
+    TResult? Function(String key)? input,
+    TResult? Function()? erase,
+    TResult? Function()? giveUp,
+    TResult? Function()? tryBiometrics,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialize,
+    TResult Function(String key)? input,
+    TResult Function()? erase,
+    TResult Function()? giveUp,
+    TResult Function()? tryBiometrics,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_InitializePinEvent value) initialize,
+    required TResult Function(_InputPinEvent value) input,
+    required TResult Function(_ErasePinEvent value) erase,
+    required TResult Function(_GiveUpPinEvent value) giveUp,
+    required TResult Function(_TryBiometricsPinEvent value) tryBiometrics,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitializePinEvent value)? initialize,
+    TResult? Function(_InputPinEvent value)? input,
+    TResult? Function(_ErasePinEvent value)? erase,
+    TResult? Function(_GiveUpPinEvent value)? giveUp,
+    TResult? Function(_TryBiometricsPinEvent value)? tryBiometrics,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitializePinEvent value)? initialize,
+    TResult Function(_InputPinEvent value)? input,
+    TResult Function(_ErasePinEvent value)? erase,
+    TResult Function(_GiveUpPinEvent value)? giveUp,
+    TResult Function(_TryBiometricsPinEvent value)? tryBiometrics,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -71,18 +89,172 @@ class _$PinEventCopyWithImpl<$Res, $Val extends PinEvent>
 }
 
 /// @nodoc
-abstract class _$$InitializePinEventImplCopyWith<$Res> {
-  factory _$$InitializePinEventImplCopyWith(_$InitializePinEventImpl value,
-          $Res Function(_$InitializePinEventImpl) then) =
-      __$$InitializePinEventImplCopyWithImpl<$Res>;
+abstract class _$$InputPinEventImplCopyWith<$Res> {
+  factory _$$InputPinEventImplCopyWith(
+          _$InputPinEventImpl value, $Res Function(_$InputPinEventImpl) then) =
+      __$$InputPinEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String key});
 }
 
 /// @nodoc
-class __$$InitializePinEventImplCopyWithImpl<$Res>
-    extends _$PinEventCopyWithImpl<$Res, _$InitializePinEventImpl>
-    implements _$$InitializePinEventImplCopyWith<$Res> {
-  __$$InitializePinEventImplCopyWithImpl(_$InitializePinEventImpl _value,
-      $Res Function(_$InitializePinEventImpl) _then)
+class __$$InputPinEventImplCopyWithImpl<$Res>
+    extends _$PinEventCopyWithImpl<$Res, _$InputPinEventImpl>
+    implements _$$InputPinEventImplCopyWith<$Res> {
+  __$$InputPinEventImplCopyWithImpl(
+      _$InputPinEventImpl _value, $Res Function(_$InputPinEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PinEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? key = null,
+  }) {
+    return _then(_$InputPinEventImpl(
+      key: null == key
+          ? _value.key
+          : key // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$InputPinEventImpl extends _InputPinEvent {
+  const _$InputPinEventImpl({required this.key}) : super._();
+
+  @override
+  final String key;
+
+  @override
+  String toString() {
+    return 'PinEvent.input(key: $key)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$InputPinEventImpl &&
+            (identical(other.key, key) || other.key == key));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, key);
+
+  /// Create a copy of PinEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$InputPinEventImplCopyWith<_$InputPinEventImpl> get copyWith =>
+      __$$InputPinEventImplCopyWithImpl<_$InputPinEventImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String key) input,
+    required TResult Function() erase,
+    required TResult Function() giveUp,
+    required TResult Function() tryBiometrics,
+  }) {
+    return input(key);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String key)? input,
+    TResult? Function()? erase,
+    TResult? Function()? giveUp,
+    TResult? Function()? tryBiometrics,
+  }) {
+    return input?.call(key);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String key)? input,
+    TResult Function()? erase,
+    TResult Function()? giveUp,
+    TResult Function()? tryBiometrics,
+    required TResult orElse(),
+  }) {
+    if (input != null) {
+      return input(key);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InputPinEvent value) input,
+    required TResult Function(_ErasePinEvent value) erase,
+    required TResult Function(_GiveUpPinEvent value) giveUp,
+    required TResult Function(_TryBiometricsPinEvent value) tryBiometrics,
+  }) {
+    return input(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InputPinEvent value)? input,
+    TResult? Function(_ErasePinEvent value)? erase,
+    TResult? Function(_GiveUpPinEvent value)? giveUp,
+    TResult? Function(_TryBiometricsPinEvent value)? tryBiometrics,
+  }) {
+    return input?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InputPinEvent value)? input,
+    TResult Function(_ErasePinEvent value)? erase,
+    TResult Function(_GiveUpPinEvent value)? giveUp,
+    TResult Function(_TryBiometricsPinEvent value)? tryBiometrics,
+    required TResult orElse(),
+  }) {
+    if (input != null) {
+      return input(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _InputPinEvent extends PinEvent {
+  const factory _InputPinEvent({required final String key}) =
+      _$InputPinEventImpl;
+  const _InputPinEvent._() : super._();
+
+  String get key;
+
+  /// Create a copy of PinEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$InputPinEventImplCopyWith<_$InputPinEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ErasePinEventImplCopyWith<$Res> {
+  factory _$$ErasePinEventImplCopyWith(
+          _$ErasePinEventImpl value, $Res Function(_$ErasePinEventImpl) then) =
+      __$$ErasePinEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ErasePinEventImplCopyWithImpl<$Res>
+    extends _$PinEventCopyWithImpl<$Res, _$ErasePinEventImpl>
+    implements _$$ErasePinEventImplCopyWith<$Res> {
+  __$$ErasePinEventImplCopyWithImpl(
+      _$ErasePinEventImpl _value, $Res Function(_$ErasePinEventImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of PinEvent
@@ -91,18 +263,18 @@ class __$$InitializePinEventImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitializePinEventImpl extends _InitializePinEvent {
-  const _$InitializePinEventImpl() : super._();
+class _$ErasePinEventImpl extends _ErasePinEvent {
+  const _$ErasePinEventImpl() : super._();
 
   @override
   String toString() {
-    return 'PinEvent.initialize()';
+    return 'PinEvent.erase()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitializePinEventImpl);
+        (other.runtimeType == runtimeType && other is _$ErasePinEventImpl);
   }
 
   @override
@@ -111,27 +283,36 @@ class _$InitializePinEventImpl extends _InitializePinEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initialize,
+    required TResult Function(String key) input,
+    required TResult Function() erase,
+    required TResult Function() giveUp,
+    required TResult Function() tryBiometrics,
   }) {
-    return initialize();
+    return erase();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialize,
+    TResult? Function(String key)? input,
+    TResult? Function()? erase,
+    TResult? Function()? giveUp,
+    TResult? Function()? tryBiometrics,
   }) {
-    return initialize?.call();
+    return erase?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialize,
+    TResult Function(String key)? input,
+    TResult Function()? erase,
+    TResult Function()? giveUp,
+    TResult Function()? tryBiometrics,
     required TResult orElse(),
   }) {
-    if (initialize != null) {
-      return initialize();
+    if (erase != null) {
+      return erase();
     }
     return orElse();
   }
@@ -139,144 +320,79 @@ class _$InitializePinEventImpl extends _InitializePinEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_InitializePinEvent value) initialize,
+    required TResult Function(_InputPinEvent value) input,
+    required TResult Function(_ErasePinEvent value) erase,
+    required TResult Function(_GiveUpPinEvent value) giveUp,
+    required TResult Function(_TryBiometricsPinEvent value) tryBiometrics,
   }) {
-    return initialize(this);
+    return erase(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitializePinEvent value)? initialize,
+    TResult? Function(_InputPinEvent value)? input,
+    TResult? Function(_ErasePinEvent value)? erase,
+    TResult? Function(_GiveUpPinEvent value)? giveUp,
+    TResult? Function(_TryBiometricsPinEvent value)? tryBiometrics,
   }) {
-    return initialize?.call(this);
+    return erase?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitializePinEvent value)? initialize,
+    TResult Function(_InputPinEvent value)? input,
+    TResult Function(_ErasePinEvent value)? erase,
+    TResult Function(_GiveUpPinEvent value)? giveUp,
+    TResult Function(_TryBiometricsPinEvent value)? tryBiometrics,
     required TResult orElse(),
   }) {
-    if (initialize != null) {
-      return initialize(this);
+    if (erase != null) {
+      return erase(this);
     }
     return orElse();
   }
 }
 
-abstract class _InitializePinEvent extends PinEvent {
-  const factory _InitializePinEvent() = _$InitializePinEventImpl;
-  const _InitializePinEvent._() : super._();
+abstract class _ErasePinEvent extends PinEvent {
+  const factory _ErasePinEvent() = _$ErasePinEventImpl;
+  const _ErasePinEvent._() : super._();
 }
 
 /// @nodoc
-mixin _$PinState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() idle,
-    required TResult Function(String message) error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function()? idle,
-    TResult? Function(String message)? error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? idle,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_InitialPinState value) initial,
-    required TResult Function(_LoadingPinState value) loading,
-    required TResult Function(_IdlePinState value) idle,
-    required TResult Function(_ErrorPinState value) error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitialPinState value)? initial,
-    TResult? Function(_LoadingPinState value)? loading,
-    TResult? Function(_IdlePinState value)? idle,
-    TResult? Function(_ErrorPinState value)? error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitialPinState value)? initial,
-    TResult Function(_LoadingPinState value)? loading,
-    TResult Function(_IdlePinState value)? idle,
-    TResult Function(_ErrorPinState value)? error,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+abstract class _$$GiveUpPinEventImplCopyWith<$Res> {
+  factory _$$GiveUpPinEventImplCopyWith(_$GiveUpPinEventImpl value,
+          $Res Function(_$GiveUpPinEventImpl) then) =
+      __$$GiveUpPinEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-abstract class $PinStateCopyWith<$Res> {
-  factory $PinStateCopyWith(PinState value, $Res Function(PinState) then) =
-      _$PinStateCopyWithImpl<$Res, PinState>;
-}
-
-/// @nodoc
-class _$PinStateCopyWithImpl<$Res, $Val extends PinState>
-    implements $PinStateCopyWith<$Res> {
-  _$PinStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of PinState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-abstract class _$$InitialPinStateImplCopyWith<$Res> {
-  factory _$$InitialPinStateImplCopyWith(_$InitialPinStateImpl value,
-          $Res Function(_$InitialPinStateImpl) then) =
-      __$$InitialPinStateImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$InitialPinStateImplCopyWithImpl<$Res>
-    extends _$PinStateCopyWithImpl<$Res, _$InitialPinStateImpl>
-    implements _$$InitialPinStateImplCopyWith<$Res> {
-  __$$InitialPinStateImplCopyWithImpl(
-      _$InitialPinStateImpl _value, $Res Function(_$InitialPinStateImpl) _then)
+class __$$GiveUpPinEventImplCopyWithImpl<$Res>
+    extends _$PinEventCopyWithImpl<$Res, _$GiveUpPinEventImpl>
+    implements _$$GiveUpPinEventImplCopyWith<$Res> {
+  __$$GiveUpPinEventImplCopyWithImpl(
+      _$GiveUpPinEventImpl _value, $Res Function(_$GiveUpPinEventImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of PinState
+  /// Create a copy of PinEvent
   /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$InitialPinStateImpl extends _InitialPinState {
-  const _$InitialPinStateImpl() : super._();
+class _$GiveUpPinEventImpl extends _GiveUpPinEvent {
+  const _$GiveUpPinEventImpl() : super._();
 
   @override
   String toString() {
-    return 'PinState.initial()';
+    return 'PinEvent.giveUp()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitialPinStateImpl);
+        (other.runtimeType == runtimeType && other is _$GiveUpPinEventImpl);
   }
 
   @override
@@ -285,36 +401,36 @@ class _$InitialPinStateImpl extends _InitialPinState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() idle,
-    required TResult Function(String message) error,
+    required TResult Function(String key) input,
+    required TResult Function() erase,
+    required TResult Function() giveUp,
+    required TResult Function() tryBiometrics,
   }) {
-    return initial();
+    return giveUp();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function()? idle,
-    TResult? Function(String message)? error,
+    TResult? Function(String key)? input,
+    TResult? Function()? erase,
+    TResult? Function()? giveUp,
+    TResult? Function()? tryBiometrics,
   }) {
-    return initial?.call();
+    return giveUp?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? idle,
-    TResult Function(String message)? error,
+    TResult Function(String key)? input,
+    TResult Function()? erase,
+    TResult Function()? giveUp,
+    TResult Function()? tryBiometrics,
     required TResult orElse(),
   }) {
-    if (initial != null) {
-      return initial();
+    if (giveUp != null) {
+      return giveUp();
     }
     return orElse();
   }
@@ -322,380 +438,119 @@ class _$InitialPinStateImpl extends _InitialPinState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_InitialPinState value) initial,
-    required TResult Function(_LoadingPinState value) loading,
-    required TResult Function(_IdlePinState value) idle,
-    required TResult Function(_ErrorPinState value) error,
+    required TResult Function(_InputPinEvent value) input,
+    required TResult Function(_ErasePinEvent value) erase,
+    required TResult Function(_GiveUpPinEvent value) giveUp,
+    required TResult Function(_TryBiometricsPinEvent value) tryBiometrics,
   }) {
-    return initial(this);
+    return giveUp(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitialPinState value)? initial,
-    TResult? Function(_LoadingPinState value)? loading,
-    TResult? Function(_IdlePinState value)? idle,
-    TResult? Function(_ErrorPinState value)? error,
+    TResult? Function(_InputPinEvent value)? input,
+    TResult? Function(_ErasePinEvent value)? erase,
+    TResult? Function(_GiveUpPinEvent value)? giveUp,
+    TResult? Function(_TryBiometricsPinEvent value)? tryBiometrics,
   }) {
-    return initial?.call(this);
+    return giveUp?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitialPinState value)? initial,
-    TResult Function(_LoadingPinState value)? loading,
-    TResult Function(_IdlePinState value)? idle,
-    TResult Function(_ErrorPinState value)? error,
+    TResult Function(_InputPinEvent value)? input,
+    TResult Function(_ErasePinEvent value)? erase,
+    TResult Function(_GiveUpPinEvent value)? giveUp,
+    TResult Function(_TryBiometricsPinEvent value)? tryBiometrics,
     required TResult orElse(),
   }) {
-    if (initial != null) {
-      return initial(this);
+    if (giveUp != null) {
+      return giveUp(this);
     }
     return orElse();
   }
 }
 
-abstract class _InitialPinState extends PinState {
-  const factory _InitialPinState() = _$InitialPinStateImpl;
-  const _InitialPinState._() : super._();
+abstract class _GiveUpPinEvent extends PinEvent {
+  const factory _GiveUpPinEvent() = _$GiveUpPinEventImpl;
+  const _GiveUpPinEvent._() : super._();
 }
 
 /// @nodoc
-abstract class _$$LoadingPinStateImplCopyWith<$Res> {
-  factory _$$LoadingPinStateImplCopyWith(_$LoadingPinStateImpl value,
-          $Res Function(_$LoadingPinStateImpl) then) =
-      __$$LoadingPinStateImplCopyWithImpl<$Res>;
+abstract class _$$TryBiometricsPinEventImplCopyWith<$Res> {
+  factory _$$TryBiometricsPinEventImplCopyWith(
+          _$TryBiometricsPinEventImpl value,
+          $Res Function(_$TryBiometricsPinEventImpl) then) =
+      __$$TryBiometricsPinEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LoadingPinStateImplCopyWithImpl<$Res>
-    extends _$PinStateCopyWithImpl<$Res, _$LoadingPinStateImpl>
-    implements _$$LoadingPinStateImplCopyWith<$Res> {
-  __$$LoadingPinStateImplCopyWithImpl(
-      _$LoadingPinStateImpl _value, $Res Function(_$LoadingPinStateImpl) _then)
+class __$$TryBiometricsPinEventImplCopyWithImpl<$Res>
+    extends _$PinEventCopyWithImpl<$Res, _$TryBiometricsPinEventImpl>
+    implements _$$TryBiometricsPinEventImplCopyWith<$Res> {
+  __$$TryBiometricsPinEventImplCopyWithImpl(_$TryBiometricsPinEventImpl _value,
+      $Res Function(_$TryBiometricsPinEventImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of PinState
+  /// Create a copy of PinEvent
   /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$LoadingPinStateImpl extends _LoadingPinState {
-  const _$LoadingPinStateImpl() : super._();
+class _$TryBiometricsPinEventImpl extends _TryBiometricsPinEvent {
+  const _$TryBiometricsPinEventImpl() : super._();
 
   @override
   String toString() {
-    return 'PinState.loading()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadingPinStateImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() idle,
-    required TResult Function(String message) error,
-  }) {
-    return loading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function()? idle,
-    TResult? Function(String message)? error,
-  }) {
-    return loading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? idle,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_InitialPinState value) initial,
-    required TResult Function(_LoadingPinState value) loading,
-    required TResult Function(_IdlePinState value) idle,
-    required TResult Function(_ErrorPinState value) error,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitialPinState value)? initial,
-    TResult? Function(_LoadingPinState value)? loading,
-    TResult? Function(_IdlePinState value)? idle,
-    TResult? Function(_ErrorPinState value)? error,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitialPinState value)? initial,
-    TResult Function(_LoadingPinState value)? loading,
-    TResult Function(_IdlePinState value)? idle,
-    TResult Function(_ErrorPinState value)? error,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _LoadingPinState extends PinState {
-  const factory _LoadingPinState() = _$LoadingPinStateImpl;
-  const _LoadingPinState._() : super._();
-}
-
-/// @nodoc
-abstract class _$$IdlePinStateImplCopyWith<$Res> {
-  factory _$$IdlePinStateImplCopyWith(
-          _$IdlePinStateImpl value, $Res Function(_$IdlePinStateImpl) then) =
-      __$$IdlePinStateImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$IdlePinStateImplCopyWithImpl<$Res>
-    extends _$PinStateCopyWithImpl<$Res, _$IdlePinStateImpl>
-    implements _$$IdlePinStateImplCopyWith<$Res> {
-  __$$IdlePinStateImplCopyWithImpl(
-      _$IdlePinStateImpl _value, $Res Function(_$IdlePinStateImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of PinState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$IdlePinStateImpl extends _IdlePinState {
-  const _$IdlePinStateImpl() : super._();
-
-  @override
-  String toString() {
-    return 'PinState.idle()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$IdlePinStateImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() idle,
-    required TResult Function(String message) error,
-  }) {
-    return idle();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function()? idle,
-    TResult? Function(String message)? error,
-  }) {
-    return idle?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? idle,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) {
-    if (idle != null) {
-      return idle();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_InitialPinState value) initial,
-    required TResult Function(_LoadingPinState value) loading,
-    required TResult Function(_IdlePinState value) idle,
-    required TResult Function(_ErrorPinState value) error,
-  }) {
-    return idle(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitialPinState value)? initial,
-    TResult? Function(_LoadingPinState value)? loading,
-    TResult? Function(_IdlePinState value)? idle,
-    TResult? Function(_ErrorPinState value)? error,
-  }) {
-    return idle?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitialPinState value)? initial,
-    TResult Function(_LoadingPinState value)? loading,
-    TResult Function(_IdlePinState value)? idle,
-    TResult Function(_ErrorPinState value)? error,
-    required TResult orElse(),
-  }) {
-    if (idle != null) {
-      return idle(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _IdlePinState extends PinState {
-  const factory _IdlePinState() = _$IdlePinStateImpl;
-  const _IdlePinState._() : super._();
-}
-
-/// @nodoc
-abstract class _$$ErrorPinStateImplCopyWith<$Res> {
-  factory _$$ErrorPinStateImplCopyWith(
-          _$ErrorPinStateImpl value, $Res Function(_$ErrorPinStateImpl) then) =
-      __$$ErrorPinStateImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String message});
-}
-
-/// @nodoc
-class __$$ErrorPinStateImplCopyWithImpl<$Res>
-    extends _$PinStateCopyWithImpl<$Res, _$ErrorPinStateImpl>
-    implements _$$ErrorPinStateImplCopyWith<$Res> {
-  __$$ErrorPinStateImplCopyWithImpl(
-      _$ErrorPinStateImpl _value, $Res Function(_$ErrorPinStateImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of PinState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$ErrorPinStateImpl(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$ErrorPinStateImpl extends _ErrorPinState {
-  const _$ErrorPinStateImpl({required this.message}) : super._();
-
-  @override
-  final String message;
-
-  @override
-  String toString() {
-    return 'PinState.error(message: $message)';
+    return 'PinEvent.tryBiometrics()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ErrorPinStateImpl &&
-            (identical(other.message, message) || other.message == message));
+            other is _$TryBiometricsPinEventImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message);
-
-  /// Create a copy of PinState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ErrorPinStateImplCopyWith<_$ErrorPinStateImpl> get copyWith =>
-      __$$ErrorPinStateImplCopyWithImpl<_$ErrorPinStateImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() idle,
-    required TResult Function(String message) error,
+    required TResult Function(String key) input,
+    required TResult Function() erase,
+    required TResult Function() giveUp,
+    required TResult Function() tryBiometrics,
   }) {
-    return error(message);
+    return tryBiometrics();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function()? idle,
-    TResult? Function(String message)? error,
+    TResult? Function(String key)? input,
+    TResult? Function()? erase,
+    TResult? Function()? giveUp,
+    TResult? Function()? tryBiometrics,
   }) {
-    return error?.call(message);
+    return tryBiometrics?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? idle,
-    TResult Function(String message)? error,
+    TResult Function(String key)? input,
+    TResult Function()? erase,
+    TResult Function()? giveUp,
+    TResult Function()? tryBiometrics,
     required TResult orElse(),
   }) {
-    if (error != null) {
-      return error(message);
+    if (tryBiometrics != null) {
+      return tryBiometrics();
     }
     return orElse();
   }
@@ -703,53 +558,44 @@ class _$ErrorPinStateImpl extends _ErrorPinState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_InitialPinState value) initial,
-    required TResult Function(_LoadingPinState value) loading,
-    required TResult Function(_IdlePinState value) idle,
-    required TResult Function(_ErrorPinState value) error,
+    required TResult Function(_InputPinEvent value) input,
+    required TResult Function(_ErasePinEvent value) erase,
+    required TResult Function(_GiveUpPinEvent value) giveUp,
+    required TResult Function(_TryBiometricsPinEvent value) tryBiometrics,
   }) {
-    return error(this);
+    return tryBiometrics(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitialPinState value)? initial,
-    TResult? Function(_LoadingPinState value)? loading,
-    TResult? Function(_IdlePinState value)? idle,
-    TResult? Function(_ErrorPinState value)? error,
+    TResult? Function(_InputPinEvent value)? input,
+    TResult? Function(_ErasePinEvent value)? erase,
+    TResult? Function(_GiveUpPinEvent value)? giveUp,
+    TResult? Function(_TryBiometricsPinEvent value)? tryBiometrics,
   }) {
-    return error?.call(this);
+    return tryBiometrics?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitialPinState value)? initial,
-    TResult Function(_LoadingPinState value)? loading,
-    TResult Function(_IdlePinState value)? idle,
-    TResult Function(_ErrorPinState value)? error,
+    TResult Function(_InputPinEvent value)? input,
+    TResult Function(_ErasePinEvent value)? erase,
+    TResult Function(_GiveUpPinEvent value)? giveUp,
+    TResult Function(_TryBiometricsPinEvent value)? tryBiometrics,
     required TResult orElse(),
   }) {
-    if (error != null) {
-      return error(this);
+    if (tryBiometrics != null) {
+      return tryBiometrics(this);
     }
     return orElse();
   }
 }
 
-abstract class _ErrorPinState extends PinState {
-  const factory _ErrorPinState({required final String message}) =
-      _$ErrorPinStateImpl;
-  const _ErrorPinState._() : super._();
-
-  String get message;
-
-  /// Create a copy of PinState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ErrorPinStateImplCopyWith<_$ErrorPinStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+abstract class _TryBiometricsPinEvent extends PinEvent {
+  const factory _TryBiometricsPinEvent() = _$TryBiometricsPinEventImpl;
+  const _TryBiometricsPinEvent._() : super._();
 }
 
 /// @nodoc
@@ -907,4 +753,526 @@ class _$ErrorPinSideEffectImpl extends _ErrorPinSideEffect {
 abstract class _ErrorPinSideEffect extends PinSideEffect {
   const factory _ErrorPinSideEffect() = _$ErrorPinSideEffectImpl;
   const _ErrorPinSideEffect._() : super._();
+}
+
+/// @nodoc
+mixin _$PinState {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String pin) idle,
+    required TResult Function(String pin, String? message) error,
+    required TResult Function(Duration timeoutDuration) timeout,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String pin)? idle,
+    TResult? Function(String pin, String? message)? error,
+    TResult? Function(Duration timeoutDuration)? timeout,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String pin)? idle,
+    TResult Function(String pin, String? message)? error,
+    TResult Function(Duration timeoutDuration)? timeout,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_IdlePinState value) idle,
+    required TResult Function(_ErrorPinState value) error,
+    required TResult Function(_TimeoutPinState value) timeout,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_IdlePinState value)? idle,
+    TResult? Function(_ErrorPinState value)? error,
+    TResult? Function(_TimeoutPinState value)? timeout,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_IdlePinState value)? idle,
+    TResult Function(_ErrorPinState value)? error,
+    TResult Function(_TimeoutPinState value)? timeout,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PinStateCopyWith<$Res> {
+  factory $PinStateCopyWith(PinState value, $Res Function(PinState) then) =
+      _$PinStateCopyWithImpl<$Res, PinState>;
+}
+
+/// @nodoc
+class _$PinStateCopyWithImpl<$Res, $Val extends PinState>
+    implements $PinStateCopyWith<$Res> {
+  _$PinStateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of PinState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$IdlePinStateImplCopyWith<$Res> {
+  factory _$$IdlePinStateImplCopyWith(
+          _$IdlePinStateImpl value, $Res Function(_$IdlePinStateImpl) then) =
+      __$$IdlePinStateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String pin});
+}
+
+/// @nodoc
+class __$$IdlePinStateImplCopyWithImpl<$Res>
+    extends _$PinStateCopyWithImpl<$Res, _$IdlePinStateImpl>
+    implements _$$IdlePinStateImplCopyWith<$Res> {
+  __$$IdlePinStateImplCopyWithImpl(
+      _$IdlePinStateImpl _value, $Res Function(_$IdlePinStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PinState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? pin = null,
+  }) {
+    return _then(_$IdlePinStateImpl(
+      pin: null == pin
+          ? _value.pin
+          : pin // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$IdlePinStateImpl extends _IdlePinState {
+  const _$IdlePinStateImpl({required this.pin}) : super._();
+
+  @override
+  final String pin;
+
+  @override
+  String toString() {
+    return 'PinState.idle(pin: $pin)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$IdlePinStateImpl &&
+            (identical(other.pin, pin) || other.pin == pin));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, pin);
+
+  /// Create a copy of PinState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$IdlePinStateImplCopyWith<_$IdlePinStateImpl> get copyWith =>
+      __$$IdlePinStateImplCopyWithImpl<_$IdlePinStateImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String pin) idle,
+    required TResult Function(String pin, String? message) error,
+    required TResult Function(Duration timeoutDuration) timeout,
+  }) {
+    return idle(pin);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String pin)? idle,
+    TResult? Function(String pin, String? message)? error,
+    TResult? Function(Duration timeoutDuration)? timeout,
+  }) {
+    return idle?.call(pin);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String pin)? idle,
+    TResult Function(String pin, String? message)? error,
+    TResult Function(Duration timeoutDuration)? timeout,
+    required TResult orElse(),
+  }) {
+    if (idle != null) {
+      return idle(pin);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_IdlePinState value) idle,
+    required TResult Function(_ErrorPinState value) error,
+    required TResult Function(_TimeoutPinState value) timeout,
+  }) {
+    return idle(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_IdlePinState value)? idle,
+    TResult? Function(_ErrorPinState value)? error,
+    TResult? Function(_TimeoutPinState value)? timeout,
+  }) {
+    return idle?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_IdlePinState value)? idle,
+    TResult Function(_ErrorPinState value)? error,
+    TResult Function(_TimeoutPinState value)? timeout,
+    required TResult orElse(),
+  }) {
+    if (idle != null) {
+      return idle(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _IdlePinState extends PinState {
+  const factory _IdlePinState({required final String pin}) = _$IdlePinStateImpl;
+  const _IdlePinState._() : super._();
+
+  String get pin;
+
+  /// Create a copy of PinState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$IdlePinStateImplCopyWith<_$IdlePinStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ErrorPinStateImplCopyWith<$Res> {
+  factory _$$ErrorPinStateImplCopyWith(
+          _$ErrorPinStateImpl value, $Res Function(_$ErrorPinStateImpl) then) =
+      __$$ErrorPinStateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String pin, String? message});
+}
+
+/// @nodoc
+class __$$ErrorPinStateImplCopyWithImpl<$Res>
+    extends _$PinStateCopyWithImpl<$Res, _$ErrorPinStateImpl>
+    implements _$$ErrorPinStateImplCopyWith<$Res> {
+  __$$ErrorPinStateImplCopyWithImpl(
+      _$ErrorPinStateImpl _value, $Res Function(_$ErrorPinStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PinState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? pin = null,
+    Object? message = freezed,
+  }) {
+    return _then(_$ErrorPinStateImpl(
+      pin: null == pin
+          ? _value.pin
+          : pin // ignore: cast_nullable_to_non_nullable
+              as String,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ErrorPinStateImpl extends _ErrorPinState {
+  const _$ErrorPinStateImpl({required this.pin, this.message}) : super._();
+
+  @override
+  final String pin;
+  @override
+  final String? message;
+
+  @override
+  String toString() {
+    return 'PinState.error(pin: $pin, message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ErrorPinStateImpl &&
+            (identical(other.pin, pin) || other.pin == pin) &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, pin, message);
+
+  /// Create a copy of PinState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ErrorPinStateImplCopyWith<_$ErrorPinStateImpl> get copyWith =>
+      __$$ErrorPinStateImplCopyWithImpl<_$ErrorPinStateImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String pin) idle,
+    required TResult Function(String pin, String? message) error,
+    required TResult Function(Duration timeoutDuration) timeout,
+  }) {
+    return error(pin, message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String pin)? idle,
+    TResult? Function(String pin, String? message)? error,
+    TResult? Function(Duration timeoutDuration)? timeout,
+  }) {
+    return error?.call(pin, message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String pin)? idle,
+    TResult Function(String pin, String? message)? error,
+    TResult Function(Duration timeoutDuration)? timeout,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(pin, message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_IdlePinState value) idle,
+    required TResult Function(_ErrorPinState value) error,
+    required TResult Function(_TimeoutPinState value) timeout,
+  }) {
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_IdlePinState value)? idle,
+    TResult? Function(_ErrorPinState value)? error,
+    TResult? Function(_TimeoutPinState value)? timeout,
+  }) {
+    return error?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_IdlePinState value)? idle,
+    TResult Function(_ErrorPinState value)? error,
+    TResult Function(_TimeoutPinState value)? timeout,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ErrorPinState extends PinState {
+  const factory _ErrorPinState(
+      {required final String pin, final String? message}) = _$ErrorPinStateImpl;
+  const _ErrorPinState._() : super._();
+
+  String get pin;
+  String? get message;
+
+  /// Create a copy of PinState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ErrorPinStateImplCopyWith<_$ErrorPinStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$TimeoutPinStateImplCopyWith<$Res> {
+  factory _$$TimeoutPinStateImplCopyWith(_$TimeoutPinStateImpl value,
+          $Res Function(_$TimeoutPinStateImpl) then) =
+      __$$TimeoutPinStateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Duration timeoutDuration});
+}
+
+/// @nodoc
+class __$$TimeoutPinStateImplCopyWithImpl<$Res>
+    extends _$PinStateCopyWithImpl<$Res, _$TimeoutPinStateImpl>
+    implements _$$TimeoutPinStateImplCopyWith<$Res> {
+  __$$TimeoutPinStateImplCopyWithImpl(
+      _$TimeoutPinStateImpl _value, $Res Function(_$TimeoutPinStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PinState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? timeoutDuration = null,
+  }) {
+    return _then(_$TimeoutPinStateImpl(
+      timeoutDuration: null == timeoutDuration
+          ? _value.timeoutDuration
+          : timeoutDuration // ignore: cast_nullable_to_non_nullable
+              as Duration,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$TimeoutPinStateImpl extends _TimeoutPinState {
+  const _$TimeoutPinStateImpl({required this.timeoutDuration}) : super._();
+
+  @override
+  final Duration timeoutDuration;
+
+  @override
+  String toString() {
+    return 'PinState.timeout(timeoutDuration: $timeoutDuration)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TimeoutPinStateImpl &&
+            (identical(other.timeoutDuration, timeoutDuration) ||
+                other.timeoutDuration == timeoutDuration));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, timeoutDuration);
+
+  /// Create a copy of PinState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TimeoutPinStateImplCopyWith<_$TimeoutPinStateImpl> get copyWith =>
+      __$$TimeoutPinStateImplCopyWithImpl<_$TimeoutPinStateImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String pin) idle,
+    required TResult Function(String pin, String? message) error,
+    required TResult Function(Duration timeoutDuration) timeout,
+  }) {
+    return timeout(timeoutDuration);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String pin)? idle,
+    TResult? Function(String pin, String? message)? error,
+    TResult? Function(Duration timeoutDuration)? timeout,
+  }) {
+    return timeout?.call(timeoutDuration);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String pin)? idle,
+    TResult Function(String pin, String? message)? error,
+    TResult Function(Duration timeoutDuration)? timeout,
+    required TResult orElse(),
+  }) {
+    if (timeout != null) {
+      return timeout(timeoutDuration);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_IdlePinState value) idle,
+    required TResult Function(_ErrorPinState value) error,
+    required TResult Function(_TimeoutPinState value) timeout,
+  }) {
+    return timeout(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_IdlePinState value)? idle,
+    TResult? Function(_ErrorPinState value)? error,
+    TResult? Function(_TimeoutPinState value)? timeout,
+  }) {
+    return timeout?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_IdlePinState value)? idle,
+    TResult Function(_ErrorPinState value)? error,
+    TResult Function(_TimeoutPinState value)? timeout,
+    required TResult orElse(),
+  }) {
+    if (timeout != null) {
+      return timeout(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _TimeoutPinState extends PinState {
+  const factory _TimeoutPinState({required final Duration timeoutDuration}) =
+      _$TimeoutPinStateImpl;
+  const _TimeoutPinState._() : super._();
+
+  Duration get timeoutDuration;
+
+  /// Create a copy of PinState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TimeoutPinStateImplCopyWith<_$TimeoutPinStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

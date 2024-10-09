@@ -17,7 +17,6 @@ class App extends StatelessWidget {
       routerConfig: router,
       builder: (context, child) {
         return HiddenLogo(
-          body: child!,
           notchBuilder: (context, constraints) {
             return NotchLogoBuilder(
               width: constraints.maxWidth,
@@ -30,6 +29,7 @@ class App extends StatelessWidget {
               height: constraints.maxHeight,
             );
           },
+          body: child!,
         );
       },
     );

@@ -1,12 +1,9 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_pin_example/app/extensions/num.dart';
 import 'package:flutter_pin_example/app/widgets/inherited_dependencies.dart';
-import 'package:flutter_pin_example/features/pin/bloc/pin_bloc.dart';
 import 'package:flutter_pin_example/features/settings/bloc/settings_bloc.dart';
-import 'package:intl/intl.dart';
+import 'package:pin/pin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 typedef _InitializationStep = FutureOr<void> Function(
@@ -19,7 +16,8 @@ abstract interface class Dependencies {
 
   abstract final SharedPreferences prefs;
 
-  abstract final PinBloc pinBloc;
+  abstract final PinCodeController pinCodeController;
+
   abstract final SettingsBloc settingsBloc;
 }
 
@@ -28,7 +26,7 @@ final class DevDependencies implements Dependencies {
   late final SharedPreferences prefs;
 
   @override
-  late final PinBloc pinBloc;
+  late final PinCodeController pinCodeController;
 
   @override
   late final SettingsBloc settingsBloc;
@@ -43,11 +41,6 @@ final class DevDependencies implements Dependencies {
       currentStep++;
       final progress = currentStep / totalSteps;
       onProgress?.call(progress, step.key);
-      if (kDebugMode) {
-        debugPrint(
-          'Initialization | ${currentStep.formatted}/${totalSteps.formatted} (${NumberFormat.percentPattern().format(progress)}) | "${step.key}"',
-        );
-      }
       await step.value(dependencies);
     }
     return dependencies;
@@ -56,7 +49,14 @@ final class DevDependencies implements Dependencies {
   static final Map<String, _InitializationStep> _initializationSteps = {
     'Shared preferences initialization': (dependencies) async =>
         dependencies.prefs = await SharedPreferences.getInstance(),
+    'Pin code controller initialization': (dependencies) async {
+      dependencies.pinCodeController = PinCodeController();
+      await dependencies.pinCodeController.initialize();
+    },
+    'Settings initialization': (dependencies) async {
+      dependencies.settingsBloc = SettingsBloc(
+        pinCodeController: dependencies.pinCodeController,
+      );
+    },
   };
 }
-
-enum DependenciesType { dev, test }

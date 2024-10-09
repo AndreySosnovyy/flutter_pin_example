@@ -16,13 +16,11 @@ void main() async {
             dependencies = initializedDependencies,
         onError: logError,
       );
-
-      final RouterConfig<Object> router = AppRouter(isPinEnabled: false).router;
+      final isPinCodeSet = dependencies.pinCodeController.isPinCodeSet;
+      final RouterConfig<Object> router =
+          AppRouter(isPinEnabled: isPinCodeSet).router;
       runApp(App(router: router));
     },
-    (error, stackTrace) {
-      debugPrint(error.toString());
-      debugPrint(stackTrace.toString());
-    },
+    logError,
   );
 }
