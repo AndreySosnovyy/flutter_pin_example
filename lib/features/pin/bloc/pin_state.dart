@@ -4,23 +4,17 @@ part of 'pin_bloc.dart';
 sealed class PinState with _$PinState {
   const PinState._();
 
-  const factory PinState.idle({
-    required String pin,
-  }) = _IdlePinState;
+  const factory PinState.idle() = _IdlePinState;
 
   const factory PinState.error({
-    required String pin,
     String? message,
   }) = _ErrorPinState;
 
   const factory PinState.timeout({
-    @Default('') String pin,
     required Duration timeoutDuration,
   }) = _TimeoutPinState;
 
-  const factory PinState.success({
-    required String pin,
-  }) = _SuccessPinState;
+  const factory PinState.success() = _SuccessPinState;
 
   bool get isIdle => maybeMap(
         idle: (_) => true,
