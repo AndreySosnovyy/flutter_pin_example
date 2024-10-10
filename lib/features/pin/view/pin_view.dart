@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc_side_effect/flutter_bloc_side_effect.dart';
 import 'package:flutter_pin_example/app/extensions/context.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_pin_example/app/widgets/pin/pin_indicator.dart';
 import 'package:flutter_pin_example/app/widgets/pin/pinpad.dart';
 import 'package:flutter_pin_example/features/pin/bloc/pin_bloc.dart';
 import 'package:flutter_pin_example/features/pin/view/widgets/forgot_button.dart';
+import 'package:pin/pin.dart';
 import 'package:pin_ui/pin_ui.dart';
 
 class PinView extends StatefulWidget {
@@ -19,7 +21,9 @@ class PinView extends StatefulWidget {
 class _PinViewState extends State<PinView> {
   late final PinBloc pinBloc;
   final pinBlocInitializationCompleter = Completer<void>();
+
   late final int targetPinLength;
+  late final BiometricsType biometricsType;
 
   final pinIndicatorAnimationController = PinIndicatorAnimationController();
 
@@ -47,6 +51,7 @@ class _PinViewState extends State<PinView> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final controller = context.dependencies.pinCodeController;
       targetPinLength = controller.pinCodeLength!;
+      biometricsType = controller.currentBiometrics;
       pinBloc = PinBloc(pinCodeController: controller);
       pinBlocInitializationCompleter.complete();
     });
@@ -153,14 +158,37 @@ class _PinViewState extends State<PinView> {
                           );
                         },
                       ),
-                      rightExtraKey: PinpadExtraKey(
-                        child: pin.isEmpty ||
-                                pinIndicatorAnimationController
-                                    .isAnimatingClear ||
-                                pinIndicatorAnimationController.isAnimatingError
-                            // Display your current biometrics type icon here
-                            ? const Icon(Icons.fingerprint_rounded, size: 32)
-                            : Icon(
+                      rightExtraKey: pin.isEmpty ||
+                              pinIndicatorAnimationController
+                                  .isAnimatingClear ||
+                              pinIndicatorAnimationController.isAnimatingError
+                          ? PinpadExtraKey(
+                              onTap: () {
+                                restartIdleTimer();
+                                if (biometricsType != BiometricsType.none) {
+                                  pinBloc.add(PinEvent.testBiometrics());
+                                }
+                              },
+                              child: switch (biometricsType) {
+                                BiometricsType.none => const SizedBox.shrink(),
+                                BiometricsType.face => const Icon(
+                                    CupertinoIcons.person_crop_circle,
+                                    size: 32,
+                                  ),
+                                BiometricsType.fingerprint => const Icon(
+                                    Icons.fingerprint_rounded,
+                                    size: 32,
+                                  ),
+                              },
+                            )
+                          : PinpadExtraKey(
+                              onTap: () {
+                                restartIdleTimer();
+                                setState(() =>
+                                    pin = pin.substring(0, pin.length - 1));
+                                pinIndicatorAnimationController.animateErase();
+                              },
+                              child: Icon(
                                 Icons.backspace_outlined,
                                 size: 24,
                                 color: !pinIndicatorAnimationController
@@ -168,19 +196,7 @@ class _PinViewState extends State<PinView> {
                                     ? null
                                     : Colors.black26,
                               ),
-                        onTap: pin.isEmpty ||
-                                pinIndicatorAnimationController.isAnimatingClear
-                            ? () {
-                                restartIdleTimer();
-                                // Call your biometrics method here
-                              }
-                            : () {
-                                restartIdleTimer();
-                                setState(() =>
-                                    pin = pin.substring(0, pin.length - 1));
-                                pinIndicatorAnimationController.animateErase();
-                              },
-                      ),
+                            ),
                     ),
                     Spacer(flex: 1),
                   ],

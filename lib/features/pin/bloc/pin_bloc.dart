@@ -59,7 +59,14 @@ class PinBloc extends Bloc<PinEvent, PinState> {
     _TestBiometricsPinEvent event,
     Emitter<PinState> emitter,
   ) async {
-    try {} on Object catch (error, stackTrace) {
+    try {
+      if (!_pinCodeController.isBiometricsSet) return;
+      if (_pinCodeController.currentBiometrics == BiometricsType.none) return;
+      _pinCodeController.testBiometrics(
+        fingerprintReason: 'Touch the fingerprint sensor',
+        faceIdReason: 'Look at the camera',
+      );
+    } on Object catch (error, stackTrace) {
       logError(error, stackTrace);
     }
   }

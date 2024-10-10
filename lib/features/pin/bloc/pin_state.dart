@@ -8,13 +8,10 @@ sealed class PinState with _$PinState {
 
   const factory PinState.testingPin() = _TestingPinState;
 
-  const factory PinState.error({
-    String? message,
-  }) = _ErrorPinState;
+  const factory PinState.error({String? message}) = _ErrorPinState;
 
-  const factory PinState.timeout({
-    required Duration timeoutDuration,
-  }) = _TimeoutPinState;
+  const factory PinState.timeout({required Duration timeoutDuration}) =
+      _TimeoutPinState;
 
   const factory PinState.success() = _SuccessPinState;
 
