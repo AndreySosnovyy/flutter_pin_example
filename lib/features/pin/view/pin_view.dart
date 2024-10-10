@@ -19,6 +19,7 @@ class PinView extends StatefulWidget {
 class _PinViewState extends State<PinView> {
   late final PinBloc pinBloc;
   final pinBlocInitializationCompleter = Completer<void>();
+  late final int targetPinLength;
 
   final pinIndicatorAnimationController = PinIndicatorAnimationController();
 
@@ -44,8 +45,9 @@ class _PinViewState extends State<PinView> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      pinBloc =
-          PinBloc(pinCodeController: context.dependencies.pinCodeController);
+      final controller = context.dependencies.pinCodeController;
+      targetPinLength = controller.pinCodeLength!;
+      pinBloc = PinBloc(pinCodeController: controller);
       pinBlocInitializationCompleter.complete();
     });
     restartIdleTimer();
@@ -81,7 +83,6 @@ class _PinViewState extends State<PinView> {
           );
           pinIndicatorAnimationController.animateSuccess(
             animation: PinSuccessAnimation.fillLast,
-            delayBeforeAnimation: const Duration(milliseconds: 480),
             onComplete: () {
               // TODO(Sosnovyy): navigate forward
             },
@@ -111,9 +112,20 @@ class _PinViewState extends State<PinView> {
                     ExamplePinpad(
                       onKeyTap: (key) {
                         restartIdleTimer();
-                        setState(() => pin = pin + key);
-                        pinIndicatorAnimationController.animateInput();
-                        pinBloc.add(PinEvent.testPin(pin: pin));
+                        if (pinIndicatorAnimationController
+                            .isAnimatingNonInterruptible) {
+                          return;
+                        } else {
+                          pinIndicatorAnimationController.stop();
+                        }
+                        if (pin.length < targetPinLength) {
+                          setState(() => pin += key);
+                          pinIndicatorAnimationController.animateInput();
+                        }
+                        if (pin.length == targetPinLength &&
+                            !state.isTestingPin) {
+                          pinBloc.add(PinEvent.testPin(pin: pin));
+                        }
                       },
                       enabled: !pinIndicatorAnimationController
                               .isAnimatingNonInterruptible &&

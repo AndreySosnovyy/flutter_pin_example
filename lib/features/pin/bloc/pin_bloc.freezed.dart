@@ -605,6 +605,7 @@ mixin _$PinState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
+    required TResult Function() testingPin,
     required TResult Function(String? message) error,
     required TResult Function(Duration timeoutDuration) timeout,
     required TResult Function() success,
@@ -613,6 +614,7 @@ mixin _$PinState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? idle,
+    TResult? Function()? testingPin,
     TResult? Function(String? message)? error,
     TResult? Function(Duration timeoutDuration)? timeout,
     TResult? Function()? success,
@@ -621,6 +623,7 @@ mixin _$PinState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
+    TResult Function()? testingPin,
     TResult Function(String? message)? error,
     TResult Function(Duration timeoutDuration)? timeout,
     TResult Function()? success,
@@ -630,6 +633,7 @@ mixin _$PinState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_IdlePinState value) idle,
+    required TResult Function(_TestingPinState value) testingPin,
     required TResult Function(_ErrorPinState value) error,
     required TResult Function(_TimeoutPinState value) timeout,
     required TResult Function(_SuccessPinState value) success,
@@ -638,6 +642,7 @@ mixin _$PinState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_IdlePinState value)? idle,
+    TResult? Function(_TestingPinState value)? testingPin,
     TResult? Function(_ErrorPinState value)? error,
     TResult? Function(_TimeoutPinState value)? timeout,
     TResult? Function(_SuccessPinState value)? success,
@@ -646,6 +651,7 @@ mixin _$PinState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_IdlePinState value)? idle,
+    TResult Function(_TestingPinState value)? testingPin,
     TResult Function(_ErrorPinState value)? error,
     TResult Function(_TimeoutPinState value)? timeout,
     TResult Function(_SuccessPinState value)? success,
@@ -716,6 +722,7 @@ class _$IdlePinStateImpl extends _IdlePinState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
+    required TResult Function() testingPin,
     required TResult Function(String? message) error,
     required TResult Function(Duration timeoutDuration) timeout,
     required TResult Function() success,
@@ -727,6 +734,7 @@ class _$IdlePinStateImpl extends _IdlePinState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? idle,
+    TResult? Function()? testingPin,
     TResult? Function(String? message)? error,
     TResult? Function(Duration timeoutDuration)? timeout,
     TResult? Function()? success,
@@ -738,6 +746,7 @@ class _$IdlePinStateImpl extends _IdlePinState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
+    TResult Function()? testingPin,
     TResult Function(String? message)? error,
     TResult Function(Duration timeoutDuration)? timeout,
     TResult Function()? success,
@@ -753,6 +762,7 @@ class _$IdlePinStateImpl extends _IdlePinState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_IdlePinState value) idle,
+    required TResult Function(_TestingPinState value) testingPin,
     required TResult Function(_ErrorPinState value) error,
     required TResult Function(_TimeoutPinState value) timeout,
     required TResult Function(_SuccessPinState value) success,
@@ -764,6 +774,7 @@ class _$IdlePinStateImpl extends _IdlePinState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_IdlePinState value)? idle,
+    TResult? Function(_TestingPinState value)? testingPin,
     TResult? Function(_ErrorPinState value)? error,
     TResult? Function(_TimeoutPinState value)? timeout,
     TResult? Function(_SuccessPinState value)? success,
@@ -775,6 +786,7 @@ class _$IdlePinStateImpl extends _IdlePinState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_IdlePinState value)? idle,
+    TResult Function(_TestingPinState value)? testingPin,
     TResult Function(_ErrorPinState value)? error,
     TResult Function(_TimeoutPinState value)? timeout,
     TResult Function(_SuccessPinState value)? success,
@@ -790,6 +802,130 @@ class _$IdlePinStateImpl extends _IdlePinState {
 abstract class _IdlePinState extends PinState {
   const factory _IdlePinState() = _$IdlePinStateImpl;
   const _IdlePinState._() : super._();
+}
+
+/// @nodoc
+abstract class _$$TestingPinStateImplCopyWith<$Res> {
+  factory _$$TestingPinStateImplCopyWith(_$TestingPinStateImpl value,
+          $Res Function(_$TestingPinStateImpl) then) =
+      __$$TestingPinStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$TestingPinStateImplCopyWithImpl<$Res>
+    extends _$PinStateCopyWithImpl<$Res, _$TestingPinStateImpl>
+    implements _$$TestingPinStateImplCopyWith<$Res> {
+  __$$TestingPinStateImplCopyWithImpl(
+      _$TestingPinStateImpl _value, $Res Function(_$TestingPinStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PinState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$TestingPinStateImpl extends _TestingPinState {
+  const _$TestingPinStateImpl() : super._();
+
+  @override
+  String toString() {
+    return 'PinState.testingPin()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$TestingPinStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() idle,
+    required TResult Function() testingPin,
+    required TResult Function(String? message) error,
+    required TResult Function(Duration timeoutDuration) timeout,
+    required TResult Function() success,
+  }) {
+    return testingPin();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? idle,
+    TResult? Function()? testingPin,
+    TResult? Function(String? message)? error,
+    TResult? Function(Duration timeoutDuration)? timeout,
+    TResult? Function()? success,
+  }) {
+    return testingPin?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? idle,
+    TResult Function()? testingPin,
+    TResult Function(String? message)? error,
+    TResult Function(Duration timeoutDuration)? timeout,
+    TResult Function()? success,
+    required TResult orElse(),
+  }) {
+    if (testingPin != null) {
+      return testingPin();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_IdlePinState value) idle,
+    required TResult Function(_TestingPinState value) testingPin,
+    required TResult Function(_ErrorPinState value) error,
+    required TResult Function(_TimeoutPinState value) timeout,
+    required TResult Function(_SuccessPinState value) success,
+  }) {
+    return testingPin(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_IdlePinState value)? idle,
+    TResult? Function(_TestingPinState value)? testingPin,
+    TResult? Function(_ErrorPinState value)? error,
+    TResult? Function(_TimeoutPinState value)? timeout,
+    TResult? Function(_SuccessPinState value)? success,
+  }) {
+    return testingPin?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_IdlePinState value)? idle,
+    TResult Function(_TestingPinState value)? testingPin,
+    TResult Function(_ErrorPinState value)? error,
+    TResult Function(_TimeoutPinState value)? timeout,
+    TResult Function(_SuccessPinState value)? success,
+    required TResult orElse(),
+  }) {
+    if (testingPin != null) {
+      return testingPin(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _TestingPinState extends PinState {
+  const factory _TestingPinState() = _$TestingPinStateImpl;
+  const _TestingPinState._() : super._();
 }
 
 /// @nodoc
@@ -861,6 +997,7 @@ class _$ErrorPinStateImpl extends _ErrorPinState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
+    required TResult Function() testingPin,
     required TResult Function(String? message) error,
     required TResult Function(Duration timeoutDuration) timeout,
     required TResult Function() success,
@@ -872,6 +1009,7 @@ class _$ErrorPinStateImpl extends _ErrorPinState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? idle,
+    TResult? Function()? testingPin,
     TResult? Function(String? message)? error,
     TResult? Function(Duration timeoutDuration)? timeout,
     TResult? Function()? success,
@@ -883,6 +1021,7 @@ class _$ErrorPinStateImpl extends _ErrorPinState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
+    TResult Function()? testingPin,
     TResult Function(String? message)? error,
     TResult Function(Duration timeoutDuration)? timeout,
     TResult Function()? success,
@@ -898,6 +1037,7 @@ class _$ErrorPinStateImpl extends _ErrorPinState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_IdlePinState value) idle,
+    required TResult Function(_TestingPinState value) testingPin,
     required TResult Function(_ErrorPinState value) error,
     required TResult Function(_TimeoutPinState value) timeout,
     required TResult Function(_SuccessPinState value) success,
@@ -909,6 +1049,7 @@ class _$ErrorPinStateImpl extends _ErrorPinState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_IdlePinState value)? idle,
+    TResult? Function(_TestingPinState value)? testingPin,
     TResult? Function(_ErrorPinState value)? error,
     TResult? Function(_TimeoutPinState value)? timeout,
     TResult? Function(_SuccessPinState value)? success,
@@ -920,6 +1061,7 @@ class _$ErrorPinStateImpl extends _ErrorPinState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_IdlePinState value)? idle,
+    TResult Function(_TestingPinState value)? testingPin,
     TResult Function(_ErrorPinState value)? error,
     TResult Function(_TimeoutPinState value)? timeout,
     TResult Function(_SuccessPinState value)? success,
@@ -1016,6 +1158,7 @@ class _$TimeoutPinStateImpl extends _TimeoutPinState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
+    required TResult Function() testingPin,
     required TResult Function(String? message) error,
     required TResult Function(Duration timeoutDuration) timeout,
     required TResult Function() success,
@@ -1027,6 +1170,7 @@ class _$TimeoutPinStateImpl extends _TimeoutPinState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? idle,
+    TResult? Function()? testingPin,
     TResult? Function(String? message)? error,
     TResult? Function(Duration timeoutDuration)? timeout,
     TResult? Function()? success,
@@ -1038,6 +1182,7 @@ class _$TimeoutPinStateImpl extends _TimeoutPinState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
+    TResult Function()? testingPin,
     TResult Function(String? message)? error,
     TResult Function(Duration timeoutDuration)? timeout,
     TResult Function()? success,
@@ -1053,6 +1198,7 @@ class _$TimeoutPinStateImpl extends _TimeoutPinState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_IdlePinState value) idle,
+    required TResult Function(_TestingPinState value) testingPin,
     required TResult Function(_ErrorPinState value) error,
     required TResult Function(_TimeoutPinState value) timeout,
     required TResult Function(_SuccessPinState value) success,
@@ -1064,6 +1210,7 @@ class _$TimeoutPinStateImpl extends _TimeoutPinState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_IdlePinState value)? idle,
+    TResult? Function(_TestingPinState value)? testingPin,
     TResult? Function(_ErrorPinState value)? error,
     TResult? Function(_TimeoutPinState value)? timeout,
     TResult? Function(_SuccessPinState value)? success,
@@ -1075,6 +1222,7 @@ class _$TimeoutPinStateImpl extends _TimeoutPinState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_IdlePinState value)? idle,
+    TResult Function(_TestingPinState value)? testingPin,
     TResult Function(_ErrorPinState value)? error,
     TResult Function(_TimeoutPinState value)? timeout,
     TResult Function(_SuccessPinState value)? success,
@@ -1143,6 +1291,7 @@ class _$SuccessPinStateImpl extends _SuccessPinState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() idle,
+    required TResult Function() testingPin,
     required TResult Function(String? message) error,
     required TResult Function(Duration timeoutDuration) timeout,
     required TResult Function() success,
@@ -1154,6 +1303,7 @@ class _$SuccessPinStateImpl extends _SuccessPinState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? idle,
+    TResult? Function()? testingPin,
     TResult? Function(String? message)? error,
     TResult? Function(Duration timeoutDuration)? timeout,
     TResult? Function()? success,
@@ -1165,6 +1315,7 @@ class _$SuccessPinStateImpl extends _SuccessPinState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? idle,
+    TResult Function()? testingPin,
     TResult Function(String? message)? error,
     TResult Function(Duration timeoutDuration)? timeout,
     TResult Function()? success,
@@ -1180,6 +1331,7 @@ class _$SuccessPinStateImpl extends _SuccessPinState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_IdlePinState value) idle,
+    required TResult Function(_TestingPinState value) testingPin,
     required TResult Function(_ErrorPinState value) error,
     required TResult Function(_TimeoutPinState value) timeout,
     required TResult Function(_SuccessPinState value) success,
@@ -1191,6 +1343,7 @@ class _$SuccessPinStateImpl extends _SuccessPinState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_IdlePinState value)? idle,
+    TResult? Function(_TestingPinState value)? testingPin,
     TResult? Function(_ErrorPinState value)? error,
     TResult? Function(_TimeoutPinState value)? timeout,
     TResult? Function(_SuccessPinState value)? success,
@@ -1202,6 +1355,7 @@ class _$SuccessPinStateImpl extends _SuccessPinState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_IdlePinState value)? idle,
+    TResult Function(_TestingPinState value)? testingPin,
     TResult Function(_ErrorPinState value)? error,
     TResult Function(_TimeoutPinState value)? timeout,
     TResult Function(_SuccessPinState value)? success,

@@ -6,6 +6,8 @@ sealed class PinState with _$PinState {
 
   const factory PinState.idle() = _IdlePinState;
 
+  const factory PinState.testingPin() = _TestingPinState;
+
   const factory PinState.error({
     String? message,
   }) = _ErrorPinState;
@@ -33,6 +35,11 @@ sealed class PinState with _$PinState {
 
   bool get isSuccess => maybeMap(
         success: (_) => true,
+        orElse: () => false,
+      );
+
+  bool get isTestingPin => maybeMap(
+        testingPin: (_) => true,
         orElse: () => false,
       );
 

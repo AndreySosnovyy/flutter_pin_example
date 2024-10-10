@@ -32,6 +32,7 @@ class PinBloc extends Bloc<PinEvent, PinState> {
     try {
       if (state.isTimeout) return;
       if (event.pin.length != _pinCodeController.pinCodeLength) return;
+      emitter(PinState.testingPin());
       final isPinValid = await _pinCodeController.testPinCode(event.pin);
       if (isPinValid) {
         emitter(PinState.success());
