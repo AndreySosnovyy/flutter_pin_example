@@ -37,6 +37,11 @@ sealed class PinState with _$PinState {
         orElse: () => false,
       );
 
+  bool get isSuccess => maybeMap(
+        success: (_) => true,
+        orElse: () => false,
+      );
+
   String? get errorMessage => mapOrNull(
         error: (state) => state.message,
       );

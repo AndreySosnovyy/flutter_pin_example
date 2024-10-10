@@ -6,6 +6,7 @@ import 'package:flutter_pin_example/app/extensions/context.dart';
 import 'package:flutter_pin_example/app/widgets/pin/pin_indicator.dart';
 import 'package:flutter_pin_example/app/widgets/pin/pinpad.dart';
 import 'package:flutter_pin_example/features/pin/bloc/pin_bloc.dart';
+import 'package:flutter_pin_example/features/pin/view/widgets/forgot_button.dart';
 import 'package:pin_ui/pin_ui.dart';
 
 class PinView extends StatefulWidget {
@@ -101,29 +102,25 @@ class _PinViewState extends State<PinView> {
                       controller: pinIndicatorAnimationController,
                       length:
                           context.dependencies.pinCodeController.pinCodeLength!,
-                      currentLength: 0,
-                      isError: false,
-                      isSuccess: false,
+                      currentLength: state.pin.length,
+                      isError: state.isError,
+                      isSuccess: state.isSuccess,
                     ),
                     SizedBox(height: 64),
                     ExamplePinpad(
-                      onKeyTap: (key) => pinBloc.add(PinEvent.input(key: key)),
+                      onKeyTap: (key) {
+                        restartIdleTimer();
+                        pinBloc.add(PinEvent.input(key: key));
+                      },
                       enabled: !pinIndicatorAnimationController
                               .isAnimatingNonInterruptible &&
                           !state.isTimeout,
                       isVisible:
                           !pinIndicatorAnimationController.isAnimatingSuccess,
                       leftExtraKey: PinpadExtraKey(
-                        child: Text(
-                          'Forgot',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall!
-                              .copyWith(
-                                  color: !pinIndicatorAnimationController
-                                          .isAnimatingNonInterruptible
-                                      ? null
-                                      : Colors.black26),
+                        child: ForgotPinButton(
+                          enabled: !pinIndicatorAnimationController
+                              .isAnimatingNonInterruptible,
                         ),
                         onTap: () {
                           restartIdleTimer();

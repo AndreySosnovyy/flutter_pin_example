@@ -45,6 +45,7 @@ class PinBloc extends Bloc<PinEvent, PinState>
               emitter(PinState.success(pin: state.pin)),
         ));
       } else {
+        emitter(PinState.error(pin: state.pin));
         emitSideEffect(PinSideEffect.representError(
           clearPinCallback: () => emitter(PinState.idle(pin: '')),
         ));
@@ -75,9 +76,10 @@ class PinBloc extends Bloc<PinEvent, PinState>
     try {
       if (state.pin.isNotEmpty) {
         emitSideEffect(PinSideEffect.representGiveUp(
-            clearPinCallback: () => emitter(PinState.idle(pin: ''))));
+          clearPinCallback: () => emitter(PinState.idle(pin: '')),
+        ));
       }
-      _pinCodeController.clear();
+      await _pinCodeController.clear();
     } on Object catch (error, stackTrace) {
       logError(error, stackTrace);
     }
