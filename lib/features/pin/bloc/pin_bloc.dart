@@ -18,6 +18,7 @@ class PinBloc extends Bloc<PinEvent, PinState> {
         testPin: (event) => _testPin(event, emitter),
         giveUp: (event) => _giveUp(event, emitter),
         testBiometrics: (event) => _testBiometrics(event, emitter),
+        reset: (event) => _reset(event, emitter),
       ),
     );
   }
@@ -29,18 +30,14 @@ class PinBloc extends Bloc<PinEvent, PinState> {
     Emitter<PinState> emitter,
   ) async {
     try {
-      // if (state.isTimeout) return;
-      // emitter(PinState.idle(pin: state.pin + event.key));
-      // if (state.pin.length != _pinCodeController.pinCodeLength) return;
-      // final isPinValid = await _pinCodeController.testPinCode(state.pin);
-      // if (isPinValid) {
-      //   emitSideEffect(PinSideEffect.representLoadingAndSuccess(
-      //     setSuccessStateCallback: () =>
-      //         emitter(PinState.success(pin: state.pin)),
-      //   ));
-      // } else {
-      //   emitter(PinState.error(pin: state.pin));
-      // }
+      if (state.isTimeout) return;
+      if (event.pin.length != _pinCodeController.pinCodeLength) return;
+      final isPinValid = await _pinCodeController.testPinCode(event.pin);
+      if (isPinValid) {
+        emitter(PinState.success());
+      } else {
+        emitter(PinState.error());
+      }
     } on Object catch (error, stackTrace) {
       logError(error, stackTrace);
     }
@@ -62,6 +59,17 @@ class PinBloc extends Bloc<PinEvent, PinState> {
     Emitter<PinState> emitter,
   ) async {
     try {} on Object catch (error, stackTrace) {
+      logError(error, stackTrace);
+    }
+  }
+
+  Future<void> _reset(
+    _ResetPinEvent event,
+    Emitter<PinState> emitter,
+  ) async {
+    try {
+      emitter(PinState.idle());
+    } on Object catch (error, stackTrace) {
       logError(error, stackTrace);
     }
   }

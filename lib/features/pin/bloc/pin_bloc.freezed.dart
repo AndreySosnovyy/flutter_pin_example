@@ -21,6 +21,7 @@ mixin _$PinEvent {
     required TResult Function(String pin) testPin,
     required TResult Function() testBiometrics,
     required TResult Function() giveUp,
+    required TResult Function() reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$PinEvent {
     TResult? Function(String pin)? testPin,
     TResult? Function()? testBiometrics,
     TResult? Function()? giveUp,
+    TResult? Function()? reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$PinEvent {
     TResult Function(String pin)? testPin,
     TResult Function()? testBiometrics,
     TResult Function()? giveUp,
+    TResult Function()? reset,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$PinEvent {
     required TResult Function(_TestPinPinEvent value) testPin,
     required TResult Function(_TestBiometricsPinEvent value) testBiometrics,
     required TResult Function(_GiveUpPinEvent value) giveUp,
+    required TResult Function(_ResetPinEvent value) reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$PinEvent {
     TResult? Function(_TestPinPinEvent value)? testPin,
     TResult? Function(_TestBiometricsPinEvent value)? testBiometrics,
     TResult? Function(_GiveUpPinEvent value)? giveUp,
+    TResult? Function(_ResetPinEvent value)? reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$PinEvent {
     TResult Function(_TestPinPinEvent value)? testPin,
     TResult Function(_TestBiometricsPinEvent value)? testBiometrics,
     TResult Function(_GiveUpPinEvent value)? giveUp,
+    TResult Function(_ResetPinEvent value)? reset,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -154,6 +160,7 @@ class _$TestPinPinEventImpl extends _TestPinPinEvent {
     required TResult Function(String pin) testPin,
     required TResult Function() testBiometrics,
     required TResult Function() giveUp,
+    required TResult Function() reset,
   }) {
     return testPin(pin);
   }
@@ -164,6 +171,7 @@ class _$TestPinPinEventImpl extends _TestPinPinEvent {
     TResult? Function(String pin)? testPin,
     TResult? Function()? testBiometrics,
     TResult? Function()? giveUp,
+    TResult? Function()? reset,
   }) {
     return testPin?.call(pin);
   }
@@ -174,6 +182,7 @@ class _$TestPinPinEventImpl extends _TestPinPinEvent {
     TResult Function(String pin)? testPin,
     TResult Function()? testBiometrics,
     TResult Function()? giveUp,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (testPin != null) {
@@ -188,6 +197,7 @@ class _$TestPinPinEventImpl extends _TestPinPinEvent {
     required TResult Function(_TestPinPinEvent value) testPin,
     required TResult Function(_TestBiometricsPinEvent value) testBiometrics,
     required TResult Function(_GiveUpPinEvent value) giveUp,
+    required TResult Function(_ResetPinEvent value) reset,
   }) {
     return testPin(this);
   }
@@ -198,6 +208,7 @@ class _$TestPinPinEventImpl extends _TestPinPinEvent {
     TResult? Function(_TestPinPinEvent value)? testPin,
     TResult? Function(_TestBiometricsPinEvent value)? testBiometrics,
     TResult? Function(_GiveUpPinEvent value)? giveUp,
+    TResult? Function(_ResetPinEvent value)? reset,
   }) {
     return testPin?.call(this);
   }
@@ -208,6 +219,7 @@ class _$TestPinPinEventImpl extends _TestPinPinEvent {
     TResult Function(_TestPinPinEvent value)? testPin,
     TResult Function(_TestBiometricsPinEvent value)? testBiometrics,
     TResult Function(_GiveUpPinEvent value)? giveUp,
+    TResult Function(_ResetPinEvent value)? reset,
     required TResult orElse(),
   }) {
     if (testPin != null) {
@@ -278,6 +290,7 @@ class _$TestBiometricsPinEventImpl extends _TestBiometricsPinEvent {
     required TResult Function(String pin) testPin,
     required TResult Function() testBiometrics,
     required TResult Function() giveUp,
+    required TResult Function() reset,
   }) {
     return testBiometrics();
   }
@@ -288,6 +301,7 @@ class _$TestBiometricsPinEventImpl extends _TestBiometricsPinEvent {
     TResult? Function(String pin)? testPin,
     TResult? Function()? testBiometrics,
     TResult? Function()? giveUp,
+    TResult? Function()? reset,
   }) {
     return testBiometrics?.call();
   }
@@ -298,6 +312,7 @@ class _$TestBiometricsPinEventImpl extends _TestBiometricsPinEvent {
     TResult Function(String pin)? testPin,
     TResult Function()? testBiometrics,
     TResult Function()? giveUp,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (testBiometrics != null) {
@@ -312,6 +327,7 @@ class _$TestBiometricsPinEventImpl extends _TestBiometricsPinEvent {
     required TResult Function(_TestPinPinEvent value) testPin,
     required TResult Function(_TestBiometricsPinEvent value) testBiometrics,
     required TResult Function(_GiveUpPinEvent value) giveUp,
+    required TResult Function(_ResetPinEvent value) reset,
   }) {
     return testBiometrics(this);
   }
@@ -322,6 +338,7 @@ class _$TestBiometricsPinEventImpl extends _TestBiometricsPinEvent {
     TResult? Function(_TestPinPinEvent value)? testPin,
     TResult? Function(_TestBiometricsPinEvent value)? testBiometrics,
     TResult? Function(_GiveUpPinEvent value)? giveUp,
+    TResult? Function(_ResetPinEvent value)? reset,
   }) {
     return testBiometrics?.call(this);
   }
@@ -332,6 +349,7 @@ class _$TestBiometricsPinEventImpl extends _TestBiometricsPinEvent {
     TResult Function(_TestPinPinEvent value)? testPin,
     TResult Function(_TestBiometricsPinEvent value)? testBiometrics,
     TResult Function(_GiveUpPinEvent value)? giveUp,
+    TResult Function(_ResetPinEvent value)? reset,
     required TResult orElse(),
   }) {
     if (testBiometrics != null) {
@@ -390,6 +408,7 @@ class _$GiveUpPinEventImpl extends _GiveUpPinEvent {
     required TResult Function(String pin) testPin,
     required TResult Function() testBiometrics,
     required TResult Function() giveUp,
+    required TResult Function() reset,
   }) {
     return giveUp();
   }
@@ -400,6 +419,7 @@ class _$GiveUpPinEventImpl extends _GiveUpPinEvent {
     TResult? Function(String pin)? testPin,
     TResult? Function()? testBiometrics,
     TResult? Function()? giveUp,
+    TResult? Function()? reset,
   }) {
     return giveUp?.call();
   }
@@ -410,6 +430,7 @@ class _$GiveUpPinEventImpl extends _GiveUpPinEvent {
     TResult Function(String pin)? testPin,
     TResult Function()? testBiometrics,
     TResult Function()? giveUp,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (giveUp != null) {
@@ -424,6 +445,7 @@ class _$GiveUpPinEventImpl extends _GiveUpPinEvent {
     required TResult Function(_TestPinPinEvent value) testPin,
     required TResult Function(_TestBiometricsPinEvent value) testBiometrics,
     required TResult Function(_GiveUpPinEvent value) giveUp,
+    required TResult Function(_ResetPinEvent value) reset,
   }) {
     return giveUp(this);
   }
@@ -434,6 +456,7 @@ class _$GiveUpPinEventImpl extends _GiveUpPinEvent {
     TResult? Function(_TestPinPinEvent value)? testPin,
     TResult? Function(_TestBiometricsPinEvent value)? testBiometrics,
     TResult? Function(_GiveUpPinEvent value)? giveUp,
+    TResult? Function(_ResetPinEvent value)? reset,
   }) {
     return giveUp?.call(this);
   }
@@ -444,6 +467,7 @@ class _$GiveUpPinEventImpl extends _GiveUpPinEvent {
     TResult Function(_TestPinPinEvent value)? testPin,
     TResult Function(_TestBiometricsPinEvent value)? testBiometrics,
     TResult Function(_GiveUpPinEvent value)? giveUp,
+    TResult Function(_ResetPinEvent value)? reset,
     required TResult orElse(),
   }) {
     if (giveUp != null) {
@@ -456,6 +480,124 @@ class _$GiveUpPinEventImpl extends _GiveUpPinEvent {
 abstract class _GiveUpPinEvent extends PinEvent {
   const factory _GiveUpPinEvent() = _$GiveUpPinEventImpl;
   const _GiveUpPinEvent._() : super._();
+}
+
+/// @nodoc
+abstract class _$$ResetPinEventImplCopyWith<$Res> {
+  factory _$$ResetPinEventImplCopyWith(
+          _$ResetPinEventImpl value, $Res Function(_$ResetPinEventImpl) then) =
+      __$$ResetPinEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ResetPinEventImplCopyWithImpl<$Res>
+    extends _$PinEventCopyWithImpl<$Res, _$ResetPinEventImpl>
+    implements _$$ResetPinEventImplCopyWith<$Res> {
+  __$$ResetPinEventImplCopyWithImpl(
+      _$ResetPinEventImpl _value, $Res Function(_$ResetPinEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PinEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ResetPinEventImpl extends _ResetPinEvent {
+  const _$ResetPinEventImpl() : super._();
+
+  @override
+  String toString() {
+    return 'PinEvent.reset()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ResetPinEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String pin) testPin,
+    required TResult Function() testBiometrics,
+    required TResult Function() giveUp,
+    required TResult Function() reset,
+  }) {
+    return reset();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String pin)? testPin,
+    TResult? Function()? testBiometrics,
+    TResult? Function()? giveUp,
+    TResult? Function()? reset,
+  }) {
+    return reset?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String pin)? testPin,
+    TResult Function()? testBiometrics,
+    TResult Function()? giveUp,
+    TResult Function()? reset,
+    required TResult orElse(),
+  }) {
+    if (reset != null) {
+      return reset();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_TestPinPinEvent value) testPin,
+    required TResult Function(_TestBiometricsPinEvent value) testBiometrics,
+    required TResult Function(_GiveUpPinEvent value) giveUp,
+    required TResult Function(_ResetPinEvent value) reset,
+  }) {
+    return reset(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_TestPinPinEvent value)? testPin,
+    TResult? Function(_TestBiometricsPinEvent value)? testBiometrics,
+    TResult? Function(_GiveUpPinEvent value)? giveUp,
+    TResult? Function(_ResetPinEvent value)? reset,
+  }) {
+    return reset?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_TestPinPinEvent value)? testPin,
+    TResult Function(_TestBiometricsPinEvent value)? testBiometrics,
+    TResult Function(_GiveUpPinEvent value)? giveUp,
+    TResult Function(_ResetPinEvent value)? reset,
+    required TResult orElse(),
+  }) {
+    if (reset != null) {
+      return reset(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ResetPinEvent extends PinEvent {
+  const factory _ResetPinEvent() = _$ResetPinEventImpl;
+  const _ResetPinEvent._() : super._();
 }
 
 /// @nodoc
