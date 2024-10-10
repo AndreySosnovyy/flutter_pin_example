@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter_bloc_side_effect/flutter_bloc_side_effect.dart';
+import 'package:flutter_pin_example/app/logging/error.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pin/pin.dart';
 
@@ -30,27 +33,62 @@ class PinBloc extends Bloc<PinEvent, PinState>
     _InputPinEvent event,
     Emitter<PinState> emitter,
   ) async {
-    try {} on Object catch (e, stackTrace) {}
+    try {
+      if (state.isTimeout) return;
+      emitter(PinState.idle(pin: state.pin + event.key));
+      emitSideEffect(PinSideEffect.representInput());
+      if (state.pin.length != _pinCodeController.pinCodeLength) return;
+      final isPinValid = await _pinCodeController.testPinCode(state.pin);
+      if (isPinValid) {
+        emitSideEffect(PinSideEffect.representLoadingAndSuccess(
+          setSuccessStateCallback: () =>
+              emitter(PinState.success(pin: state.pin)),
+        ));
+      } else {
+        emitSideEffect(PinSideEffect.representError(
+          clearPinCallback: () => emitter(PinState.idle(pin: '')),
+        ));
+      }
+    } on Object catch (error, stackTrace) {
+      logError(error, stackTrace);
+    }
   }
 
   Future<void> _erase(
     _ErasePinEvent event,
     Emitter<PinState> emitter,
   ) async {
-    try {} on Object catch (e, stackTrace) {}
+    try {
+      if (state.isTimeout) return;
+      if (state.pin.isEmpty) return;
+      emitter(PinState.idle(pin: state.pin.substring(0, state.pin.length - 1)));
+      emitSideEffect(PinSideEffect.representErase());
+    } on Object catch (error, stackTrace) {
+      logError(error, stackTrace);
+    }
   }
 
   Future<void> _giveUp(
     _GiveUpPinEvent event,
     Emitter<PinState> emitter,
   ) async {
-    try {} on Object catch (e, stackTrace) {}
+    try {
+      if (state.pin.isNotEmpty) {
+        emitSideEffect(PinSideEffect.representGiveUp(
+            clearPinCallback: () => emitter(PinState.idle(pin: ''))));
+      }
+      _pinCodeController.clear();
+    } on Object catch (error, stackTrace) {
+      logError(error, stackTrace);
+    }
   }
 
   Future<void> _tryBiometrics(
     _TryBiometricsPinEvent event,
     Emitter<PinState> emitter,
   ) async {
-    try {} on Object catch (e, stackTrace) {}
+    try {} on Object catch (error, stackTrace) {
+      logError(error, stackTrace);
+    }
   }
 }

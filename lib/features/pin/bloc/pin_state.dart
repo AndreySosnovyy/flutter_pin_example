@@ -14,8 +14,13 @@ sealed class PinState with _$PinState {
   }) = _ErrorPinState;
 
   const factory PinState.timeout({
+    @Default('') String pin,
     required Duration timeoutDuration,
   }) = _TimeoutPinState;
+
+  const factory PinState.success({
+    required String pin,
+  }) = _SuccessPinState;
 
   bool get isIdle => maybeMap(
         idle: (_) => true,

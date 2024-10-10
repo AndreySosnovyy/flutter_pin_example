@@ -53,7 +53,39 @@ class _PinViewState extends State<PinView> {
     return BlocConsumerWithSideEffects<PinBloc, PinState, PinSideEffect>(
       bloc: pinBloc,
       listener: (context, state) {},
-      sideEffectsListener: (context, sideEffect) {},
+      sideEffectsListener: (context, sideEffect) {
+        sideEffect.map(
+          representInput: (_) => pinIndicatorAnimationController.animateInput(),
+          representErase: (_) => pinIndicatorAnimationController.animateErase(),
+          representGiveUp: (se) => pinIndicatorAnimationController.animateClear(
+            onComplete: () => se.clearPinCallback.call(),
+          ),
+          representError: (se) {
+            pinIndicatorAnimationController.animateError(
+              onInterrupt: () => se.clearPinCallback.call(),
+              delayAfterAnimation: const Duration(milliseconds: 240),
+            );
+            pinIndicatorAnimationController.animateClear(
+              onInterrupt: () => se.clearPinCallback.call(),
+              onComplete: () => se.clearPinCallback.call(),
+            );
+          },
+          representLoadingAndSuccess: (se) {
+            pinIndicatorAnimationController.animateLoading(
+              repeatCount: 2,
+              delayAfterAnimation: const Duration(milliseconds: 160),
+              onComplete: () => se.setSuccessStateCallback.call(),
+            );
+            pinIndicatorAnimationController.animateSuccess(
+                animation: PinSuccessAnimation.fillLast,
+                delayBeforeAnimation: const Duration(milliseconds: 480),
+                delayAfterAnimation: const Duration(milliseconds: 1200),
+                onComplete: () {
+                  // TODO(Sosnovyy): navigate forward
+                });
+          },
+        );
+      },
       builder: (context, state) {
         return ValueListenableBuilder(
             valueListenable: pinIndicatorAnimationController,
@@ -75,12 +107,66 @@ class _PinViewState extends State<PinView> {
                     ),
                     SizedBox(height: 64),
                     ExamplePinpad(
-                      onKeyTap: (key) {},
+                      onKeyTap: (key) => pinBloc.add(PinEvent.input(key: key)),
                       enabled: !pinIndicatorAnimationController
                               .isAnimatingNonInterruptible &&
                           !state.isTimeout,
                       isVisible:
                           !pinIndicatorAnimationController.isAnimatingSuccess,
+                      leftExtraKey: PinpadExtraKey(
+                        child: Text(
+                          'Forgot',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall!
+                              .copyWith(
+                                  color: !pinIndicatorAnimationController
+                                          .isAnimatingNonInterruptible
+                                      ? null
+                                      : Colors.black26),
+                        ),
+                        onTap: () {
+                          restartIdleTimer();
+                          if (state.pin.isEmpty ||
+                              pinIndicatorAnimationController
+                                  .isAnimatingClear ||
+                              pinIndicatorAnimationController
+                                  .isAnimatingError) {
+                            return;
+                          }
+                          pinIndicatorAnimationController.animateClear(
+                            animation: PinClearAnimation.drop,
+                            // onComplete: clear,
+                            // onInterrupt: clear,
+                          );
+                          // Call your forgot pin flow logic
+                        },
+                      ),
+                      rightExtraKey: PinpadExtraKey(
+                        child: state.pin.isEmpty ||
+                                pinIndicatorAnimationController.isAnimatingClear
+                            // Display your current biometrics type icon here
+                            ? const Icon(Icons.fingerprint_rounded, size: 32)
+                            : Icon(
+                                Icons.backspace_outlined,
+                                size: 24,
+                                color: !pinIndicatorAnimationController
+                                        .isAnimatingNonInterruptible
+                                    ? null
+                                    : Colors.black26,
+                              ),
+                        onTap: state.pin.isEmpty ||
+                                pinIndicatorAnimationController.isAnimatingClear
+                            ? () {
+                                restartIdleTimer();
+                                // Call your biometrics method here
+                              }
+                            : () {
+                                restartIdleTimer();
+                                pinBloc.add(PinEvent.erase());
+                                pinIndicatorAnimationController.animateErase();
+                              },
+                      ),
                     ),
                     Spacer(flex: 1),
                   ],
