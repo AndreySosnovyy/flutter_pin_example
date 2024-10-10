@@ -136,6 +136,8 @@ class _PinViewState extends State<PinView> {
                           }
                           pinIndicatorAnimationController.animateClear(
                             animation: PinClearAnimation.drop,
+                            onComplete: clear,
+                            onInterrupt: clear,
                           );
                         },
                       ),
