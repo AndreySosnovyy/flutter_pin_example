@@ -72,9 +72,10 @@ class _PinViewState extends State<PinView> {
     required PinBloc pinBloc,
     required bool enabled,
   }) {
-    if (!pinBloc.state.isTimeout && (pin.isNotEmpty ||
-        pinIndicatorAnimationController.isAnimatingClear ||
-        pinIndicatorAnimationController.isAnimatingError)) {
+    if (!pinBloc.state.isTimeout &&
+        (pin.isNotEmpty ||
+            pinIndicatorAnimationController.isAnimatingClear ||
+            pinIndicatorAnimationController.isAnimatingError)) {
       return PinpadExtraKey(
         onTap: () {
           restartIdleTimer();
@@ -187,11 +188,10 @@ class _PinViewState extends State<PinView> {
                       isVisible:
                           !pinIndicatorAnimationController.isAnimatingSuccess,
                       leftExtraKey: PinpadExtraKey(
-                        child: ForgotPinButton(
-                          enabled: isPinpadEnabled,
-                        ),
+                        child: ForgotPinButton(enabled: isPinpadEnabled),
                         onTap: () {
                           restartIdleTimer();
+                          pinBloc.add(PinEvent.giveUp());
                           if (pin.isEmpty ||
                               pinIndicatorAnimationController
                                   .isAnimatingClear ||
