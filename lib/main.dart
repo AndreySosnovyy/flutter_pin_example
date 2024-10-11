@@ -11,9 +11,10 @@ void main() async {
   runZonedGuarded(
     () async {
       final dependencies = await initializeApp(onError: logError);
-      final isPinCodeSet = dependencies.pinCodeController.isPinCodeSet;
-      final RouterConfig<Object> router =
-          AppRouter(isPinEnabled: isPinCodeSet).router;
+      final RouterConfig<Object> router = AppRouter(
+        isPinEnabled: dependencies.pinCodeController.isPinCodeSet,
+        isAuthenticated: dependencies.authBloc.state.isAuthenticated,
+      ).router;
       runApp(InheritedDependencies(
         dependencies: dependencies,
         child: App(router: router),
