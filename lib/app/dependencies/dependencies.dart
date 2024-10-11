@@ -50,7 +50,13 @@ final class DevDependencies implements Dependencies {
     'Shared preferences initialization': (dependencies) async =>
         dependencies.prefs = await SharedPreferences.getInstance(),
     'Pin code controller initialization': (dependencies) async {
-      dependencies.pinCodeController = PinCodeController();
+      final timeoutConfig = PinCodeTimeoutConfig.refreshable(
+        timeouts: {0: 3, 30: 2, 60: 1},
+      );
+      dependencies.pinCodeController = PinCodeController(
+        logsEnabled: true,
+        timeoutConfig: timeoutConfig,
+      );
       await dependencies.pinCodeController.initialize();
     },
     'Settings initialization': (dependencies) async {

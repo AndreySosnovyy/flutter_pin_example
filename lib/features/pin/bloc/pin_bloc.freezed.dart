@@ -607,7 +607,7 @@ mixin _$PinState {
     required TResult Function() idle,
     required TResult Function() testingPin,
     required TResult Function(String? message) error,
-    required TResult Function(Duration timeoutDuration) timeout,
+    required TResult Function(Duration remainingDuration) timeout,
     required TResult Function() success,
   }) =>
       throw _privateConstructorUsedError;
@@ -616,7 +616,7 @@ mixin _$PinState {
     TResult? Function()? idle,
     TResult? Function()? testingPin,
     TResult? Function(String? message)? error,
-    TResult? Function(Duration timeoutDuration)? timeout,
+    TResult? Function(Duration remainingDuration)? timeout,
     TResult? Function()? success,
   }) =>
       throw _privateConstructorUsedError;
@@ -625,7 +625,7 @@ mixin _$PinState {
     TResult Function()? idle,
     TResult Function()? testingPin,
     TResult Function(String? message)? error,
-    TResult Function(Duration timeoutDuration)? timeout,
+    TResult Function(Duration remainingDuration)? timeout,
     TResult Function()? success,
     required TResult orElse(),
   }) =>
@@ -724,7 +724,7 @@ class _$IdlePinStateImpl extends _IdlePinState {
     required TResult Function() idle,
     required TResult Function() testingPin,
     required TResult Function(String? message) error,
-    required TResult Function(Duration timeoutDuration) timeout,
+    required TResult Function(Duration remainingDuration) timeout,
     required TResult Function() success,
   }) {
     return idle();
@@ -736,7 +736,7 @@ class _$IdlePinStateImpl extends _IdlePinState {
     TResult? Function()? idle,
     TResult? Function()? testingPin,
     TResult? Function(String? message)? error,
-    TResult? Function(Duration timeoutDuration)? timeout,
+    TResult? Function(Duration remainingDuration)? timeout,
     TResult? Function()? success,
   }) {
     return idle?.call();
@@ -748,7 +748,7 @@ class _$IdlePinStateImpl extends _IdlePinState {
     TResult Function()? idle,
     TResult Function()? testingPin,
     TResult Function(String? message)? error,
-    TResult Function(Duration timeoutDuration)? timeout,
+    TResult Function(Duration remainingDuration)? timeout,
     TResult Function()? success,
     required TResult orElse(),
   }) {
@@ -848,7 +848,7 @@ class _$TestingPinStateImpl extends _TestingPinState {
     required TResult Function() idle,
     required TResult Function() testingPin,
     required TResult Function(String? message) error,
-    required TResult Function(Duration timeoutDuration) timeout,
+    required TResult Function(Duration remainingDuration) timeout,
     required TResult Function() success,
   }) {
     return testingPin();
@@ -860,7 +860,7 @@ class _$TestingPinStateImpl extends _TestingPinState {
     TResult? Function()? idle,
     TResult? Function()? testingPin,
     TResult? Function(String? message)? error,
-    TResult? Function(Duration timeoutDuration)? timeout,
+    TResult? Function(Duration remainingDuration)? timeout,
     TResult? Function()? success,
   }) {
     return testingPin?.call();
@@ -872,7 +872,7 @@ class _$TestingPinStateImpl extends _TestingPinState {
     TResult Function()? idle,
     TResult Function()? testingPin,
     TResult Function(String? message)? error,
-    TResult Function(Duration timeoutDuration)? timeout,
+    TResult Function(Duration remainingDuration)? timeout,
     TResult Function()? success,
     required TResult orElse(),
   }) {
@@ -999,7 +999,7 @@ class _$ErrorPinStateImpl extends _ErrorPinState {
     required TResult Function() idle,
     required TResult Function() testingPin,
     required TResult Function(String? message) error,
-    required TResult Function(Duration timeoutDuration) timeout,
+    required TResult Function(Duration remainingDuration) timeout,
     required TResult Function() success,
   }) {
     return error(message);
@@ -1011,7 +1011,7 @@ class _$ErrorPinStateImpl extends _ErrorPinState {
     TResult? Function()? idle,
     TResult? Function()? testingPin,
     TResult? Function(String? message)? error,
-    TResult? Function(Duration timeoutDuration)? timeout,
+    TResult? Function(Duration remainingDuration)? timeout,
     TResult? Function()? success,
   }) {
     return error?.call(message);
@@ -1023,7 +1023,7 @@ class _$ErrorPinStateImpl extends _ErrorPinState {
     TResult Function()? idle,
     TResult Function()? testingPin,
     TResult Function(String? message)? error,
-    TResult Function(Duration timeoutDuration)? timeout,
+    TResult Function(Duration remainingDuration)? timeout,
     TResult Function()? success,
     required TResult orElse(),
   }) {
@@ -1093,7 +1093,7 @@ abstract class _$$TimeoutPinStateImplCopyWith<$Res> {
           $Res Function(_$TimeoutPinStateImpl) then) =
       __$$TimeoutPinStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Duration timeoutDuration});
+  $Res call({Duration remainingDuration});
 }
 
 /// @nodoc
@@ -1109,12 +1109,12 @@ class __$$TimeoutPinStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? timeoutDuration = null,
+    Object? remainingDuration = null,
   }) {
     return _then(_$TimeoutPinStateImpl(
-      timeoutDuration: null == timeoutDuration
-          ? _value.timeoutDuration
-          : timeoutDuration // ignore: cast_nullable_to_non_nullable
+      remainingDuration: null == remainingDuration
+          ? _value.remainingDuration
+          : remainingDuration // ignore: cast_nullable_to_non_nullable
               as Duration,
     ));
   }
@@ -1123,14 +1123,14 @@ class __$$TimeoutPinStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TimeoutPinStateImpl extends _TimeoutPinState {
-  const _$TimeoutPinStateImpl({required this.timeoutDuration}) : super._();
+  const _$TimeoutPinStateImpl({required this.remainingDuration}) : super._();
 
   @override
-  final Duration timeoutDuration;
+  final Duration remainingDuration;
 
   @override
   String toString() {
-    return 'PinState.timeout(timeoutDuration: $timeoutDuration)';
+    return 'PinState.timeout(remainingDuration: $remainingDuration)';
   }
 
   @override
@@ -1138,12 +1138,12 @@ class _$TimeoutPinStateImpl extends _TimeoutPinState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TimeoutPinStateImpl &&
-            (identical(other.timeoutDuration, timeoutDuration) ||
-                other.timeoutDuration == timeoutDuration));
+            (identical(other.remainingDuration, remainingDuration) ||
+                other.remainingDuration == remainingDuration));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, timeoutDuration);
+  int get hashCode => Object.hash(runtimeType, remainingDuration);
 
   /// Create a copy of PinState
   /// with the given fields replaced by the non-null parameter values.
@@ -1160,10 +1160,10 @@ class _$TimeoutPinStateImpl extends _TimeoutPinState {
     required TResult Function() idle,
     required TResult Function() testingPin,
     required TResult Function(String? message) error,
-    required TResult Function(Duration timeoutDuration) timeout,
+    required TResult Function(Duration remainingDuration) timeout,
     required TResult Function() success,
   }) {
-    return timeout(timeoutDuration);
+    return timeout(remainingDuration);
   }
 
   @override
@@ -1172,10 +1172,10 @@ class _$TimeoutPinStateImpl extends _TimeoutPinState {
     TResult? Function()? idle,
     TResult? Function()? testingPin,
     TResult? Function(String? message)? error,
-    TResult? Function(Duration timeoutDuration)? timeout,
+    TResult? Function(Duration remainingDuration)? timeout,
     TResult? Function()? success,
   }) {
-    return timeout?.call(timeoutDuration);
+    return timeout?.call(remainingDuration);
   }
 
   @override
@@ -1184,12 +1184,12 @@ class _$TimeoutPinStateImpl extends _TimeoutPinState {
     TResult Function()? idle,
     TResult Function()? testingPin,
     TResult Function(String? message)? error,
-    TResult Function(Duration timeoutDuration)? timeout,
+    TResult Function(Duration remainingDuration)? timeout,
     TResult Function()? success,
     required TResult orElse(),
   }) {
     if (timeout != null) {
-      return timeout(timeoutDuration);
+      return timeout(remainingDuration);
     }
     return orElse();
   }
@@ -1236,11 +1236,11 @@ class _$TimeoutPinStateImpl extends _TimeoutPinState {
 }
 
 abstract class _TimeoutPinState extends PinState {
-  const factory _TimeoutPinState({required final Duration timeoutDuration}) =
+  const factory _TimeoutPinState({required final Duration remainingDuration}) =
       _$TimeoutPinStateImpl;
   const _TimeoutPinState._() : super._();
 
-  Duration get timeoutDuration;
+  Duration get remainingDuration;
 
   /// Create a copy of PinState
   /// with the given fields replaced by the non-null parameter values.
@@ -1293,7 +1293,7 @@ class _$SuccessPinStateImpl extends _SuccessPinState {
     required TResult Function() idle,
     required TResult Function() testingPin,
     required TResult Function(String? message) error,
-    required TResult Function(Duration timeoutDuration) timeout,
+    required TResult Function(Duration remainingDuration) timeout,
     required TResult Function() success,
   }) {
     return success();
@@ -1305,7 +1305,7 @@ class _$SuccessPinStateImpl extends _SuccessPinState {
     TResult? Function()? idle,
     TResult? Function()? testingPin,
     TResult? Function(String? message)? error,
-    TResult? Function(Duration timeoutDuration)? timeout,
+    TResult? Function(Duration remainingDuration)? timeout,
     TResult? Function()? success,
   }) {
     return success?.call();
@@ -1317,7 +1317,7 @@ class _$SuccessPinStateImpl extends _SuccessPinState {
     TResult Function()? idle,
     TResult Function()? testingPin,
     TResult Function(String? message)? error,
-    TResult Function(Duration timeoutDuration)? timeout,
+    TResult Function(Duration remainingDuration)? timeout,
     TResult Function()? success,
     required TResult orElse(),
   }) {

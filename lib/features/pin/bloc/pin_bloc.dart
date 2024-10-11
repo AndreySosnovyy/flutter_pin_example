@@ -11,8 +11,12 @@ class PinBloc extends Bloc<PinEvent, PinState> {
   PinBloc({
     required PinCodeController pinCodeController,
   })  : _pinCodeController = pinCodeController,
-        // TODO(Sosnovyy): add timeout initial check
-        super(const PinState.idle()) {
+        super(pinCodeController.isTimeoutRunning
+            ? PinState.timeout(
+                remainingDuration:
+                    pinCodeController.currentTimeoutRemainingDuration!,
+              )
+            : const PinState.idle()) {
     on<PinEvent>(
       (event, emitter) => event.map(
         testPin: (event) => _testPin(event, emitter),
@@ -62,10 +66,15 @@ class PinBloc extends Bloc<PinEvent, PinState> {
     try {
       if (!_pinCodeController.isBiometricsSet) return;
       if (_pinCodeController.currentBiometrics == BiometricsType.none) return;
-      _pinCodeController.testBiometrics(
+      final result = await _pinCodeController.testBiometrics(
         fingerprintReason: 'Touch the fingerprint sensor',
         faceIdReason: 'Look at the camera',
       );
+      if (result) {
+        emitter(PinState.success());
+      } else {
+        emitter(PinState.idle());
+      }
     } on Object catch (error, stackTrace) {
       logError(error, stackTrace);
     }

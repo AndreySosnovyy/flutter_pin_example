@@ -64,6 +64,47 @@ class _PinViewState extends State<PinView> {
     pinBloc.add(PinEvent.reset());
   }
 
+  PinpadExtraKey? buildRightPinpadExtraKey({required PinBloc pinBloc}) {
+    if (pin.isNotEmpty ||
+        pinIndicatorAnimationController.isAnimatingClear ||
+        pinIndicatorAnimationController.isAnimatingError) {
+      return PinpadExtraKey(
+        onTap: () {
+          restartIdleTimer();
+          setState(() => pin = pin.substring(0, pin.length - 1));
+          pinIndicatorAnimationController.animateErase();
+        },
+        child: Icon(
+          Icons.backspace_outlined,
+          size: 24,
+          color: !pinIndicatorAnimationController.isAnimatingNonInterruptible
+              ? null
+              : Colors.black26,
+        ),
+      );
+    }
+    if (biometricsType != BiometricsType.none) {
+      return PinpadExtraKey(
+        onTap: () {
+          restartIdleTimer();
+          if (biometricsType != BiometricsType.none) {
+            pinBloc.add(PinEvent.testBiometrics());
+          }
+        },
+        child: biometricsType == BiometricsType.fingerprint
+            ? const Icon(
+                Icons.fingerprint_rounded,
+                size: 32,
+              )
+            : const Icon(
+                CupertinoIcons.person_crop_circle,
+                size: 32,
+              ),
+      );
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     if (!pinBlocInitializationCompleter.isCompleted) return SizedBox.shrink();
@@ -140,7 +181,8 @@ class _PinViewState extends State<PinView> {
                       leftExtraKey: PinpadExtraKey(
                         child: ForgotPinButton(
                           enabled: !pinIndicatorAnimationController
-                              .isAnimatingNonInterruptible,
+                              .isAnimatingNonInterruptible &&
+                              !state.isTimeout,
                         ),
                         onTap: () {
                           restartIdleTimer();
@@ -158,45 +200,7 @@ class _PinViewState extends State<PinView> {
                           );
                         },
                       ),
-                      rightExtraKey: pin.isEmpty ||
-                              pinIndicatorAnimationController
-                                  .isAnimatingClear ||
-                              pinIndicatorAnimationController.isAnimatingError
-                          ? PinpadExtraKey(
-                              onTap: () {
-                                restartIdleTimer();
-                                if (biometricsType != BiometricsType.none) {
-                                  pinBloc.add(PinEvent.testBiometrics());
-                                }
-                              },
-                              child: switch (biometricsType) {
-                                BiometricsType.none => const SizedBox.shrink(),
-                                BiometricsType.face => const Icon(
-                                    CupertinoIcons.person_crop_circle,
-                                    size: 32,
-                                  ),
-                                BiometricsType.fingerprint => const Icon(
-                                    Icons.fingerprint_rounded,
-                                    size: 32,
-                                  ),
-                              },
-                            )
-                          : PinpadExtraKey(
-                              onTap: () {
-                                restartIdleTimer();
-                                setState(() =>
-                                    pin = pin.substring(0, pin.length - 1));
-                                pinIndicatorAnimationController.animateErase();
-                              },
-                              child: Icon(
-                                Icons.backspace_outlined,
-                                size: 24,
-                                color: !pinIndicatorAnimationController
-                                        .isAnimatingNonInterruptible
-                                    ? null
-                                    : Colors.black26,
-                              ),
-                            ),
+                      rightExtraKey: buildRightPinpadExtraKey(pinBloc: pinBloc),
                     ),
                     Spacer(flex: 1),
                   ],

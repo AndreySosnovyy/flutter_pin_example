@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
-  pin: ^0.1.1
+  pin: ^0.2.0
   pin_ui: ^0.0.1
   flutter_bloc_side_effect: ^0.0.2
   go_router: ^14.3.0
