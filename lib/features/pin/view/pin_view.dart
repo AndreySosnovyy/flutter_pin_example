@@ -21,6 +21,7 @@ class PinView extends StatefulWidget {
 class _PinViewState extends State<PinView> {
   late final PinBloc pinBloc;
   final pinBlocInitializationCompleter = Completer<void>();
+  late final StreamSubscription pinEventsSubscription;
 
   late final int targetPinLength;
   late final BiometricsType biometricsType;
@@ -54,6 +55,9 @@ class _PinViewState extends State<PinView> {
       biometricsType = controller.currentBiometrics;
       pinBloc = PinBloc(pinCodeController: controller);
       pinBlocInitializationCompleter.complete();
+      pinEventsSubscription = controller.eventsStream.listen((event) {
+        if (event == PinCodeEvents.timeoutEnded) clear();
+      });
     });
     restartIdleTimer();
     super.initState();
@@ -64,10 +68,13 @@ class _PinViewState extends State<PinView> {
     pinBloc.add(PinEvent.reset());
   }
 
-  PinpadExtraKey? buildRightPinpadExtraKey({required PinBloc pinBloc}) {
-    if (pin.isNotEmpty ||
+  PinpadExtraKey? buildRightPinpadExtraKey({
+    required PinBloc pinBloc,
+    required bool enabled,
+  }) {
+    if (!pinBloc.state.isTimeout && (pin.isNotEmpty ||
         pinIndicatorAnimationController.isAnimatingClear ||
-        pinIndicatorAnimationController.isAnimatingError) {
+        pinIndicatorAnimationController.isAnimatingError)) {
       return PinpadExtraKey(
         onTap: () {
           restartIdleTimer();
@@ -77,9 +84,7 @@ class _PinViewState extends State<PinView> {
         child: Icon(
           Icons.backspace_outlined,
           size: 24,
-          color: !pinIndicatorAnimationController.isAnimatingNonInterruptible
-              ? null
-              : Colors.black26,
+          color: enabled ? null : Colors.black26,
         ),
       );
     }
@@ -92,13 +97,15 @@ class _PinViewState extends State<PinView> {
           }
         },
         child: biometricsType == BiometricsType.fingerprint
-            ? const Icon(
+            ? Icon(
                 Icons.fingerprint_rounded,
                 size: 32,
+                color: enabled ? null : Colors.black26,
               )
-            : const Icon(
+            : Icon(
                 CupertinoIcons.person_crop_circle,
                 size: 32,
+                color: enabled ? null : Colors.black26,
               ),
       );
     }
@@ -139,6 +146,9 @@ class _PinViewState extends State<PinView> {
         return ValueListenableBuilder(
             valueListenable: pinIndicatorAnimationController,
             builder: (context, _, __) {
+              final isPinpadEnabled = !pinIndicatorAnimationController
+                      .isAnimatingNonInterruptible &&
+                  !state.isTimeout;
               return Scaffold(
                 body: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -173,16 +183,12 @@ class _PinViewState extends State<PinView> {
                           pinBloc.add(PinEvent.testPin(pin: pin));
                         }
                       },
-                      enabled: !pinIndicatorAnimationController
-                              .isAnimatingNonInterruptible &&
-                          !state.isTimeout,
+                      enabled: isPinpadEnabled,
                       isVisible:
                           !pinIndicatorAnimationController.isAnimatingSuccess,
                       leftExtraKey: PinpadExtraKey(
                         child: ForgotPinButton(
-                          enabled: !pinIndicatorAnimationController
-                              .isAnimatingNonInterruptible &&
-                              !state.isTimeout,
+                          enabled: isPinpadEnabled,
                         ),
                         onTap: () {
                           restartIdleTimer();
@@ -200,7 +206,10 @@ class _PinViewState extends State<PinView> {
                           );
                         },
                       ),
-                      rightExtraKey: buildRightPinpadExtraKey(pinBloc: pinBloc),
+                      rightExtraKey: buildRightPinpadExtraKey(
+                        pinBloc: pinBloc,
+                        enabled: isPinpadEnabled,
+                      ),
                     ),
                     Spacer(flex: 1),
                   ],
@@ -213,6 +222,7 @@ class _PinViewState extends State<PinView> {
 
   @override
   void dispose() {
+    pinEventsSubscription.cancel();
     pinIndicatorAnimationController.dispose();
     idlePinIndicatorAnimationTimer?.cancel();
     idlePinIndicatorAnimationTimer = null;

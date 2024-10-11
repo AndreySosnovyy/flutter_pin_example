@@ -42,6 +42,12 @@ class PinBloc extends Bloc<PinEvent, PinState> {
         emitter(PinState.success());
       } else {
         emitter(PinState.error());
+        if (_pinCodeController.isTimeoutRunning) {
+          emitter(PinState.timeout(
+            remainingDuration:
+                _pinCodeController.currentTimeoutRemainingDuration!,
+          ));
+        }
       }
     } on Object catch (error, stackTrace) {
       logError(error, stackTrace);
@@ -85,6 +91,14 @@ class PinBloc extends Bloc<PinEvent, PinState> {
     Emitter<PinState> emitter,
   ) async {
     try {
+      if (state.isTimeout && _pinCodeController.isTimeoutRunning) return;
+      if (_pinCodeController.isTimeoutRunning) {
+        emitter(
+          PinState.timeout(
+              remainingDuration:
+                  _pinCodeController.currentTimeoutRemainingDuration!),
+        );
+      }
       emitter(PinState.idle());
     } on Object catch (error, stackTrace) {
       logError(error, stackTrace);
