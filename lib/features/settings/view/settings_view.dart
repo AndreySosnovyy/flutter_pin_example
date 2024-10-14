@@ -38,6 +38,7 @@ class _SettingsViewState extends State<SettingsView> {
             SizedBox(height: 16),
             SettingsTile.withSwitch(
               // TODO(Sosnovyy): add biometrics type name
+              // TODO(Sosnovyy): add biometrics available on this device check
               title: 'Biometric',
               value: false,
               onChanged: (value) {},
@@ -57,12 +58,6 @@ class _SettingsViewState extends State<SettingsView> {
               info:
                   'Allows you to avoid entering PIN code for some time if it was already entered before.',
               onTap: () {},
-            ),
-            SizedBox(height: 16),
-            SettingsTile.withSwitch(
-              title: 'Vibration',
-              value: false,
-              onChanged: (value) {},
             ),
             SizedBox(height: 16),
           ],

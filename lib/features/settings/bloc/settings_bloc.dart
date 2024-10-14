@@ -4,28 +4,92 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pin/pin.dart';
 
 part 'settings_bloc.freezed.dart';
+
 part 'settings_event.dart';
+
 part 'settings_state.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   SettingsBloc({
     required PinCodeController pinCodeController,
-  })  : _pinCodeController = pinCodeController,
-        super(const SettingsState.initial()) {
+  })
+      : _pinCodeController = pinCodeController,
+        super(SettingsState.idle(
+        pinEnabled: pinCodeController.isPinCodeSet,
+        biometricsType: pinCodeController.currentBiometrics,
+        requestAgainSeconds: pinCodeController
+            .requestAgainConfig?.secondsBeforeRequestingAgain,
+        skipPinSeconds:
+        pinCodeController.skipPinCodeConfig?.duration.inSeconds,
+      )) {
     on<SettingsEvent>(
-      (event, emitter) => switch (event) {
-        _InitializeSettingsEvent() => _initialize(event, emitter),
-      },
+          (event, emitter) =>
+          event.map(
+            setPin: (event) => _setPinEnabled(event, emitter),
+            setBiometricsType: (event) =>
+                _setBiometricsType(event, emitter),
+            setRequestAgainSeconds: (event) =>
+                _setRequestAgainSeconds(event, emitter),
+            setSkipPinSeconds: (event) => _setSkipPinSeconds(event, emitter),
+          ),
     );
   }
 
   final PinCodeController _pinCodeController;
 
-  Future<void> _initialize(
-    _InitializeSettingsEvent event,
-    Emitter<SettingsState> emitter,
-  ) async {
-    try {} on Object catch (error, stackTrace) {
+  Future<void> _setPinEnabled(_SetPinSettingsEvent event,
+      Emitter<SettingsState> emitter,) async {
+    try {
+      emitter(state.copyWith(pinEnabled: event.pin != null));
+      if (event.pin != null) {
+        await _pinCodeController.setPinCode(event.pin!);
+      } else {
+        await _pinCodeController.clear();
+      }
+    } on Object catch (error, stackTrace) {
+      logError(error, stackTrace);
+    }
+  }
+
+  Future<void> _setBiometricsType(_SetBiometricsEnabledSettingsEvent event,
+      Emitter<SettingsState> emitter,) async {
+    try {
+      emitter(state.copyWith(biometricsType: event.type));
+      if (event.type != BiometricsType.none) {
+
+      } else {
+        await _pinCodeController.disableBiometrics();
+      }
+    } on Object catch (error, stackTrace) {
+      logError(error, stackTrace);
+    }
+  }
+
+  Future<void> _setRequestAgainSeconds(
+      _SetRequestAgainSecondsSettingsEvent event,
+      Emitter<SettingsState> emitter,) async {
+    try {
+      emitter(state.copyWith(requestAgainSeconds: event.seconds));
+      if (event.seconds != null) {
+        // await _pinCodeController.setRequestAgainConfig(config);
+      } else {
+        await _pinCodeController.setRequestAgainConfig(null);
+      }
+    } on Object catch (error, stackTrace) {
+      logError(error, stackTrace);
+    }
+  }
+
+  Future<void> _setSkipPinSeconds(_SetSkipPinSecondsSettingsEvent event,
+      Emitter<SettingsState> emitter,) async {
+    try {
+      emitter(state.copyWith(skipPinSeconds: event.seconds));
+      if (event.seconds != null) {
+        // await _pinCodeController.setSkipPinCodeConfig(config);
+      } else {
+        await _pinCodeController.setSkipPinCodeConfig(null);
+      }
+    } on Object catch (error, stackTrace) {
       logError(error, stackTrace);
     }
   }
