@@ -23,7 +23,7 @@ class _HomeViewState extends State<HomeView> {
           ),
           Spacer(flex: 1),
           ElevatedButton(
-            onPressed: () => context.router.go('/home/settings'),
+            onPressed: () => context.router.push('/home/settings'),
             child: Text('Settings'),
           ),
           SizedBox(height: 16),

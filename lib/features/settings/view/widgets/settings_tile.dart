@@ -41,7 +41,56 @@ class SettingsTile extends StatelessWidget {
     );
   }
 
-  // TODO(Sosnovyy): add info
+  void onInfoTap(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Stack(
+          children: [
+            Center(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 36),
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        left: 16, right: 16, top: 24, bottom: 8),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '$title ∘ Info',
+                          style:
+                              Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                        ),
+                        SizedBox(height: 16),
+                        Text('$info'),
+                        SizedBox(height: 24),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: TextButton(
+                            onPressed: Navigator.of(context).pop,
+                            child: Text('OK'),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -50,7 +99,6 @@ class SettingsTile extends StatelessWidget {
       child: SizedBox(
         height: 42,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               title,
@@ -58,6 +106,20 @@ class SettingsTile extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
             ),
+            if (info != null)
+              GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () => onInfoTap(context),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  child: Icon(
+                    Icons.info_outline_rounded,
+                    color: Colors.black26,
+                    size: 18,
+                  ),
+                ),
+              ),
+            Spacer(),
             trailing,
           ],
         ),
