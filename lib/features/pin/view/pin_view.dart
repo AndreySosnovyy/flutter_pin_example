@@ -152,7 +152,6 @@ class _PinViewState extends State<PinView> {
                   !state.isTimeout;
               return Scaffold(
                 body: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(width: MediaQuery.sizeOf(context).width),
                     Spacer(flex: 3),

@@ -18,7 +18,6 @@ class _AuthViewState extends State<AuthView> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(width: MediaQuery.sizeOf(context).width),
             Spacer(flex: 1),
