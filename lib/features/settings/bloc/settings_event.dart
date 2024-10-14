@@ -5,15 +5,16 @@ sealed class SettingsEvent with _$SettingsEvent {
   const SettingsEvent._();
 
   // null = disabled
-  const factory SettingsEvent.setPin(String? pin) =
-      _SetPinSettingsEvent;
+  const factory SettingsEvent.setPin(String? pin) = _SetPinSettingsEvent;
 
-  const factory SettingsEvent.setBiometricsType(BiometricsType type) =
+  const factory SettingsEvent.setBiometricsEnabled(bool enabled) =
       _SetBiometricsEnabledSettingsEvent;
 
   // null = disabled
-  const factory SettingsEvent.setRequestAgainSeconds(int? seconds) =
-      _SetRequestAgainSecondsSettingsEvent;
+  const factory SettingsEvent.setRequestAgainSeconds(
+    int? seconds, {
+    void Function()? onRequestAgainCalled,
+  }) = _SetRequestAgainSecondsSettingsEvent;
 
   // null = disabled
   const factory SettingsEvent.setSkipPinSeconds(int? seconds) =

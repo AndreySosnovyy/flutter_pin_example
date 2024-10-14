@@ -73,7 +73,7 @@ final class DevDependencies implements Dependencies {
     'Settings initialization': (dependencies) async {
       dependencies.settingsBloc = SettingsBloc(
         pinCodeController: dependencies.pinCodeController,
-      )..add(SettingsEvent.initialize());
+      );
     },
   };
 }
