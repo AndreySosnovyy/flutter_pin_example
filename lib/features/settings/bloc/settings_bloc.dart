@@ -1,4 +1,5 @@
 import 'package:flutter_bloc_side_effect/flutter_bloc_side_effect.dart';
+import 'package:flutter_pin_example/app/logging/error.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pin/pin.dart';
 
@@ -24,6 +25,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     _InitializeSettingsEvent event,
     Emitter<SettingsState> emitter,
   ) async {
-    try {} on Object catch (e, stackTrace) {}
+    try {} on Object catch (error, stackTrace) {
+      logError(error, stackTrace);
+    }
   }
 }

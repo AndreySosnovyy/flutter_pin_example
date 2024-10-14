@@ -154,7 +154,6 @@ class _PinViewState extends State<PinView> {
                 body: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    // SizedBox to make the column as wide as the screen size
                     SizedBox(width: MediaQuery.sizeOf(context).width),
                     Spacer(flex: 3),
                     ExamplePinIndicator(
