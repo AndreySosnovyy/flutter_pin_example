@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pin_example/app/extensions/context.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -10,8 +11,33 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SizedBox.shrink(),
+    return Scaffold(
+      body: Column(
+        children: [
+          SizedBox(width: MediaQuery.sizeOf(context).width),
+          Spacer(flex: 3),
+          Text(
+            'Welcome, ${context.dependencies.authBloc.state.username!}',
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+          Spacer(flex: 1),
+          ElevatedButton(
+            onPressed: () {},
+            child: Text('Settings'),
+          ),
+          SizedBox(height: 16),
+          TextButton(
+            onPressed: () {},
+            child: Text(
+              'Sign Out',
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    color: Colors.red,
+                  ),
+            ),
+          ),
+          Spacer(flex: 3),
+        ],
+      ),
     );
   }
 }
