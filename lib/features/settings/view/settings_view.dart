@@ -76,7 +76,9 @@ class _SettingsViewState extends State<SettingsView> {
                   padding: const EdgeInsets.only(bottom: 16.0),
                   child: SettingsTile.withTextButton(
                     title: 'Request again',
-                    text: 'Disabled',
+                    text:
+                        RequestAgainType.fromSeconds(state.requestAgainSeconds)
+                            .title,
                     info:
                         'Whether request PIN code again after applications was in background for determined amount of time.',
                     onTap: () {
@@ -85,14 +87,16 @@ class _SettingsViewState extends State<SettingsView> {
                         builder: (context) => PickerDialog(
                           title: 'Select Request Again time configuration',
                           alternatives: [
-                            for (final type in RequestAgainType.values)
-                              type.title
+                            for (final type in SkipPinType.values) type.title
                           ],
-                          onTap: (int index) {
-                            final type = RequestAgainType.values[index];
-                            settingsBloc.add(
-                                SettingsEvent.setRequestAgainSeconds(
-                                    type.seconds));
+                          onTap: (index) {
+                            final type = SkipPinType.values[index];
+                            settingsBloc
+                                .add(SettingsEvent.setRequestAgainSeconds(
+                              type.seconds,
+                              onRequestAgainCalled: requestAgainCallback,
+                            ));
+                            Navigator.of(context).pop();
                           },
                         ),
                       );
@@ -103,16 +107,23 @@ class _SettingsViewState extends State<SettingsView> {
                   padding: const EdgeInsets.only(bottom: 16.0),
                   child: SettingsTile.withTextButton(
                     title: 'Skip PIN',
-                    text: 'Disabled',
+                    text: SkipPinType.fromSeconds(state.skipPinSeconds).title,
                     info:
                         'Allows you to avoid entering PIN code for some time if it was already entered before.',
                     onTap: () {
                       showDialog(
                         context: context,
                         builder: (context) => PickerDialog(
-                          title: '',
-                          alternatives: [],
-                          onTap: (int index) {},
+                          title: 'Select Skip PIN time configuration',
+                          alternatives: [
+                            for (final type in SkipPinType.values) type.title
+                          ],
+                          onTap: (index) {
+                            final type = SkipPinType.values[index];
+                            settingsBloc.add(
+                                SettingsEvent.setSkipPinSeconds(type.seconds));
+                            Navigator.of(context).pop();
+                          },
                         ),
                       );
                     },
@@ -140,7 +151,7 @@ enum RequestAgainType {
 
   const RequestAgainType(this.seconds);
 
-  static RequestAgainType fromSeconds(int seconds) {
+  static RequestAgainType fromSeconds(int? seconds) {
     return RequestAgainType.values
         .firstWhere((element) => element.seconds == seconds);
   }
@@ -165,5 +176,37 @@ extension RequestAgainTypeExtension on RequestAgainType {
         RequestAgainType.min3 => 180,
         RequestAgainType.min5 => 300,
         RequestAgainType.min10 => 600,
+      };
+}
+
+enum SkipPinType {
+  disabled(null),
+  min1(60),
+  min5(300),
+  min10(600);
+
+  final int? seconds;
+
+  const SkipPinType(this.seconds);
+
+  static SkipPinType fromSeconds(int? seconds) {
+    return SkipPinType.values
+        .firstWhere((element) => element.seconds == seconds);
+  }
+}
+
+extension SkipPinTypeExtension on SkipPinType {
+  String get title => switch (this) {
+        SkipPinType.disabled => 'Disabled',
+        SkipPinType.min1 => '1 minute',
+        SkipPinType.min5 => '5 minutes',
+        SkipPinType.min10 => '10 minutes',
+      };
+
+  int? get toSeconds => switch (this) {
+        SkipPinType.disabled => null,
+        SkipPinType.min1 => 60,
+        SkipPinType.min5 => 300,
+        SkipPinType.min10 => 600,
       };
 }
