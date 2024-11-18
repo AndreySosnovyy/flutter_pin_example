@@ -1,5 +1,4 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_pin_example/app/app.dart';
 import 'package:flutter_pin_example/features/auth/view/auth_view.dart';
 import 'package:flutter_pin_example/features/home/view/home_view.dart';
 import 'package:flutter_pin_example/features/pin/view/pin_view.dart';
@@ -15,12 +14,9 @@ final class AppRouter {
   final bool isPinEnabled;
   final bool isAuthenticated;
 
-  final GlobalKey<NavigatorState> _rootNavigatorKey =
-      GlobalKey<NavigatorState>();
-
   // TODO(Sosnovyy): add transitions
   late final GoRouter router = GoRouter(
-    navigatorKey: _rootNavigatorKey,
+    navigatorKey: navigatorKey,
     initialLocation: isPinEnabled
         ? '/pin'
         : isAuthenticated
