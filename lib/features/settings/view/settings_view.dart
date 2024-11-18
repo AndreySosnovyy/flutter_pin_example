@@ -4,6 +4,7 @@ import 'package:flutter_pin_example/app/app.dart';
 import 'package:flutter_pin_example/app/extensions/context.dart';
 import 'package:flutter_pin_example/features/pin/view/pin_view.dart';
 import 'package:flutter_pin_example/features/settings/bloc/settings_bloc.dart';
+import 'package:flutter_pin_example/features/settings/view/widgets/create_pin_dialog.dart';
 import 'package:flutter_pin_example/features/settings/view/widgets/picker_dialog.dart';
 import 'package:flutter_pin_example/features/settings/view/widgets/settings_tile.dart';
 
@@ -54,11 +55,22 @@ class _SettingsViewState extends State<SettingsView> {
                   child: SettingsTile.withSwitch(
                     title: 'PIN code',
                     value: state.pinEnabled,
-                    onChanged: (value) {
+                    onChanged: (value) async {
                       if (!value) {
                         settingsBloc.add(SettingsEvent.setPin(null));
                       } else {
-                        // TODO(Sosnovyy): navigate to create pin code screen
+                        await showDialog(
+                          context: context,
+                          builder: (context) {
+                            return CreatePinDialog(
+                              createPinTitle: 'Come up with a new PIN code',
+                              confirmPinTitle: 'Confirm entered PIN code',
+                              onCreated: (pin) =>
+                                  settingsBloc.add(SettingsEvent.setPin(pin)),
+                              pinLength: 4,
+                            );
+                          },
+                        );
                       }
                     },
                   ),
