@@ -7,6 +7,7 @@ sealed class SettingsState with _$SettingsState {
   const factory SettingsState.idle({
     required bool pinEnabled,
     required BiometricsType? biometricsType,
+    required bool biometricsAvailable,
     required int? requestAgainSeconds,
     required int? skipPinSeconds,
   }) = _IdleSettingsState;

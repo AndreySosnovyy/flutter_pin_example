@@ -18,7 +18,7 @@ final class AppRouter {
   final GlobalKey<NavigatorState> _rootNavigatorKey =
       GlobalKey<NavigatorState>();
 
-  // TODO(Sosnovyy: add transitions)
+  // TODO(Sosnovyy): add transitions
   late final GoRouter router = GoRouter(
     navigatorKey: _rootNavigatorKey,
     initialLocation: isPinEnabled

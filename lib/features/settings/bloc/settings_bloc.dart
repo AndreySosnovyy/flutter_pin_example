@@ -18,6 +18,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
               .requestAgainConfig?.secondsBeforeRequestingAgain,
           skipPinSeconds:
               pinCodeController.skipPinCodeConfig?.duration.inSeconds,
+          biometricsAvailable: pinCodeController.canSetBiometrics,
         )) {
     on<SettingsEvent>(
       (event, emitter) => event.map(

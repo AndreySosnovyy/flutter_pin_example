@@ -799,26 +799,39 @@ abstract class _SetSkipPinSecondsSettingsEvent extends SettingsEvent {
 mixin _$SettingsState {
   bool get pinEnabled => throw _privateConstructorUsedError;
   BiometricsType? get biometricsType => throw _privateConstructorUsedError;
+  bool get biometricsAvailable => throw _privateConstructorUsedError;
   int? get requestAgainSeconds => throw _privateConstructorUsedError;
   int? get skipPinSeconds => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool pinEnabled, BiometricsType? biometricsType,
-            int? requestAgainSeconds, int? skipPinSeconds)
+    required TResult Function(
+            bool pinEnabled,
+            BiometricsType? biometricsType,
+            bool biometricsAvailable,
+            int? requestAgainSeconds,
+            int? skipPinSeconds)
         idle,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool pinEnabled, BiometricsType? biometricsType,
-            int? requestAgainSeconds, int? skipPinSeconds)?
+    TResult? Function(
+            bool pinEnabled,
+            BiometricsType? biometricsType,
+            bool biometricsAvailable,
+            int? requestAgainSeconds,
+            int? skipPinSeconds)?
         idle,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool pinEnabled, BiometricsType? biometricsType,
-            int? requestAgainSeconds, int? skipPinSeconds)?
+    TResult Function(
+            bool pinEnabled,
+            BiometricsType? biometricsType,
+            bool biometricsAvailable,
+            int? requestAgainSeconds,
+            int? skipPinSeconds)?
         idle,
     required TResult orElse(),
   }) =>
@@ -856,6 +869,7 @@ abstract class $SettingsStateCopyWith<$Res> {
   $Res call(
       {bool pinEnabled,
       BiometricsType? biometricsType,
+      bool biometricsAvailable,
       int? requestAgainSeconds,
       int? skipPinSeconds});
 }
@@ -877,6 +891,7 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
   $Res call({
     Object? pinEnabled = null,
     Object? biometricsType = freezed,
+    Object? biometricsAvailable = null,
     Object? requestAgainSeconds = freezed,
     Object? skipPinSeconds = freezed,
   }) {
@@ -889,6 +904,10 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
           ? _value.biometricsType
           : biometricsType // ignore: cast_nullable_to_non_nullable
               as BiometricsType?,
+      biometricsAvailable: null == biometricsAvailable
+          ? _value.biometricsAvailable
+          : biometricsAvailable // ignore: cast_nullable_to_non_nullable
+              as bool,
       requestAgainSeconds: freezed == requestAgainSeconds
           ? _value.requestAgainSeconds
           : requestAgainSeconds // ignore: cast_nullable_to_non_nullable
@@ -912,6 +931,7 @@ abstract class _$$IdleSettingsStateImplCopyWith<$Res>
   $Res call(
       {bool pinEnabled,
       BiometricsType? biometricsType,
+      bool biometricsAvailable,
       int? requestAgainSeconds,
       int? skipPinSeconds});
 }
@@ -931,6 +951,7 @@ class __$$IdleSettingsStateImplCopyWithImpl<$Res>
   $Res call({
     Object? pinEnabled = null,
     Object? biometricsType = freezed,
+    Object? biometricsAvailable = null,
     Object? requestAgainSeconds = freezed,
     Object? skipPinSeconds = freezed,
   }) {
@@ -943,6 +964,10 @@ class __$$IdleSettingsStateImplCopyWithImpl<$Res>
           ? _value.biometricsType
           : biometricsType // ignore: cast_nullable_to_non_nullable
               as BiometricsType?,
+      biometricsAvailable: null == biometricsAvailable
+          ? _value.biometricsAvailable
+          : biometricsAvailable // ignore: cast_nullable_to_non_nullable
+              as bool,
       requestAgainSeconds: freezed == requestAgainSeconds
           ? _value.requestAgainSeconds
           : requestAgainSeconds // ignore: cast_nullable_to_non_nullable
@@ -961,6 +986,7 @@ class _$IdleSettingsStateImpl extends _IdleSettingsState {
   const _$IdleSettingsStateImpl(
       {required this.pinEnabled,
       required this.biometricsType,
+      required this.biometricsAvailable,
       required this.requestAgainSeconds,
       required this.skipPinSeconds})
       : super._();
@@ -970,13 +996,15 @@ class _$IdleSettingsStateImpl extends _IdleSettingsState {
   @override
   final BiometricsType? biometricsType;
   @override
+  final bool biometricsAvailable;
+  @override
   final int? requestAgainSeconds;
   @override
   final int? skipPinSeconds;
 
   @override
   String toString() {
-    return 'SettingsState.idle(pinEnabled: $pinEnabled, biometricsType: $biometricsType, requestAgainSeconds: $requestAgainSeconds, skipPinSeconds: $skipPinSeconds)';
+    return 'SettingsState.idle(pinEnabled: $pinEnabled, biometricsType: $biometricsType, biometricsAvailable: $biometricsAvailable, requestAgainSeconds: $requestAgainSeconds, skipPinSeconds: $skipPinSeconds)';
   }
 
   @override
@@ -988,6 +1016,8 @@ class _$IdleSettingsStateImpl extends _IdleSettingsState {
                 other.pinEnabled == pinEnabled) &&
             (identical(other.biometricsType, biometricsType) ||
                 other.biometricsType == biometricsType) &&
+            (identical(other.biometricsAvailable, biometricsAvailable) ||
+                other.biometricsAvailable == biometricsAvailable) &&
             (identical(other.requestAgainSeconds, requestAgainSeconds) ||
                 other.requestAgainSeconds == requestAgainSeconds) &&
             (identical(other.skipPinSeconds, skipPinSeconds) ||
@@ -996,7 +1026,7 @@ class _$IdleSettingsStateImpl extends _IdleSettingsState {
 
   @override
   int get hashCode => Object.hash(runtimeType, pinEnabled, biometricsType,
-      requestAgainSeconds, skipPinSeconds);
+      biometricsAvailable, requestAgainSeconds, skipPinSeconds);
 
   /// Create a copy of SettingsState
   /// with the given fields replaced by the non-null parameter values.
@@ -1010,36 +1040,48 @@ class _$IdleSettingsStateImpl extends _IdleSettingsState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool pinEnabled, BiometricsType? biometricsType,
-            int? requestAgainSeconds, int? skipPinSeconds)
+    required TResult Function(
+            bool pinEnabled,
+            BiometricsType? biometricsType,
+            bool biometricsAvailable,
+            int? requestAgainSeconds,
+            int? skipPinSeconds)
         idle,
   }) {
-    return idle(
-        pinEnabled, biometricsType, requestAgainSeconds, skipPinSeconds);
+    return idle(pinEnabled, biometricsType, biometricsAvailable,
+        requestAgainSeconds, skipPinSeconds);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool pinEnabled, BiometricsType? biometricsType,
-            int? requestAgainSeconds, int? skipPinSeconds)?
+    TResult? Function(
+            bool pinEnabled,
+            BiometricsType? biometricsType,
+            bool biometricsAvailable,
+            int? requestAgainSeconds,
+            int? skipPinSeconds)?
         idle,
   }) {
-    return idle?.call(
-        pinEnabled, biometricsType, requestAgainSeconds, skipPinSeconds);
+    return idle?.call(pinEnabled, biometricsType, biometricsAvailable,
+        requestAgainSeconds, skipPinSeconds);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool pinEnabled, BiometricsType? biometricsType,
-            int? requestAgainSeconds, int? skipPinSeconds)?
+    TResult Function(
+            bool pinEnabled,
+            BiometricsType? biometricsType,
+            bool biometricsAvailable,
+            int? requestAgainSeconds,
+            int? skipPinSeconds)?
         idle,
     required TResult orElse(),
   }) {
     if (idle != null) {
-      return idle(
-          pinEnabled, biometricsType, requestAgainSeconds, skipPinSeconds);
+      return idle(pinEnabled, biometricsType, biometricsAvailable,
+          requestAgainSeconds, skipPinSeconds);
     }
     return orElse();
   }
@@ -1077,6 +1119,7 @@ abstract class _IdleSettingsState extends SettingsState {
   const factory _IdleSettingsState(
       {required final bool pinEnabled,
       required final BiometricsType? biometricsType,
+      required final bool biometricsAvailable,
       required final int? requestAgainSeconds,
       required final int? skipPinSeconds}) = _$IdleSettingsStateImpl;
   const _IdleSettingsState._() : super._();
@@ -1085,6 +1128,8 @@ abstract class _IdleSettingsState extends SettingsState {
   bool get pinEnabled;
   @override
   BiometricsType? get biometricsType;
+  @override
+  bool get biometricsAvailable;
   @override
   int? get requestAgainSeconds;
   @override
