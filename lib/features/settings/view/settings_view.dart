@@ -83,7 +83,7 @@ class _SettingsViewState extends State<SettingsView> {
                       showDialog(
                         context: context,
                         builder: (context) => PickerDialog(
-                          title: '',
+                          title: 'Select Request Again time configuration',
                           alternatives: [
                             for (final type in RequestAgainType.values)
                               type.title

@@ -37,7 +37,15 @@ class SettingsTile extends StatelessWidget {
       title: title,
       onTap: onTap,
       info: info,
-      trailing: Text(text),
+      trailing: Text(
+        text,
+        style: TextStyle(
+          fontWeight: FontWeight.w500,
+          fontSize: 16,
+          decoration: TextDecoration.underline,
+          decorationColor: Colors.black26,
+        ),
+      ),
     );
   }
 
