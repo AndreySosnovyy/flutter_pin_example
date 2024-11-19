@@ -13,6 +13,7 @@ import 'package:flutter_pin_example/features/settings/bloc/settings_bloc.dart';
 import 'package:pin/pin.dart';
 import 'package:pin_ui/pin_ui.dart';
 
+// TODO(Sosnovyy): add timer view
 class PinView extends StatefulWidget {
   const PinView({super.key});
 
