@@ -6,6 +6,7 @@ import 'package:flutter_bloc_side_effect/flutter_bloc_side_effect.dart';
 import 'package:flutter_pin_example/app/extensions/context.dart';
 import 'package:flutter_pin_example/app/widgets/pin/pin_indicator.dart';
 import 'package:flutter_pin_example/app/widgets/pin/pinpad.dart';
+import 'package:flutter_pin_example/features/auth/bloc/auth_bloc.dart';
 import 'package:flutter_pin_example/features/pin/bloc/pin_bloc.dart';
 import 'package:flutter_pin_example/features/pin/view/widgets/forgot_button.dart';
 import 'package:flutter_pin_example/features/settings/bloc/settings_bloc.dart';
@@ -122,11 +123,8 @@ class _PinViewState extends State<PinView> {
       sideEffectsListener: (context, se) {
         se.map(
           giveUp: (_) {
+            context.dependencies.authBloc.add(AuthEvent.signOut());
             context.dependencies.settingsBloc.add(SettingsEvent.fetch());
-            while (context.router.canPop()) {
-              context.router.pop();
-            }
-            context.router.go('/auth');
           },
         );
       },
@@ -156,79 +154,90 @@ class _PinViewState extends State<PinView> {
         }
       },
       builder: (context, state) {
-        return ValueListenableBuilder(
-            valueListenable: pinIndicatorAnimationController,
-            builder: (context, _, __) {
-              final isPinpadEnabled = !pinIndicatorAnimationController
-                      .isAnimatingNonInterruptible &&
-                  !state.isTimeout;
-              return Scaffold(
-                backgroundColor: Colors.black,
-                body: Column(
-                  children: [
-                    SizedBox(width: MediaQuery.sizeOf(context).width),
-                    Spacer(flex: 3),
-                    ExamplePinIndicator(
-                      isDark: true,
-                      controller: pinIndicatorAnimationController,
-                      length:
-                          context.dependencies.pinCodeController.pinCodeLength!,
-                      currentLength: pin.length,
-                      isError: state.isError,
-                      isSuccess: state.isSuccess && !isLoading,
-                    ),
-                    SizedBox(height: 64),
-                    ExamplePinpad(
-                      isDark: true,
-                      onKeyTap: (key) {
-                        restartIdleTimer();
-                        if (pinIndicatorAnimationController
-                            .isAnimatingNonInterruptible) {
-                          return;
-                        } else {
-                          pinIndicatorAnimationController.stop();
-                        }
-                        if (pin.length < targetPinLength) {
-                          setState(() => pin += key);
-                          pinIndicatorAnimationController.animateInput();
-                        }
-                        if (pin.length == targetPinLength &&
-                            !state.isTestingPin) {
-                          pinBloc.add(PinEvent.testPin(pin: pin));
-                        }
-                      },
-                      enabled: isPinpadEnabled,
-                      isVisible:
-                          !pinIndicatorAnimationController.isAnimatingSuccess,
-                      leftExtraKey: PinpadExtraKey(
-                        child: ForgotPinButton(enabled: isPinpadEnabled),
-                        onTap: () {
-                          restartIdleTimer();
-                          pinBloc.add(PinEvent.giveUp());
-                          if (pin.isEmpty ||
-                              pinIndicatorAnimationController
-                                  .isAnimatingClear ||
-                              pinIndicatorAnimationController
-                                  .isAnimatingError) {
-                            return;
-                          }
-                          pinIndicatorAnimationController.animateClear(
-                            animation: PinClearAnimation.drop,
-                            onComplete: clear,
-                            onInterrupt: clear,
-                          );
-                        },
-                      ),
-                      rightExtraKey: buildRightPinpadExtraKey(
-                        pinBloc: pinBloc,
-                        enabled: isPinpadEnabled,
-                      ),
-                    ),
-                    Spacer(flex: 1),
-                  ],
-                ),
-              );
+        return BlocListener<AuthBloc, AuthState>(
+          bloc: context.dependencies.authBloc,
+          listener: (context, state) {
+            state.mapOrNull(notAuthenticated: (_) {
+              while (context.router.canPop()) {
+                context.router.pop();
+              }
+              context.router.go('/auth');
             });
+          },
+          child: ValueListenableBuilder(
+              valueListenable: pinIndicatorAnimationController,
+              builder: (context, _, __) {
+                final isPinpadEnabled = !pinIndicatorAnimationController
+                        .isAnimatingNonInterruptible &&
+                    !state.isTimeout;
+                return Scaffold(
+                  backgroundColor: Colors.black,
+                  body: Column(
+                    children: [
+                      SizedBox(width: MediaQuery.sizeOf(context).width),
+                      Spacer(flex: 3),
+                      ExamplePinIndicator(
+                        isDark: true,
+                        controller: pinIndicatorAnimationController,
+                        length: context
+                            .dependencies.pinCodeController.pinCodeLength!,
+                        currentLength: pin.length,
+                        isError: state.isError,
+                        isSuccess: state.isSuccess && !isLoading,
+                      ),
+                      SizedBox(height: 64),
+                      ExamplePinpad(
+                        isDark: true,
+                        onKeyTap: (key) {
+                          restartIdleTimer();
+                          if (pinIndicatorAnimationController
+                              .isAnimatingNonInterruptible) {
+                            return;
+                          } else {
+                            pinIndicatorAnimationController.stop();
+                          }
+                          if (pin.length < targetPinLength) {
+                            setState(() => pin += key);
+                            pinIndicatorAnimationController.animateInput();
+                          }
+                          if (pin.length == targetPinLength &&
+                              !state.isTestingPin) {
+                            pinBloc.add(PinEvent.testPin(pin: pin));
+                          }
+                        },
+                        enabled: isPinpadEnabled,
+                        isVisible:
+                            !pinIndicatorAnimationController.isAnimatingSuccess,
+                        leftExtraKey: PinpadExtraKey(
+                          child: ForgotPinButton(enabled: isPinpadEnabled),
+                          onTap: () {
+                            restartIdleTimer();
+                            pinBloc.add(PinEvent.giveUp());
+                            if (pin.isEmpty ||
+                                pinIndicatorAnimationController
+                                    .isAnimatingClear ||
+                                pinIndicatorAnimationController
+                                    .isAnimatingError) {
+                              return;
+                            }
+                            pinIndicatorAnimationController.animateClear(
+                              animation: PinClearAnimation.drop,
+                              onComplete: clear,
+                              onInterrupt: clear,
+                            );
+                          },
+                        ),
+                        rightExtraKey: buildRightPinpadExtraKey(
+                          pinBloc: pinBloc,
+                          enabled: isPinpadEnabled,
+                        ),
+                      ),
+                      Spacer(flex: 1),
+                    ],
+                  ),
+                );
+              }),
+        );
       },
     );
   }

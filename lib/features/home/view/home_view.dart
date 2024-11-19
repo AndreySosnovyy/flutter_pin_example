@@ -18,7 +18,7 @@ class _HomeViewState extends State<HomeView> {
           SizedBox(width: MediaQuery.sizeOf(context).width),
           Spacer(flex: 3),
           Text(
-            'Welcome, ${context.dependencies.authBloc.state.username!}',
+            'Welcome, ${context.dependencies.authBloc.state.username ?? 'Unknown'}',
             style: Theme.of(context).textTheme.bodyLarge,
           ),
           Spacer(flex: 1),
