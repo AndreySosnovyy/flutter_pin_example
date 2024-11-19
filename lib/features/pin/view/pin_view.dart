@@ -138,7 +138,7 @@ class _PinViewState extends State<PinView> {
           pinIndicatorAnimationController.animateSuccess(
             animation: PinSuccessAnimation.fillLast,
             onComplete: () {
-              // TODO(Sosnovyy): navigate forward
+              context.router.pushReplacement('/home');
             },
           );
         }

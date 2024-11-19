@@ -31,6 +31,16 @@ class _CreatePinDialogState extends State<CreatePinDialog> {
       ? widget.createPinTitle
       : widget.confirmPinTitle;
 
+  bool get isEraseButtonVisible {
+    if (state == _DialogState.creating && pin.isNotEmpty) {
+      return true;
+    }
+    if (state == _DialogState.confirming && confirmationPin.isNotEmpty) {
+      return true;
+    }
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -41,21 +51,52 @@ class _CreatePinDialogState extends State<CreatePinDialog> {
           Text(
             title,
             style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              fontWeight: FontWeight.w500,
-              fontSize: 18,
-            ),
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18,
+                ),
           ),
           SizedBox(height: 84),
           ExamplePinIndicator(
             controller: indicatorController,
             length: widget.pinLength,
-            currentLength: pin.length,
+            currentLength: state == _DialogState.creating
+                ? pin.length
+                : confirmationPin.length,
             isError: false,
             isSuccess: false,
           ),
           SizedBox(height: 52),
           ExamplePinpad(
-            onKeyTap: (key) {},
+            onKeyTap: (key) {
+              if (state == _DialogState.creating) {
+                pin = '$pin$key';
+                if (pin.length == widget.pinLength) {
+                  state = _DialogState.confirming;
+                  confirmationPin = '';
+                }
+              } else {
+                confirmationPin = '$confirmationPin$key';
+                if (confirmationPin.length == widget.pinLength) {
+                  widget.onCreated(pin);
+                  Navigator.of(context).pop();
+                }
+              }
+              setState(() {});
+            },
+            rightExtraKey: isEraseButtonVisible ? PinpadExtraKey(
+              onTap: () {
+                if (state == _DialogState.creating) {
+                  setState(() => pin = pin.substring(0, pin.length - 1));
+                } else {
+                  setState(() => confirmationPin =
+                      confirmationPin.substring(0, confirmationPin.length - 1));
+                }
+              },
+              child: Icon(
+                Icons.backspace_outlined,
+                size: 24,
+              ),
+            ) : null,
           ),
           SizedBox(height: 52),
           Padding(
