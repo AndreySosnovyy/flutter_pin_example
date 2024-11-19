@@ -17,10 +17,9 @@ class ForgotPinButton extends StatelessWidget {
       onTap: onTap,
       child: Text(
         'Forgot',
-        style: Theme.of(context)
-            .textTheme
-            .bodySmall!
-            .copyWith(color: enabled ? null : Colors.black26),
+        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+              color: enabled ? Colors.white : Colors.white.withOpacity(0.5),
+            ),
       ),
     );
   }

@@ -8,6 +8,7 @@ class ExamplePinIndicator extends StatelessWidget {
     required this.currentLength,
     required this.isError,
     required this.isSuccess,
+    this.isDark = false,
     super.key,
   });
 
@@ -16,6 +17,7 @@ class ExamplePinIndicator extends StatelessWidget {
   final int currentLength;
   final bool isError;
   final bool isSuccess;
+  final bool isDark;
 
   @override
   Widget build(BuildContext context) {

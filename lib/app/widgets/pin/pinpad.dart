@@ -8,6 +8,7 @@ class ExamplePinpad extends StatelessWidget {
     this.isVisible = true,
     this.rightExtraKey,
     this.leftExtraKey,
+    this.isDark = false,
     super.key,
   });
 
@@ -16,6 +17,13 @@ class ExamplePinpad extends StatelessWidget {
   final bool isVisible;
   final PinpadExtraKey? rightExtraKey;
   final PinpadExtraKey? leftExtraKey;
+  final bool isDark;
+
+  TextStyle _getDefaultTextStyle(BuildContext context) =>
+      Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 32);
+
+  BoxDecoration _getDefaultDecoration(BuildContext context) =>
+      const BoxDecoration(shape: BoxShape.circle);
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +33,18 @@ class ExamplePinpad extends StatelessWidget {
       isVisible: isVisible,
       rightExtraKey: rightExtraKey,
       leftExtraKey: leftExtraKey,
+      keyDefaultTextStyle: _getDefaultTextStyle(context).copyWith(
+        color: Colors.white,
+      ),
+      keyDisabledTextStyle: _getDefaultTextStyle(context).copyWith(
+        color: Colors.white.withOpacity(0.5),
+      ),
+      keyPressedTextStyle:
+          _getDefaultTextStyle(context).copyWith(color: Colors.white),
+      keyDefaultDecoration: _getDefaultDecoration(context),
+      keyDisabledDecoration: _getDefaultDecoration(context),
+      keyPressedDecoration: _getDefaultDecoration(context)
+          .copyWith(color: Colors.white.withOpacity(0.1)),
     );
   }
 }

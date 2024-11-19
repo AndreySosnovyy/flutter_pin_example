@@ -85,7 +85,7 @@ class _PinViewState extends State<PinView> {
         child: Icon(
           Icons.backspace_outlined,
           size: 24,
-          color: enabled ? null : Colors.black26,
+          color: enabled ? Colors.white : Colors.white.withOpacity(0.5),
         ),
       );
     }
@@ -101,12 +101,12 @@ class _PinViewState extends State<PinView> {
             ? Icon(
                 Icons.fingerprint_rounded,
                 size: 32,
-                color: enabled ? null : Colors.black26,
+                color: enabled ? Colors.white : Colors.white.withOpacity(0.5),
               )
             : Icon(
                 CupertinoIcons.person_crop_circle,
                 size: 32,
-                color: enabled ? null : Colors.black26,
+                color: enabled ? Colors.white : Colors.white.withOpacity(0.5),
               ),
       );
     }
@@ -151,11 +151,13 @@ class _PinViewState extends State<PinView> {
                       .isAnimatingNonInterruptible &&
                   !state.isTimeout;
               return Scaffold(
+                backgroundColor: Colors.black,
                 body: Column(
                   children: [
                     SizedBox(width: MediaQuery.sizeOf(context).width),
                     Spacer(flex: 3),
                     ExamplePinIndicator(
+                      isDark: true,
                       controller: pinIndicatorAnimationController,
                       length:
                           context.dependencies.pinCodeController.pinCodeLength!,
@@ -165,6 +167,7 @@ class _PinViewState extends State<PinView> {
                     ),
                     SizedBox(height: 64),
                     ExamplePinpad(
+                      isDark: true,
                       onKeyTap: (key) {
                         restartIdleTimer();
                         if (pinIndicatorAnimationController
