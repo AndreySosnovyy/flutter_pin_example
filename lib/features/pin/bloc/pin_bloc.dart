@@ -5,9 +5,11 @@ import 'package:pin/pin.dart';
 
 part 'pin_bloc.freezed.dart';
 part 'pin_event.dart';
+part 'pin_side_effect.dart';
 part 'pin_state.dart';
 
-class PinBloc extends Bloc<PinEvent, PinState> {
+class PinBloc extends Bloc<PinEvent, PinState>
+    with BlocSideEffectMixin<PinEvent, PinState, PinSideEffect> {
   PinBloc({
     required PinCodeController pinCodeController,
   })  : _pinCodeController = pinCodeController,
@@ -60,6 +62,7 @@ class PinBloc extends Bloc<PinEvent, PinState> {
   ) async {
     try {
       await _pinCodeController.clear();
+      emitSideEffect(PinSideEffect.giveUp());
     } on Object catch (error, stackTrace) {
       logError(error, stackTrace);
     }

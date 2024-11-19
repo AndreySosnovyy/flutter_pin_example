@@ -22,6 +22,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         )) {
     on<SettingsEvent>(
       (event, emitter) => event.map(
+        fetch: (event) => _fetchPinSettings(event, emitter),
         setPin: (event) => _setPinEnabled(event, emitter),
         setBiometricsEnabled: (event) => _setBiometricsType(event, emitter),
         setRequestAgainSeconds: (event) =>
@@ -32,6 +33,25 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   }
 
   final PinCodeController _pinCodeController;
+
+  Future<void> _fetchPinSettings(
+    _FetchSettingsEvent event,
+    Emitter<SettingsState> emitter,
+  ) async {
+    try {
+      emitter(SettingsState.idle(
+        pinEnabled: _pinCodeController.isPinCodeSet,
+        biometricsType: _pinCodeController.currentBiometrics,
+        requestAgainSeconds:
+            _pinCodeController.requestAgainConfig?.secondsBeforeRequestingAgain,
+        skipPinSeconds:
+            _pinCodeController.skipPinCodeConfig?.duration.inSeconds,
+        biometricsAvailable: _pinCodeController.canSetBiometrics,
+      ));
+    } on Object catch (error, stackTrace) {
+      logError(error, stackTrace);
+    }
+  }
 
   Future<void> _setPinEnabled(
     _SetPinSettingsEvent event,

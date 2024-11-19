@@ -8,6 +8,7 @@ import 'package:flutter_pin_example/app/widgets/pin/pin_indicator.dart';
 import 'package:flutter_pin_example/app/widgets/pin/pinpad.dart';
 import 'package:flutter_pin_example/features/pin/bloc/pin_bloc.dart';
 import 'package:flutter_pin_example/features/pin/view/widgets/forgot_button.dart';
+import 'package:flutter_pin_example/features/settings/bloc/settings_bloc.dart';
 import 'package:pin/pin.dart';
 import 'package:pin_ui/pin_ui.dart';
 
@@ -116,8 +117,19 @@ class _PinViewState extends State<PinView> {
   @override
   Widget build(BuildContext context) {
     if (!pinBlocInitializationCompleter.isCompleted) return SizedBox.shrink();
-    return BlocConsumer<PinBloc, PinState>(
+    return BlocConsumerWithSideEffects<PinBloc, PinState, PinSideEffect>(
       bloc: pinBloc,
+      sideEffectsListener: (context, se) {
+        se.map(
+          giveUp: (_) {
+            context.dependencies.settingsBloc.add(SettingsEvent.fetch());
+            while (context.router.canPop()) {
+              context.router.pop();
+            }
+            context.router.go('/auth');
+          },
+        );
+      },
       listener: (context, state) {
         if (state.isError) {
           pinIndicatorAnimationController.animateError(

@@ -601,6 +601,164 @@ abstract class _ResetPinEvent extends PinEvent {
 }
 
 /// @nodoc
+mixin _$PinSideEffect {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() giveUp,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? giveUp,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? giveUp,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GiveUpPinSideEffect value) giveUp,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GiveUpPinSideEffect value)? giveUp,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GiveUpPinSideEffect value)? giveUp,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PinSideEffectCopyWith<$Res> {
+  factory $PinSideEffectCopyWith(
+          PinSideEffect value, $Res Function(PinSideEffect) then) =
+      _$PinSideEffectCopyWithImpl<$Res, PinSideEffect>;
+}
+
+/// @nodoc
+class _$PinSideEffectCopyWithImpl<$Res, $Val extends PinSideEffect>
+    implements $PinSideEffectCopyWith<$Res> {
+  _$PinSideEffectCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of PinSideEffect
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$GiveUpPinSideEffectImplCopyWith<$Res> {
+  factory _$$GiveUpPinSideEffectImplCopyWith(_$GiveUpPinSideEffectImpl value,
+          $Res Function(_$GiveUpPinSideEffectImpl) then) =
+      __$$GiveUpPinSideEffectImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$GiveUpPinSideEffectImplCopyWithImpl<$Res>
+    extends _$PinSideEffectCopyWithImpl<$Res, _$GiveUpPinSideEffectImpl>
+    implements _$$GiveUpPinSideEffectImplCopyWith<$Res> {
+  __$$GiveUpPinSideEffectImplCopyWithImpl(_$GiveUpPinSideEffectImpl _value,
+      $Res Function(_$GiveUpPinSideEffectImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PinSideEffect
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$GiveUpPinSideEffectImpl extends _GiveUpPinSideEffect {
+  const _$GiveUpPinSideEffectImpl() : super._();
+
+  @override
+  String toString() {
+    return 'PinSideEffect.giveUp()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GiveUpPinSideEffectImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() giveUp,
+  }) {
+    return giveUp();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? giveUp,
+  }) {
+    return giveUp?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? giveUp,
+    required TResult orElse(),
+  }) {
+    if (giveUp != null) {
+      return giveUp();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GiveUpPinSideEffect value) giveUp,
+  }) {
+    return giveUp(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GiveUpPinSideEffect value)? giveUp,
+  }) {
+    return giveUp?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GiveUpPinSideEffect value)? giveUp,
+    required TResult orElse(),
+  }) {
+    if (giveUp != null) {
+      return giveUp(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GiveUpPinSideEffect extends PinSideEffect {
+  const factory _GiveUpPinSideEffect() = _$GiveUpPinSideEffectImpl;
+  const _GiveUpPinSideEffect._() : super._();
+}
+
+/// @nodoc
 mixin _$PinState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({

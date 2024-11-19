@@ -4,6 +4,9 @@ part of 'settings_bloc.dart';
 sealed class SettingsEvent with _$SettingsEvent {
   const SettingsEvent._();
 
+
+  const factory SettingsEvent.fetch() = _FetchSettingsEvent;
+
   // null = disabled
   const factory SettingsEvent.setPin(String? pin) = _SetPinSettingsEvent;
 
