@@ -14,7 +14,6 @@ final class AppRouter {
   final bool isPinEnabled;
   final bool isAuthenticated;
 
-  // TODO(Sosnovyy): add transitions
   late final GoRouter router = GoRouter(
     navigatorKey: navigatorKey,
     initialLocation: isPinEnabled
@@ -40,8 +39,7 @@ final class AppRouter {
       ),
       GoRoute(
         path: '/home/settings',
-        pageBuilder: (context, state) =>
-            const NoTransitionPage<void>(child: SettingsView()),
+        builder: (context, state) => SettingsView(),
       ),
     ],
   );
