@@ -26,6 +26,7 @@ class _CreatePinDialogState extends State<CreatePinDialog> {
   String confirmationPin = '';
   final indicatorController = PinIndicatorAnimationController();
   _DialogState state = _DialogState.creating;
+  bool isPinpadEnabled = true;
 
   String get title => state == _DialogState.creating
       ? widget.createPinTitle
@@ -67,36 +68,47 @@ class _CreatePinDialogState extends State<CreatePinDialog> {
           ),
           SizedBox(height: 52),
           ExamplePinpad(
-            onKeyTap: (key) {
+            onKeyTap: (key) async {
               if (state == _DialogState.creating) {
                 pin = '$pin$key';
-                if (pin.length == widget.pinLength) {
-                  state = _DialogState.confirming;
-                  confirmationPin = '';
-                }
               } else {
                 confirmationPin = '$confirmationPin$key';
-                if (confirmationPin.length == widget.pinLength) {
-                  widget.onCreated(pin);
-                  Navigator.of(context).pop();
-                }
               }
-              setState(() {});
+              indicatorController.animateInput();
+              if (state == _DialogState.creating &&
+                  pin.length == widget.pinLength) {
+                setState(() => isPinpadEnabled = false);
+                await Future.delayed(Duration(milliseconds: 800));
+                state = _DialogState.confirming;
+                confirmationPin = '';
+              } else if (state == _DialogState.confirming &&
+                  confirmationPin.length == widget.pinLength) {
+                setState(() => isPinpadEnabled = false);
+                await Future.delayed(Duration(milliseconds: 500));
+                if (!context.mounted) return;
+                widget.onCreated(pin);
+                Navigator.of(context).pop();
+              }
+              setState(() => isPinpadEnabled = true);
             },
-            rightExtraKey: isEraseButtonVisible ? PinpadExtraKey(
-              onTap: () {
-                if (state == _DialogState.creating) {
-                  setState(() => pin = pin.substring(0, pin.length - 1));
-                } else {
-                  setState(() => confirmationPin =
-                      confirmationPin.substring(0, confirmationPin.length - 1));
-                }
-              },
-              child: Icon(
-                Icons.backspace_outlined,
-                size: 24,
-              ),
-            ) : null,
+            enabled: isPinpadEnabled,
+            rightExtraKey: isEraseButtonVisible && isPinpadEnabled
+                ? PinpadExtraKey(
+                    onTap: () {
+                      if (state == _DialogState.creating) {
+                        setState(() => pin = pin.substring(0, pin.length - 1));
+                      } else {
+                        setState(() => confirmationPin = confirmationPin
+                            .substring(0, confirmationPin.length - 1));
+                      }
+                      indicatorController.animateErase();
+                    },
+                    child: Icon(
+                      Icons.backspace_outlined,
+                      size: 24,
+                    ),
+                  )
+                : null,
           ),
           SizedBox(height: 52),
           Padding(
