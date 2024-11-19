@@ -385,10 +385,10 @@ packages:
     dependency: "direct main"
     description:
       name: hidden_logo
-      sha256: "199a25975b753e505fee62f472859e59db7700e2ed43aeb14dbaf04dd655d794"
+      sha256: c09e5b96940d40aaa3fddd50c2c9bd40bc5ecb055712830c26dfc1cf5f317891
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.7+1"
+    version: "0.0.8"
   http_multi_server:
     dependency: transitive
     description:

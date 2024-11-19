@@ -177,15 +177,16 @@ class _PinViewState extends State<PinView> {
                     children: [
                       SizedBox(width: MediaQuery.sizeOf(context).width),
                       Spacer(flex: 3),
-                      ExamplePinIndicator(
-                        isDark: true,
-                        controller: pinIndicatorAnimationController,
-                        length: context
-                            .dependencies.pinCodeController.pinCodeLength!,
-                        currentLength: pin.length,
-                        isError: state.isError,
-                        isSuccess: state.isSuccess && !isLoading,
-                      ),
+                      if (context.dependencies.pinCodeController.isPinCodeSet)
+                        ExamplePinIndicator(
+                          isDark: true,
+                          controller: pinIndicatorAnimationController,
+                          length: context
+                              .dependencies.pinCodeController.pinCodeLength!,
+                          currentLength: pin.length,
+                          isError: state.isError,
+                          isSuccess: state.isSuccess && !isLoading,
+                        ),
                       SizedBox(height: 64),
                       ExamplePinpad(
                         isDark: true,
