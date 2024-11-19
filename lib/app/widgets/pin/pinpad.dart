@@ -33,18 +33,25 @@ class ExamplePinpad extends StatelessWidget {
       isVisible: isVisible,
       rightExtraKey: rightExtraKey,
       leftExtraKey: leftExtraKey,
-      keyDefaultTextStyle: _getDefaultTextStyle(context).copyWith(
-        color: Colors.white,
-      ),
-      keyDisabledTextStyle: _getDefaultTextStyle(context).copyWith(
-        color: Colors.white.withOpacity(0.5),
-      ),
-      keyPressedTextStyle:
-          _getDefaultTextStyle(context).copyWith(color: Colors.white),
-      keyDefaultDecoration: _getDefaultDecoration(context),
-      keyDisabledDecoration: _getDefaultDecoration(context),
-      keyPressedDecoration: _getDefaultDecoration(context)
-          .copyWith(color: Colors.white.withOpacity(0.1)),
+      keyDefaultTextStyle: isDark
+          ? _getDefaultTextStyle(context).copyWith(
+              color: Colors.white,
+            )
+          : null,
+      keyDisabledTextStyle: isDark
+          ? _getDefaultTextStyle(context).copyWith(
+              color: Colors.white.withOpacity(0.5),
+            )
+          : null,
+      keyPressedTextStyle: isDark
+          ? _getDefaultTextStyle(context).copyWith(color: Colors.white)
+          : null,
+      keyDefaultDecoration: isDark ? _getDefaultDecoration(context) : null,
+      keyDisabledDecoration: isDark ? _getDefaultDecoration(context) : null,
+      keyPressedDecoration: isDark
+          ? _getDefaultDecoration(context)
+              .copyWith(color: Colors.white.withOpacity(0.1))
+          : null,
     );
   }
 }
