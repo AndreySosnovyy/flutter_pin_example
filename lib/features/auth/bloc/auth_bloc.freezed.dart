@@ -21,6 +21,7 @@ mixin _$AuthEvent {
     required TResult Function() initialize,
     required TResult Function(String username) signIn,
     required TResult Function() signOut,
+    required TResult Function() signOutOnMaxPinTimeoutsReached,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$AuthEvent {
     TResult? Function()? initialize,
     TResult? Function(String username)? signIn,
     TResult? Function()? signOut,
+    TResult? Function()? signOutOnMaxPinTimeoutsReached,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$AuthEvent {
     TResult Function()? initialize,
     TResult Function(String username)? signIn,
     TResult Function()? signOut,
+    TResult Function()? signOutOnMaxPinTimeoutsReached,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,8 @@ mixin _$AuthEvent {
     required TResult Function(_InitializeAuthEvent value) initialize,
     required TResult Function(_SignInAuthEvent value) signIn,
     required TResult Function(_SignOutAuthEvent value) signOut,
+    required TResult Function(_SignOutOnMaxPinTimeoutsReachedAuthEvent value)
+        signOutOnMaxPinTimeoutsReached,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +55,8 @@ mixin _$AuthEvent {
     TResult? Function(_InitializeAuthEvent value)? initialize,
     TResult? Function(_SignInAuthEvent value)? signIn,
     TResult? Function(_SignOutAuthEvent value)? signOut,
+    TResult? Function(_SignOutOnMaxPinTimeoutsReachedAuthEvent value)?
+        signOutOnMaxPinTimeoutsReached,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +64,8 @@ mixin _$AuthEvent {
     TResult Function(_InitializeAuthEvent value)? initialize,
     TResult Function(_SignInAuthEvent value)? signIn,
     TResult Function(_SignOutAuthEvent value)? signOut,
+    TResult Function(_SignOutOnMaxPinTimeoutsReachedAuthEvent value)?
+        signOutOnMaxPinTimeoutsReached,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -127,6 +136,7 @@ class _$InitializeAuthEventImpl extends _InitializeAuthEvent {
     required TResult Function() initialize,
     required TResult Function(String username) signIn,
     required TResult Function() signOut,
+    required TResult Function() signOutOnMaxPinTimeoutsReached,
   }) {
     return initialize();
   }
@@ -137,6 +147,7 @@ class _$InitializeAuthEventImpl extends _InitializeAuthEvent {
     TResult? Function()? initialize,
     TResult? Function(String username)? signIn,
     TResult? Function()? signOut,
+    TResult? Function()? signOutOnMaxPinTimeoutsReached,
   }) {
     return initialize?.call();
   }
@@ -147,6 +158,7 @@ class _$InitializeAuthEventImpl extends _InitializeAuthEvent {
     TResult Function()? initialize,
     TResult Function(String username)? signIn,
     TResult Function()? signOut,
+    TResult Function()? signOutOnMaxPinTimeoutsReached,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -161,6 +173,8 @@ class _$InitializeAuthEventImpl extends _InitializeAuthEvent {
     required TResult Function(_InitializeAuthEvent value) initialize,
     required TResult Function(_SignInAuthEvent value) signIn,
     required TResult Function(_SignOutAuthEvent value) signOut,
+    required TResult Function(_SignOutOnMaxPinTimeoutsReachedAuthEvent value)
+        signOutOnMaxPinTimeoutsReached,
   }) {
     return initialize(this);
   }
@@ -171,6 +185,8 @@ class _$InitializeAuthEventImpl extends _InitializeAuthEvent {
     TResult? Function(_InitializeAuthEvent value)? initialize,
     TResult? Function(_SignInAuthEvent value)? signIn,
     TResult? Function(_SignOutAuthEvent value)? signOut,
+    TResult? Function(_SignOutOnMaxPinTimeoutsReachedAuthEvent value)?
+        signOutOnMaxPinTimeoutsReached,
   }) {
     return initialize?.call(this);
   }
@@ -181,6 +197,8 @@ class _$InitializeAuthEventImpl extends _InitializeAuthEvent {
     TResult Function(_InitializeAuthEvent value)? initialize,
     TResult Function(_SignInAuthEvent value)? signIn,
     TResult Function(_SignOutAuthEvent value)? signOut,
+    TResult Function(_SignOutOnMaxPinTimeoutsReachedAuthEvent value)?
+        signOutOnMaxPinTimeoutsReached,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -268,6 +286,7 @@ class _$SignInAuthEventImpl extends _SignInAuthEvent {
     required TResult Function() initialize,
     required TResult Function(String username) signIn,
     required TResult Function() signOut,
+    required TResult Function() signOutOnMaxPinTimeoutsReached,
   }) {
     return signIn(username);
   }
@@ -278,6 +297,7 @@ class _$SignInAuthEventImpl extends _SignInAuthEvent {
     TResult? Function()? initialize,
     TResult? Function(String username)? signIn,
     TResult? Function()? signOut,
+    TResult? Function()? signOutOnMaxPinTimeoutsReached,
   }) {
     return signIn?.call(username);
   }
@@ -288,6 +308,7 @@ class _$SignInAuthEventImpl extends _SignInAuthEvent {
     TResult Function()? initialize,
     TResult Function(String username)? signIn,
     TResult Function()? signOut,
+    TResult Function()? signOutOnMaxPinTimeoutsReached,
     required TResult orElse(),
   }) {
     if (signIn != null) {
@@ -302,6 +323,8 @@ class _$SignInAuthEventImpl extends _SignInAuthEvent {
     required TResult Function(_InitializeAuthEvent value) initialize,
     required TResult Function(_SignInAuthEvent value) signIn,
     required TResult Function(_SignOutAuthEvent value) signOut,
+    required TResult Function(_SignOutOnMaxPinTimeoutsReachedAuthEvent value)
+        signOutOnMaxPinTimeoutsReached,
   }) {
     return signIn(this);
   }
@@ -312,6 +335,8 @@ class _$SignInAuthEventImpl extends _SignInAuthEvent {
     TResult? Function(_InitializeAuthEvent value)? initialize,
     TResult? Function(_SignInAuthEvent value)? signIn,
     TResult? Function(_SignOutAuthEvent value)? signOut,
+    TResult? Function(_SignOutOnMaxPinTimeoutsReachedAuthEvent value)?
+        signOutOnMaxPinTimeoutsReached,
   }) {
     return signIn?.call(this);
   }
@@ -322,6 +347,8 @@ class _$SignInAuthEventImpl extends _SignInAuthEvent {
     TResult Function(_InitializeAuthEvent value)? initialize,
     TResult Function(_SignInAuthEvent value)? signIn,
     TResult Function(_SignOutAuthEvent value)? signOut,
+    TResult Function(_SignOutOnMaxPinTimeoutsReachedAuthEvent value)?
+        signOutOnMaxPinTimeoutsReached,
     required TResult orElse(),
   }) {
     if (signIn != null) {
@@ -389,6 +416,7 @@ class _$SignOutAuthEventImpl extends _SignOutAuthEvent {
     required TResult Function() initialize,
     required TResult Function(String username) signIn,
     required TResult Function() signOut,
+    required TResult Function() signOutOnMaxPinTimeoutsReached,
   }) {
     return signOut();
   }
@@ -399,6 +427,7 @@ class _$SignOutAuthEventImpl extends _SignOutAuthEvent {
     TResult? Function()? initialize,
     TResult? Function(String username)? signIn,
     TResult? Function()? signOut,
+    TResult? Function()? signOutOnMaxPinTimeoutsReached,
   }) {
     return signOut?.call();
   }
@@ -409,6 +438,7 @@ class _$SignOutAuthEventImpl extends _SignOutAuthEvent {
     TResult Function()? initialize,
     TResult Function(String username)? signIn,
     TResult Function()? signOut,
+    TResult Function()? signOutOnMaxPinTimeoutsReached,
     required TResult orElse(),
   }) {
     if (signOut != null) {
@@ -423,6 +453,8 @@ class _$SignOutAuthEventImpl extends _SignOutAuthEvent {
     required TResult Function(_InitializeAuthEvent value) initialize,
     required TResult Function(_SignInAuthEvent value) signIn,
     required TResult Function(_SignOutAuthEvent value) signOut,
+    required TResult Function(_SignOutOnMaxPinTimeoutsReachedAuthEvent value)
+        signOutOnMaxPinTimeoutsReached,
   }) {
     return signOut(this);
   }
@@ -433,6 +465,8 @@ class _$SignOutAuthEventImpl extends _SignOutAuthEvent {
     TResult? Function(_InitializeAuthEvent value)? initialize,
     TResult? Function(_SignInAuthEvent value)? signIn,
     TResult? Function(_SignOutAuthEvent value)? signOut,
+    TResult? Function(_SignOutOnMaxPinTimeoutsReachedAuthEvent value)?
+        signOutOnMaxPinTimeoutsReached,
   }) {
     return signOut?.call(this);
   }
@@ -443,6 +477,8 @@ class _$SignOutAuthEventImpl extends _SignOutAuthEvent {
     TResult Function(_InitializeAuthEvent value)? initialize,
     TResult Function(_SignInAuthEvent value)? signIn,
     TResult Function(_SignOutAuthEvent value)? signOut,
+    TResult Function(_SignOutOnMaxPinTimeoutsReachedAuthEvent value)?
+        signOutOnMaxPinTimeoutsReached,
     required TResult orElse(),
   }) {
     if (signOut != null) {
@@ -455,6 +491,302 @@ class _$SignOutAuthEventImpl extends _SignOutAuthEvent {
 abstract class _SignOutAuthEvent extends AuthEvent {
   const factory _SignOutAuthEvent() = _$SignOutAuthEventImpl;
   const _SignOutAuthEvent._() : super._();
+}
+
+/// @nodoc
+abstract class _$$SignOutOnMaxPinTimeoutsReachedAuthEventImplCopyWith<$Res> {
+  factory _$$SignOutOnMaxPinTimeoutsReachedAuthEventImplCopyWith(
+          _$SignOutOnMaxPinTimeoutsReachedAuthEventImpl value,
+          $Res Function(_$SignOutOnMaxPinTimeoutsReachedAuthEventImpl) then) =
+      __$$SignOutOnMaxPinTimeoutsReachedAuthEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SignOutOnMaxPinTimeoutsReachedAuthEventImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res,
+        _$SignOutOnMaxPinTimeoutsReachedAuthEventImpl>
+    implements _$$SignOutOnMaxPinTimeoutsReachedAuthEventImplCopyWith<$Res> {
+  __$$SignOutOnMaxPinTimeoutsReachedAuthEventImplCopyWithImpl(
+      _$SignOutOnMaxPinTimeoutsReachedAuthEventImpl _value,
+      $Res Function(_$SignOutOnMaxPinTimeoutsReachedAuthEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$SignOutOnMaxPinTimeoutsReachedAuthEventImpl
+    extends _SignOutOnMaxPinTimeoutsReachedAuthEvent {
+  const _$SignOutOnMaxPinTimeoutsReachedAuthEventImpl() : super._();
+
+  @override
+  String toString() {
+    return 'AuthEvent.signOutOnMaxPinTimeoutsReached()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SignOutOnMaxPinTimeoutsReachedAuthEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+    required TResult Function(String username) signIn,
+    required TResult Function() signOut,
+    required TResult Function() signOutOnMaxPinTimeoutsReached,
+  }) {
+    return signOutOnMaxPinTimeoutsReached();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
+    TResult? Function(String username)? signIn,
+    TResult? Function()? signOut,
+    TResult? Function()? signOutOnMaxPinTimeoutsReached,
+  }) {
+    return signOutOnMaxPinTimeoutsReached?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function(String username)? signIn,
+    TResult Function()? signOut,
+    TResult Function()? signOutOnMaxPinTimeoutsReached,
+    required TResult orElse(),
+  }) {
+    if (signOutOnMaxPinTimeoutsReached != null) {
+      return signOutOnMaxPinTimeoutsReached();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InitializeAuthEvent value) initialize,
+    required TResult Function(_SignInAuthEvent value) signIn,
+    required TResult Function(_SignOutAuthEvent value) signOut,
+    required TResult Function(_SignOutOnMaxPinTimeoutsReachedAuthEvent value)
+        signOutOnMaxPinTimeoutsReached,
+  }) {
+    return signOutOnMaxPinTimeoutsReached(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InitializeAuthEvent value)? initialize,
+    TResult? Function(_SignInAuthEvent value)? signIn,
+    TResult? Function(_SignOutAuthEvent value)? signOut,
+    TResult? Function(_SignOutOnMaxPinTimeoutsReachedAuthEvent value)?
+        signOutOnMaxPinTimeoutsReached,
+  }) {
+    return signOutOnMaxPinTimeoutsReached?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InitializeAuthEvent value)? initialize,
+    TResult Function(_SignInAuthEvent value)? signIn,
+    TResult Function(_SignOutAuthEvent value)? signOut,
+    TResult Function(_SignOutOnMaxPinTimeoutsReachedAuthEvent value)?
+        signOutOnMaxPinTimeoutsReached,
+    required TResult orElse(),
+  }) {
+    if (signOutOnMaxPinTimeoutsReached != null) {
+      return signOutOnMaxPinTimeoutsReached(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SignOutOnMaxPinTimeoutsReachedAuthEvent extends AuthEvent {
+  const factory _SignOutOnMaxPinTimeoutsReachedAuthEvent() =
+      _$SignOutOnMaxPinTimeoutsReachedAuthEventImpl;
+  const _SignOutOnMaxPinTimeoutsReachedAuthEvent._() : super._();
+}
+
+/// @nodoc
+mixin _$AuthSideEffect {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() maxPinTimeoutsReached,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? maxPinTimeoutsReached,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? maxPinTimeoutsReached,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_MaxPinTimeoutsReachedAuthSideEffect value)
+        maxPinTimeoutsReached,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_MaxPinTimeoutsReachedAuthSideEffect value)?
+        maxPinTimeoutsReached,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_MaxPinTimeoutsReachedAuthSideEffect value)?
+        maxPinTimeoutsReached,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AuthSideEffectCopyWith<$Res> {
+  factory $AuthSideEffectCopyWith(
+          AuthSideEffect value, $Res Function(AuthSideEffect) then) =
+      _$AuthSideEffectCopyWithImpl<$Res, AuthSideEffect>;
+}
+
+/// @nodoc
+class _$AuthSideEffectCopyWithImpl<$Res, $Val extends AuthSideEffect>
+    implements $AuthSideEffectCopyWith<$Res> {
+  _$AuthSideEffectCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of AuthSideEffect
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$MaxPinTimeoutsReachedAuthSideEffectImplCopyWith<$Res> {
+  factory _$$MaxPinTimeoutsReachedAuthSideEffectImplCopyWith(
+          _$MaxPinTimeoutsReachedAuthSideEffectImpl value,
+          $Res Function(_$MaxPinTimeoutsReachedAuthSideEffectImpl) then) =
+      __$$MaxPinTimeoutsReachedAuthSideEffectImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$MaxPinTimeoutsReachedAuthSideEffectImplCopyWithImpl<$Res>
+    extends _$AuthSideEffectCopyWithImpl<$Res,
+        _$MaxPinTimeoutsReachedAuthSideEffectImpl>
+    implements _$$MaxPinTimeoutsReachedAuthSideEffectImplCopyWith<$Res> {
+  __$$MaxPinTimeoutsReachedAuthSideEffectImplCopyWithImpl(
+      _$MaxPinTimeoutsReachedAuthSideEffectImpl _value,
+      $Res Function(_$MaxPinTimeoutsReachedAuthSideEffectImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AuthSideEffect
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$MaxPinTimeoutsReachedAuthSideEffectImpl
+    extends _MaxPinTimeoutsReachedAuthSideEffect {
+  const _$MaxPinTimeoutsReachedAuthSideEffectImpl() : super._();
+
+  @override
+  String toString() {
+    return 'AuthSideEffect.maxPinTimeoutsReached()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MaxPinTimeoutsReachedAuthSideEffectImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() maxPinTimeoutsReached,
+  }) {
+    return maxPinTimeoutsReached();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? maxPinTimeoutsReached,
+  }) {
+    return maxPinTimeoutsReached?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? maxPinTimeoutsReached,
+    required TResult orElse(),
+  }) {
+    if (maxPinTimeoutsReached != null) {
+      return maxPinTimeoutsReached();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_MaxPinTimeoutsReachedAuthSideEffect value)
+        maxPinTimeoutsReached,
+  }) {
+    return maxPinTimeoutsReached(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_MaxPinTimeoutsReachedAuthSideEffect value)?
+        maxPinTimeoutsReached,
+  }) {
+    return maxPinTimeoutsReached?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_MaxPinTimeoutsReachedAuthSideEffect value)?
+        maxPinTimeoutsReached,
+    required TResult orElse(),
+  }) {
+    if (maxPinTimeoutsReached != null) {
+      return maxPinTimeoutsReached(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _MaxPinTimeoutsReachedAuthSideEffect extends AuthSideEffect {
+  const factory _MaxPinTimeoutsReachedAuthSideEffect() =
+      _$MaxPinTimeoutsReachedAuthSideEffectImpl;
+  const _MaxPinTimeoutsReachedAuthSideEffect._() : super._();
 }
 
 /// @nodoc

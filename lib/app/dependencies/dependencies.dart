@@ -62,8 +62,8 @@ final class DevDependencies implements Dependencies {
     'Pin code controller initialization': (dependencies) async {
       final timeoutConfig = PinCodeTimeoutConfig.notRefreshable(
           timeouts: {0: 3, 10: 2, 20: 1},
-          onMaxTimeoutsReached: () =>
-              dependencies.authBloc.add(AuthEvent.signOut()));
+          onMaxTimeoutsReached: () => dependencies.authBloc
+              .add(AuthEvent.signOutOnMaxPinTimeoutsReached()));
       dependencies.pinCodeController = PinCodeController(
         iterateInterval: 5,
         logsEnabled: true,

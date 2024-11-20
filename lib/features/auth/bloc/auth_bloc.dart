@@ -5,11 +5,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 part 'auth_bloc.freezed.dart';
 part 'auth_event.dart';
+part 'auth_side_effect.dart';
 part 'auth_state.dart';
 
 const String _usernameKey = 'key_username';
 
-class AuthBloc extends Bloc<AuthEvent, AuthState> {
+class AuthBloc extends Bloc<AuthEvent, AuthState>
+    with BlocSideEffectMixin<AuthEvent, AuthState, AuthSideEffect> {
   AuthBloc({
     required SharedPreferences prefs,
   })  : _prefs = prefs,
@@ -19,6 +21,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         initialize: (event) => _initialize(event, emitter),
         signIn: (event) => _signIn(event, emitter),
         signOut: (event) => _signOut(event, emitter),
+        signOutOnMaxPinTimeoutsReached: (event) =>
+            _signOutOnMaxPinTimeoutsReached(event, emitter),
       ),
     );
   }
@@ -61,6 +65,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   ) async {
     try {
       emitter(const AuthState.notAuthenticated());
+      await _prefs.remove(_usernameKey);
+    } on Object catch (error, stackTrace) {
+      logError(error, stackTrace);
+    }
+  }
+
+  Future<void> _signOutOnMaxPinTimeoutsReached(
+    _SignOutOnMaxPinTimeoutsReachedAuthEvent event,
+    Emitter<AuthState> emitter,
+  ) async {
+    try {
+      emitter(const AuthState.notAuthenticated());
+      emitSideEffect(AuthSideEffect.maxPinTimeoutsReached());
       await _prefs.remove(_usernameKey);
     } on Object catch (error, stackTrace) {
       logError(error, stackTrace);

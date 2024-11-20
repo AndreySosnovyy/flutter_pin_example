@@ -163,15 +163,30 @@ class _PinViewState extends State<PinView> {
           }
         },
         builder: (context, state) {
-          return BlocListener<AuthBloc, AuthState>(
+          return BlocListenerWithSideEffects<AuthBloc, AuthState,
+              AuthSideEffect>(
             bloc: context.dependencies.authBloc,
             listener: (context, state) {
-              state.mapOrNull(notAuthenticated: (_) {
-                while (context.router.canPop()) {
-                  context.router.pop();
-                }
-                context.router.go('/auth');
-              });
+              state.mapOrNull(
+                notAuthenticated: (_) {
+                  while (context.router.canPop()) {
+                    context.router.pop();
+                  }
+                  context.router.go('/auth');
+                },
+              );
+            },
+            sideEffectsListener: (context, se) {
+              se.map(
+                maxPinTimeoutsReached: (_) {
+                  showOkAlertDialog(
+                    context: context,
+                    title: 'Attention!',
+                    message:
+                        'You have been signed out due to too many failed attempts.',
+                  );
+                },
+              );
             },
             child: ValueListenableBuilder(
                 valueListenable: pinIndicatorAnimationController,
@@ -249,6 +264,16 @@ class _PinViewState extends State<PinView> {
                           rightExtraKey: buildRightPinpadExtraKey(
                             pinBloc: pinBloc,
                             enabled: isPinpadEnabled,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 32),
+                          child: Text(
+                            state.timeoutDuration?.toString() ?? '',
+                            style: TextStyle(
+                              color:
+                                  state.isTimeout ? Colors.white : Colors.black,
+                            ),
                           ),
                         ),
                         Spacer(flex: 1),

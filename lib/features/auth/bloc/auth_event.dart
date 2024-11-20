@@ -11,4 +11,7 @@ sealed class AuthEvent with _$AuthEvent {
   }) = _SignInAuthEvent;
 
   const factory AuthEvent.signOut() = _SignOutAuthEvent;
+
+  const factory AuthEvent.signOutOnMaxPinTimeoutsReached() =
+      _SignOutOnMaxPinTimeoutsReachedAuthEvent;
 }

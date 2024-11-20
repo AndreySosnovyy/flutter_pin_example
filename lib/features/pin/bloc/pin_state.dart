@@ -45,6 +45,6 @@ sealed class PinState with _$PinState {
       );
 
   Duration? get timeoutDuration => mapOrNull(
-        timeout: (state) => state.timeoutDuration,
+        timeout: (state) => state.remainingDuration,
       );
 }

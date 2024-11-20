@@ -1141,6 +1141,168 @@ abstract class _SetSkipPinSecondsSettingsEvent extends SettingsEvent {
 }
 
 /// @nodoc
+mixin _$SettingsSideEffect {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InitializeSettingsSideEffect value) initialize,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InitializeSettingsSideEffect value)? initialize,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InitializeSettingsSideEffect value)? initialize,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SettingsSideEffectCopyWith<$Res> {
+  factory $SettingsSideEffectCopyWith(
+          SettingsSideEffect value, $Res Function(SettingsSideEffect) then) =
+      _$SettingsSideEffectCopyWithImpl<$Res, SettingsSideEffect>;
+}
+
+/// @nodoc
+class _$SettingsSideEffectCopyWithImpl<$Res, $Val extends SettingsSideEffect>
+    implements $SettingsSideEffectCopyWith<$Res> {
+  _$SettingsSideEffectCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of SettingsSideEffect
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$InitializeSettingsSideEffectImplCopyWith<$Res> {
+  factory _$$InitializeSettingsSideEffectImplCopyWith(
+          _$InitializeSettingsSideEffectImpl value,
+          $Res Function(_$InitializeSettingsSideEffectImpl) then) =
+      __$$InitializeSettingsSideEffectImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$InitializeSettingsSideEffectImplCopyWithImpl<$Res>
+    extends _$SettingsSideEffectCopyWithImpl<$Res,
+        _$InitializeSettingsSideEffectImpl>
+    implements _$$InitializeSettingsSideEffectImplCopyWith<$Res> {
+  __$$InitializeSettingsSideEffectImplCopyWithImpl(
+      _$InitializeSettingsSideEffectImpl _value,
+      $Res Function(_$InitializeSettingsSideEffectImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of SettingsSideEffect
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$InitializeSettingsSideEffectImpl extends _InitializeSettingsSideEffect {
+  const _$InitializeSettingsSideEffectImpl() : super._();
+
+  @override
+  String toString() {
+    return 'SettingsSideEffect.initialize()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$InitializeSettingsSideEffectImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+  }) {
+    return initialize();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
+  }) {
+    return initialize?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    required TResult orElse(),
+  }) {
+    if (initialize != null) {
+      return initialize();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InitializeSettingsSideEffect value) initialize,
+  }) {
+    return initialize(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InitializeSettingsSideEffect value)? initialize,
+  }) {
+    return initialize?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InitializeSettingsSideEffect value)? initialize,
+    required TResult orElse(),
+  }) {
+    if (initialize != null) {
+      return initialize(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _InitializeSettingsSideEffect extends SettingsSideEffect {
+  const factory _InitializeSettingsSideEffect() =
+      _$InitializeSettingsSideEffectImpl;
+  const _InitializeSettingsSideEffect._() : super._();
+}
+
+/// @nodoc
 mixin _$SettingsState {
   bool get pinEnabled => throw _privateConstructorUsedError;
   BiometricsType? get biometricsType => throw _privateConstructorUsedError;
@@ -1486,166 +1648,4 @@ abstract class _IdleSettingsState extends SettingsState {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$IdleSettingsStateImplCopyWith<_$IdleSettingsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-mixin _$SettingsSideEffect {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialize,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialize,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialize,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_InitializeSettingsSideEffect value) initialize,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitializeSettingsSideEffect value)? initialize,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitializeSettingsSideEffect value)? initialize,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $SettingsSideEffectCopyWith<$Res> {
-  factory $SettingsSideEffectCopyWith(
-          SettingsSideEffect value, $Res Function(SettingsSideEffect) then) =
-      _$SettingsSideEffectCopyWithImpl<$Res, SettingsSideEffect>;
-}
-
-/// @nodoc
-class _$SettingsSideEffectCopyWithImpl<$Res, $Val extends SettingsSideEffect>
-    implements $SettingsSideEffectCopyWith<$Res> {
-  _$SettingsSideEffectCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of SettingsSideEffect
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-abstract class _$$InitializeSettingsSideEffectImplCopyWith<$Res> {
-  factory _$$InitializeSettingsSideEffectImplCopyWith(
-          _$InitializeSettingsSideEffectImpl value,
-          $Res Function(_$InitializeSettingsSideEffectImpl) then) =
-      __$$InitializeSettingsSideEffectImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$InitializeSettingsSideEffectImplCopyWithImpl<$Res>
-    extends _$SettingsSideEffectCopyWithImpl<$Res,
-        _$InitializeSettingsSideEffectImpl>
-    implements _$$InitializeSettingsSideEffectImplCopyWith<$Res> {
-  __$$InitializeSettingsSideEffectImplCopyWithImpl(
-      _$InitializeSettingsSideEffectImpl _value,
-      $Res Function(_$InitializeSettingsSideEffectImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SettingsSideEffect
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$InitializeSettingsSideEffectImpl extends _InitializeSettingsSideEffect {
-  const _$InitializeSettingsSideEffectImpl() : super._();
-
-  @override
-  String toString() {
-    return 'SettingsSideEffect.initialize()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$InitializeSettingsSideEffectImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialize,
-  }) {
-    return initialize();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialize,
-  }) {
-    return initialize?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialize,
-    required TResult orElse(),
-  }) {
-    if (initialize != null) {
-      return initialize();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_InitializeSettingsSideEffect value) initialize,
-  }) {
-    return initialize(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitializeSettingsSideEffect value)? initialize,
-  }) {
-    return initialize?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitializeSettingsSideEffect value)? initialize,
-    required TResult orElse(),
-  }) {
-    if (initialize != null) {
-      return initialize(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _InitializeSettingsSideEffect extends SettingsSideEffect {
-  const factory _InitializeSettingsSideEffect() =
-      _$InitializeSettingsSideEffectImpl;
-  const _InitializeSettingsSideEffect._() : super._();
 }
