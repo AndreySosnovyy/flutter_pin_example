@@ -66,6 +66,7 @@ class _PinViewState extends State<PinView> {
       pinEventsSubscription = controller.eventsStream.listen((event) {
         if (event == PinCodeEvents.timeoutEnded) clear();
       });
+      setState(() {});
     });
     restartIdleTimer();
     super.initState();
