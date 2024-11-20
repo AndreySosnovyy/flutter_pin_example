@@ -1,7 +1,7 @@
 name: flutter_pin_example
 description: "Example project for pin and pin_ui Flutter packages"
 publish_to: 'none'
-version: 1.0.0+1
+version: 0.0.1+1
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
