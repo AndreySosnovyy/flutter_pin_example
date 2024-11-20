@@ -48,8 +48,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emitter,
   ) async {
     try {
-      await _prefs.setString(_usernameKey, event.username);
       emitter(AuthState.authenticated(username: event.username));
+      await _prefs.setString(_usernameKey, event.username);
     } on Object catch (error, stackTrace) {
       logError(error, stackTrace);
     }
@@ -60,8 +60,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emitter,
   ) async {
     try {
-      await _prefs.remove(_usernameKey);
       emitter(const AuthState.notAuthenticated());
+      await _prefs.remove(_usernameKey);
     } on Object catch (error, stackTrace) {
       logError(error, stackTrace);
     }

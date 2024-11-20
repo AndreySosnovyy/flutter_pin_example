@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc_side_effect/flutter_bloc_side_effect.dart';
@@ -212,8 +213,22 @@ class _PinViewState extends State<PinView> {
                             !pinIndicatorAnimationController.isAnimatingSuccess,
                         leftExtraKey: PinpadExtraKey(
                           child: ForgotPinButton(enabled: isPinpadEnabled),
-                          onTap: () {
+                          onTap: () async {
                             restartIdleTimer();
+                            pinIndicatorAnimationController.animateClear(
+                              animation: PinClearAnimation.drop,
+                              onComplete: clear,
+                              onInterrupt: clear,
+                            );
+                            final result = await showOkCancelAlertDialog(
+                              context: context,
+                              title: 'Are you sure',
+                              message: 'You will be logged out',
+                              isDestructiveAction: true,
+                              okLabel: 'Yes',
+                              cancelLabel: 'No',
+                            );
+                            if (result == OkCancelResult.cancel) return;
                             pinBloc.add(PinEvent.giveUp());
                             if (pin.isEmpty ||
                                 pinIndicatorAnimationController
@@ -222,11 +237,6 @@ class _PinViewState extends State<PinView> {
                                     .isAnimatingError) {
                               return;
                             }
-                            pinIndicatorAnimationController.animateClear(
-                              animation: PinClearAnimation.drop,
-                              onComplete: clear,
-                              onInterrupt: clear,
-                            );
                           },
                         ),
                         rightExtraKey: buildRightPinpadExtraKey(
