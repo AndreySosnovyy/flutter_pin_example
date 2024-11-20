@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pin_example/app/extensions/context.dart';
 import 'package:flutter_pin_example/app/widgets/hidden_logo/dynamic_island_logo_builder.dart';
 import 'package:flutter_pin_example/app/widgets/hidden_logo/notch_logo_builder.dart';
-import 'package:flutter_pin_example/features/settings/view/settings_view.dart';
 import 'package:hidden_logo/hidden_logo.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
@@ -27,15 +26,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    final pinCodeController = context.dependencies.pinCodeController;
     WidgetsBinding.instance.addObserver(this);
-    if (pinCodeController.requestAgainConfig == null) return;
-    // You have also to set the callback on app start for Request again feature
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await pinCodeController.setRequestAgainConfig(pinCodeController
-          .requestAgainConfig!
-          .copyWith(onRequestAgain: requestAgainCallback));
-    });
   }
 
   @override

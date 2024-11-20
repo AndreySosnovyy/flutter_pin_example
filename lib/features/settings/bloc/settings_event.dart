@@ -4,6 +4,7 @@ part of 'settings_bloc.dart';
 sealed class SettingsEvent with _$SettingsEvent {
   const SettingsEvent._();
 
+  const factory SettingsEvent.initialize() = _InitializeSettingsEvent;
 
   const factory SettingsEvent.fetch() = _FetchSettingsEvent;
 

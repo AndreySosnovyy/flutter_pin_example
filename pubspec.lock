@@ -713,10 +713,10 @@ packages:
     dependency: "direct main"
     description:
       name: pin
-      sha256: fca1b9fff91f14a8473b9a5e98290d7daf49ffd06236b054842429087c799950
+      sha256: "166fbdb91ca480ec3d924824f718c58f06cecd44a0d3346b6edac9154e8e2650"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.0"
+    version: "0.3.1"
   pin_ui:
     dependency: "direct main"
     description:

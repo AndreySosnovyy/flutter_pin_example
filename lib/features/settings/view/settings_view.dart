@@ -1,39 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc_side_effect/flutter_bloc_side_effect.dart';
-import 'package:flutter_pin_example/app/app.dart';
 import 'package:flutter_pin_example/app/extensions/context.dart';
-import 'package:flutter_pin_example/features/pin/view/pin_view.dart';
 import 'package:flutter_pin_example/features/settings/bloc/settings_bloc.dart';
 import 'package:flutter_pin_example/features/settings/view/widgets/create_pin_dialog.dart';
 import 'package:flutter_pin_example/features/settings/view/widgets/picker_dialog.dart';
 import 'package:flutter_pin_example/features/settings/view/widgets/settings_tile.dart';
 
-void requestAgainCallback() {
-  final navigator = navigatorKey.currentState!;
-  if (!navigator.canPop()) return;
-  navigator
-    ..popUntil((route) => route.isFirst)
-    ..pushReplacement(MaterialPageRoute(
-      builder: (context) => const PinView(),
-    ));
-}
-
 class SettingsView extends StatefulWidget {
-  const SettingsView({
-    super.key,
-  });
+  const SettingsView({super.key});
 
   @override
   State<SettingsView> createState() => _SettingsViewState();
 }
 
 class _SettingsViewState extends State<SettingsView> {
+  void navigateToPinView() {
+    if (ModalRoute.of(context)?.settings.name == '/pin') return;
+    context.router.push('/pin');
+  }
+
   @override
   Widget build(BuildContext context) {
     final settingsBloc = context.dependencies.settingsBloc;
-    return BlocConsumer<SettingsBloc, SettingsState>(
+    return BlocBuilder<SettingsBloc, SettingsState>(
       bloc: context.dependencies.settingsBloc,
-      listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
@@ -99,14 +89,15 @@ class _SettingsViewState extends State<SettingsView> {
                         builder: (context) => PickerDialog(
                           title: 'Select Request Again time configuration',
                           alternatives: [
-                            for (final type in SkipPinType.values) type.title
+                            for (final type in RequestAgainType.values)
+                              type.title
                           ],
                           onTap: (index) {
-                            final type = SkipPinType.values[index];
+                            final type = RequestAgainType.values[index];
                             settingsBloc
                                 .add(SettingsEvent.setRequestAgainSeconds(
                               type.seconds,
-                              onRequestAgainCalled: requestAgainCallback,
+                              onRequestAgainCalled: navigateToPinView,
                             ));
                             Navigator.of(context).pop();
                           },

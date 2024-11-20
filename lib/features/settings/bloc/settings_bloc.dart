@@ -5,9 +5,11 @@ import 'package:pin/pin.dart';
 
 part 'settings_bloc.freezed.dart';
 part 'settings_event.dart';
+part 'settings_side_effect.dart';
 part 'settings_state.dart';
 
-class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
+class SettingsBloc extends Bloc<SettingsEvent, SettingsState>
+    with BlocSideEffectMixin<SettingsEvent, SettingsState, SettingsSideEffect> {
   SettingsBloc({
     required PinCodeController pinCodeController,
   })  : _pinCodeController = pinCodeController,
@@ -22,6 +24,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         )) {
     on<SettingsEvent>(
       (event, emitter) => event.map(
+        initialize: (event) => _initialize(event, emitter),
         fetch: (event) => _fetchPinSettings(event, emitter),
         setPin: (event) => _setPinEnabled(event, emitter),
         setBiometricsEnabled: (event) => _setBiometricsType(event, emitter),
@@ -33,6 +36,17 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   }
 
   final PinCodeController _pinCodeController;
+
+  Future<void> _initialize(
+    _InitializeSettingsEvent event,
+    Emitter<SettingsState> emitter,
+  ) async {
+    try {
+      emitSideEffect(SettingsSideEffect.initialize());
+    } on Object catch (error, stackTrace) {
+      logError(error, stackTrace);
+    }
+  }
 
   Future<void> _fetchPinSettings(
     _FetchSettingsEvent event,

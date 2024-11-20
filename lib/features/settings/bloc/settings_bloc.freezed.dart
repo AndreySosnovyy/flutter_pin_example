@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SettingsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
     required TResult Function() fetch,
     required TResult Function(String? pin) setPin,
     required TResult Function(bool enabled) setBiometricsEnabled,
@@ -29,6 +30,7 @@ mixin _$SettingsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
     TResult? Function()? fetch,
     TResult? Function(String? pin)? setPin,
     TResult? Function(bool enabled)? setBiometricsEnabled,
@@ -39,6 +41,7 @@ mixin _$SettingsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
     TResult Function()? fetch,
     TResult Function(String? pin)? setPin,
     TResult Function(bool enabled)? setBiometricsEnabled,
@@ -50,6 +53,7 @@ mixin _$SettingsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_InitializeSettingsEvent value) initialize,
     required TResult Function(_FetchSettingsEvent value) fetch,
     required TResult Function(_SetPinSettingsEvent value) setPin,
     required TResult Function(_SetBiometricsEnabledSettingsEvent value)
@@ -62,6 +66,7 @@ mixin _$SettingsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InitializeSettingsEvent value)? initialize,
     TResult? Function(_FetchSettingsEvent value)? fetch,
     TResult? Function(_SetPinSettingsEvent value)? setPin,
     TResult? Function(_SetBiometricsEnabledSettingsEvent value)?
@@ -73,6 +78,7 @@ mixin _$SettingsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InitializeSettingsEvent value)? initialize,
     TResult Function(_FetchSettingsEvent value)? fetch,
     TResult Function(_SetPinSettingsEvent value)? setPin,
     TResult Function(_SetBiometricsEnabledSettingsEvent value)?
@@ -104,6 +110,150 @@ class _$SettingsEventCopyWithImpl<$Res, $Val extends SettingsEvent>
 
   /// Create a copy of SettingsEvent
   /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$InitializeSettingsEventImplCopyWith<$Res> {
+  factory _$$InitializeSettingsEventImplCopyWith(
+          _$InitializeSettingsEventImpl value,
+          $Res Function(_$InitializeSettingsEventImpl) then) =
+      __$$InitializeSettingsEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$InitializeSettingsEventImplCopyWithImpl<$Res>
+    extends _$SettingsEventCopyWithImpl<$Res, _$InitializeSettingsEventImpl>
+    implements _$$InitializeSettingsEventImplCopyWith<$Res> {
+  __$$InitializeSettingsEventImplCopyWithImpl(
+      _$InitializeSettingsEventImpl _value,
+      $Res Function(_$InitializeSettingsEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of SettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$InitializeSettingsEventImpl extends _InitializeSettingsEvent {
+  const _$InitializeSettingsEventImpl() : super._();
+
+  @override
+  String toString() {
+    return 'SettingsEvent.initialize()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$InitializeSettingsEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+    required TResult Function() fetch,
+    required TResult Function(String? pin) setPin,
+    required TResult Function(bool enabled) setBiometricsEnabled,
+    required TResult Function(
+            int? seconds, void Function()? onRequestAgainCalled)
+        setRequestAgainSeconds,
+    required TResult Function(int? seconds) setSkipPinSeconds,
+  }) {
+    return initialize();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
+    TResult? Function()? fetch,
+    TResult? Function(String? pin)? setPin,
+    TResult? Function(bool enabled)? setBiometricsEnabled,
+    TResult? Function(int? seconds, void Function()? onRequestAgainCalled)?
+        setRequestAgainSeconds,
+    TResult? Function(int? seconds)? setSkipPinSeconds,
+  }) {
+    return initialize?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function()? fetch,
+    TResult Function(String? pin)? setPin,
+    TResult Function(bool enabled)? setBiometricsEnabled,
+    TResult Function(int? seconds, void Function()? onRequestAgainCalled)?
+        setRequestAgainSeconds,
+    TResult Function(int? seconds)? setSkipPinSeconds,
+    required TResult orElse(),
+  }) {
+    if (initialize != null) {
+      return initialize();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InitializeSettingsEvent value) initialize,
+    required TResult Function(_FetchSettingsEvent value) fetch,
+    required TResult Function(_SetPinSettingsEvent value) setPin,
+    required TResult Function(_SetBiometricsEnabledSettingsEvent value)
+        setBiometricsEnabled,
+    required TResult Function(_SetRequestAgainSecondsSettingsEvent value)
+        setRequestAgainSeconds,
+    required TResult Function(_SetSkipPinSecondsSettingsEvent value)
+        setSkipPinSeconds,
+  }) {
+    return initialize(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InitializeSettingsEvent value)? initialize,
+    TResult? Function(_FetchSettingsEvent value)? fetch,
+    TResult? Function(_SetPinSettingsEvent value)? setPin,
+    TResult? Function(_SetBiometricsEnabledSettingsEvent value)?
+        setBiometricsEnabled,
+    TResult? Function(_SetRequestAgainSecondsSettingsEvent value)?
+        setRequestAgainSeconds,
+    TResult? Function(_SetSkipPinSecondsSettingsEvent value)? setSkipPinSeconds,
+  }) {
+    return initialize?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InitializeSettingsEvent value)? initialize,
+    TResult Function(_FetchSettingsEvent value)? fetch,
+    TResult Function(_SetPinSettingsEvent value)? setPin,
+    TResult Function(_SetBiometricsEnabledSettingsEvent value)?
+        setBiometricsEnabled,
+    TResult Function(_SetRequestAgainSecondsSettingsEvent value)?
+        setRequestAgainSeconds,
+    TResult Function(_SetSkipPinSecondsSettingsEvent value)? setSkipPinSeconds,
+    required TResult orElse(),
+  }) {
+    if (initialize != null) {
+      return initialize(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _InitializeSettingsEvent extends SettingsEvent {
+  const factory _InitializeSettingsEvent() = _$InitializeSettingsEventImpl;
+  const _InitializeSettingsEvent._() : super._();
 }
 
 /// @nodoc
@@ -147,6 +297,7 @@ class _$FetchSettingsEventImpl extends _FetchSettingsEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
     required TResult Function() fetch,
     required TResult Function(String? pin) setPin,
     required TResult Function(bool enabled) setBiometricsEnabled,
@@ -161,6 +312,7 @@ class _$FetchSettingsEventImpl extends _FetchSettingsEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
     TResult? Function()? fetch,
     TResult? Function(String? pin)? setPin,
     TResult? Function(bool enabled)? setBiometricsEnabled,
@@ -174,6 +326,7 @@ class _$FetchSettingsEventImpl extends _FetchSettingsEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
     TResult Function()? fetch,
     TResult Function(String? pin)? setPin,
     TResult Function(bool enabled)? setBiometricsEnabled,
@@ -191,6 +344,7 @@ class _$FetchSettingsEventImpl extends _FetchSettingsEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_InitializeSettingsEvent value) initialize,
     required TResult Function(_FetchSettingsEvent value) fetch,
     required TResult Function(_SetPinSettingsEvent value) setPin,
     required TResult Function(_SetBiometricsEnabledSettingsEvent value)
@@ -206,6 +360,7 @@ class _$FetchSettingsEventImpl extends _FetchSettingsEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InitializeSettingsEvent value)? initialize,
     TResult? Function(_FetchSettingsEvent value)? fetch,
     TResult? Function(_SetPinSettingsEvent value)? setPin,
     TResult? Function(_SetBiometricsEnabledSettingsEvent value)?
@@ -220,6 +375,7 @@ class _$FetchSettingsEventImpl extends _FetchSettingsEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InitializeSettingsEvent value)? initialize,
     TResult Function(_FetchSettingsEvent value)? fetch,
     TResult Function(_SetPinSettingsEvent value)? setPin,
     TResult Function(_SetBiometricsEnabledSettingsEvent value)?
@@ -310,6 +466,7 @@ class _$SetPinSettingsEventImpl extends _SetPinSettingsEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
     required TResult Function() fetch,
     required TResult Function(String? pin) setPin,
     required TResult Function(bool enabled) setBiometricsEnabled,
@@ -324,6 +481,7 @@ class _$SetPinSettingsEventImpl extends _SetPinSettingsEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
     TResult? Function()? fetch,
     TResult? Function(String? pin)? setPin,
     TResult? Function(bool enabled)? setBiometricsEnabled,
@@ -337,6 +495,7 @@ class _$SetPinSettingsEventImpl extends _SetPinSettingsEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
     TResult Function()? fetch,
     TResult Function(String? pin)? setPin,
     TResult Function(bool enabled)? setBiometricsEnabled,
@@ -354,6 +513,7 @@ class _$SetPinSettingsEventImpl extends _SetPinSettingsEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_InitializeSettingsEvent value) initialize,
     required TResult Function(_FetchSettingsEvent value) fetch,
     required TResult Function(_SetPinSettingsEvent value) setPin,
     required TResult Function(_SetBiometricsEnabledSettingsEvent value)
@@ -369,6 +529,7 @@ class _$SetPinSettingsEventImpl extends _SetPinSettingsEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InitializeSettingsEvent value)? initialize,
     TResult? Function(_FetchSettingsEvent value)? fetch,
     TResult? Function(_SetPinSettingsEvent value)? setPin,
     TResult? Function(_SetBiometricsEnabledSettingsEvent value)?
@@ -383,6 +544,7 @@ class _$SetPinSettingsEventImpl extends _SetPinSettingsEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InitializeSettingsEvent value)? initialize,
     TResult Function(_FetchSettingsEvent value)? fetch,
     TResult Function(_SetPinSettingsEvent value)? setPin,
     TResult Function(_SetBiometricsEnabledSettingsEvent value)?
@@ -487,6 +649,7 @@ class _$SetBiometricsEnabledSettingsEventImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
     required TResult Function() fetch,
     required TResult Function(String? pin) setPin,
     required TResult Function(bool enabled) setBiometricsEnabled,
@@ -501,6 +664,7 @@ class _$SetBiometricsEnabledSettingsEventImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
     TResult? Function()? fetch,
     TResult? Function(String? pin)? setPin,
     TResult? Function(bool enabled)? setBiometricsEnabled,
@@ -514,6 +678,7 @@ class _$SetBiometricsEnabledSettingsEventImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
     TResult Function()? fetch,
     TResult Function(String? pin)? setPin,
     TResult Function(bool enabled)? setBiometricsEnabled,
@@ -531,6 +696,7 @@ class _$SetBiometricsEnabledSettingsEventImpl
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_InitializeSettingsEvent value) initialize,
     required TResult Function(_FetchSettingsEvent value) fetch,
     required TResult Function(_SetPinSettingsEvent value) setPin,
     required TResult Function(_SetBiometricsEnabledSettingsEvent value)
@@ -546,6 +712,7 @@ class _$SetBiometricsEnabledSettingsEventImpl
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InitializeSettingsEvent value)? initialize,
     TResult? Function(_FetchSettingsEvent value)? fetch,
     TResult? Function(_SetPinSettingsEvent value)? setPin,
     TResult? Function(_SetBiometricsEnabledSettingsEvent value)?
@@ -560,6 +727,7 @@ class _$SetBiometricsEnabledSettingsEventImpl
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InitializeSettingsEvent value)? initialize,
     TResult Function(_FetchSettingsEvent value)? fetch,
     TResult Function(_SetPinSettingsEvent value)? setPin,
     TResult Function(_SetBiometricsEnabledSettingsEvent value)?
@@ -676,6 +844,7 @@ class _$SetRequestAgainSecondsSettingsEventImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
     required TResult Function() fetch,
     required TResult Function(String? pin) setPin,
     required TResult Function(bool enabled) setBiometricsEnabled,
@@ -690,6 +859,7 @@ class _$SetRequestAgainSecondsSettingsEventImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
     TResult? Function()? fetch,
     TResult? Function(String? pin)? setPin,
     TResult? Function(bool enabled)? setBiometricsEnabled,
@@ -703,6 +873,7 @@ class _$SetRequestAgainSecondsSettingsEventImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
     TResult Function()? fetch,
     TResult Function(String? pin)? setPin,
     TResult Function(bool enabled)? setBiometricsEnabled,
@@ -720,6 +891,7 @@ class _$SetRequestAgainSecondsSettingsEventImpl
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_InitializeSettingsEvent value) initialize,
     required TResult Function(_FetchSettingsEvent value) fetch,
     required TResult Function(_SetPinSettingsEvent value) setPin,
     required TResult Function(_SetBiometricsEnabledSettingsEvent value)
@@ -735,6 +907,7 @@ class _$SetRequestAgainSecondsSettingsEventImpl
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InitializeSettingsEvent value)? initialize,
     TResult? Function(_FetchSettingsEvent value)? fetch,
     TResult? Function(_SetPinSettingsEvent value)? setPin,
     TResult? Function(_SetBiometricsEnabledSettingsEvent value)?
@@ -749,6 +922,7 @@ class _$SetRequestAgainSecondsSettingsEventImpl
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InitializeSettingsEvent value)? initialize,
     TResult Function(_FetchSettingsEvent value)? fetch,
     TResult Function(_SetPinSettingsEvent value)? setPin,
     TResult Function(_SetBiometricsEnabledSettingsEvent value)?
@@ -856,6 +1030,7 @@ class _$SetSkipPinSecondsSettingsEventImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
     required TResult Function() fetch,
     required TResult Function(String? pin) setPin,
     required TResult Function(bool enabled) setBiometricsEnabled,
@@ -870,6 +1045,7 @@ class _$SetSkipPinSecondsSettingsEventImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
     TResult? Function()? fetch,
     TResult? Function(String? pin)? setPin,
     TResult? Function(bool enabled)? setBiometricsEnabled,
@@ -883,6 +1059,7 @@ class _$SetSkipPinSecondsSettingsEventImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
     TResult Function()? fetch,
     TResult Function(String? pin)? setPin,
     TResult Function(bool enabled)? setBiometricsEnabled,
@@ -900,6 +1077,7 @@ class _$SetSkipPinSecondsSettingsEventImpl
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_InitializeSettingsEvent value) initialize,
     required TResult Function(_FetchSettingsEvent value) fetch,
     required TResult Function(_SetPinSettingsEvent value) setPin,
     required TResult Function(_SetBiometricsEnabledSettingsEvent value)
@@ -915,6 +1093,7 @@ class _$SetSkipPinSecondsSettingsEventImpl
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InitializeSettingsEvent value)? initialize,
     TResult? Function(_FetchSettingsEvent value)? fetch,
     TResult? Function(_SetPinSettingsEvent value)? setPin,
     TResult? Function(_SetBiometricsEnabledSettingsEvent value)?
@@ -929,6 +1108,7 @@ class _$SetSkipPinSecondsSettingsEventImpl
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InitializeSettingsEvent value)? initialize,
     TResult Function(_FetchSettingsEvent value)? fetch,
     TResult Function(_SetPinSettingsEvent value)? setPin,
     TResult Function(_SetBiometricsEnabledSettingsEvent value)?
@@ -1306,4 +1486,166 @@ abstract class _IdleSettingsState extends SettingsState {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$IdleSettingsStateImplCopyWith<_$IdleSettingsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$SettingsSideEffect {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InitializeSettingsSideEffect value) initialize,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InitializeSettingsSideEffect value)? initialize,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InitializeSettingsSideEffect value)? initialize,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SettingsSideEffectCopyWith<$Res> {
+  factory $SettingsSideEffectCopyWith(
+          SettingsSideEffect value, $Res Function(SettingsSideEffect) then) =
+      _$SettingsSideEffectCopyWithImpl<$Res, SettingsSideEffect>;
+}
+
+/// @nodoc
+class _$SettingsSideEffectCopyWithImpl<$Res, $Val extends SettingsSideEffect>
+    implements $SettingsSideEffectCopyWith<$Res> {
+  _$SettingsSideEffectCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of SettingsSideEffect
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$InitializeSettingsSideEffectImplCopyWith<$Res> {
+  factory _$$InitializeSettingsSideEffectImplCopyWith(
+          _$InitializeSettingsSideEffectImpl value,
+          $Res Function(_$InitializeSettingsSideEffectImpl) then) =
+      __$$InitializeSettingsSideEffectImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$InitializeSettingsSideEffectImplCopyWithImpl<$Res>
+    extends _$SettingsSideEffectCopyWithImpl<$Res,
+        _$InitializeSettingsSideEffectImpl>
+    implements _$$InitializeSettingsSideEffectImplCopyWith<$Res> {
+  __$$InitializeSettingsSideEffectImplCopyWithImpl(
+      _$InitializeSettingsSideEffectImpl _value,
+      $Res Function(_$InitializeSettingsSideEffectImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of SettingsSideEffect
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$InitializeSettingsSideEffectImpl extends _InitializeSettingsSideEffect {
+  const _$InitializeSettingsSideEffectImpl() : super._();
+
+  @override
+  String toString() {
+    return 'SettingsSideEffect.initialize()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$InitializeSettingsSideEffectImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+  }) {
+    return initialize();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
+  }) {
+    return initialize?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    required TResult orElse(),
+  }) {
+    if (initialize != null) {
+      return initialize();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InitializeSettingsSideEffect value) initialize,
+  }) {
+    return initialize(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InitializeSettingsSideEffect value)? initialize,
+  }) {
+    return initialize?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InitializeSettingsSideEffect value)? initialize,
+    required TResult orElse(),
+  }) {
+    if (initialize != null) {
+      return initialize(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _InitializeSettingsSideEffect extends SettingsSideEffect {
+  const factory _InitializeSettingsSideEffect() =
+      _$InitializeSettingsSideEffectImpl;
+  const _InitializeSettingsSideEffect._() : super._();
 }

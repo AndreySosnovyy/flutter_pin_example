@@ -53,6 +53,10 @@ class _PinViewState extends State<PinView> {
 
   @override
   void initState() {
+    // Hack to avoid exceptions when state changes while on pin view with request config being set
+    context.dependencies.pinCodeController.setRequestAgainConfig(context
+        .dependencies.pinCodeController.requestAgainConfig
+        ?.copyWith(onRequestAgain: () {}));
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final controller = context.dependencies.pinCodeController;
       targetPinLength = controller.pinCodeLength!;
@@ -120,137 +124,140 @@ class _PinViewState extends State<PinView> {
   @override
   Widget build(BuildContext context) {
     if (!pinBlocInitializationCompleter.isCompleted) return SizedBox.shrink();
-    return BlocConsumerWithSideEffects<PinBloc, PinState, PinSideEffect>(
-      bloc: pinBloc,
-      sideEffectsListener: (context, se) {
-        se.map(
-          giveUp: (_) {
-            context.dependencies.authBloc.add(AuthEvent.signOut());
-            context.dependencies.settingsBloc.add(SettingsEvent.fetch());
-          },
-        );
-      },
-      listener: (context, state) {
-        if (state.isError) {
-          pinIndicatorAnimationController.animateError(
-            onInterrupt: clear,
-            delayAfterAnimation: const Duration(milliseconds: 240),
-          );
-          pinIndicatorAnimationController.animateClear(
-            onInterrupt: clear,
-            onComplete: clear,
-          );
-        } else if (state.isSuccess) {
-          setState(() => isLoading = true);
-          pinIndicatorAnimationController.animateLoading(
-            repeatCount: 2,
-            delayAfterAnimation: const Duration(milliseconds: 160),
-            onComplete: () => setState(() => isLoading = false),
-          );
-          pinIndicatorAnimationController.animateSuccess(
-            animation: PinSuccessAnimation.fillLast,
-            onComplete: () {
-              context.router.pushReplacement('/home');
+    return PopScope(
+      canPop: false,
+      child: BlocConsumerWithSideEffects<PinBloc, PinState, PinSideEffect>(
+        bloc: pinBloc,
+        sideEffectsListener: (context, se) {
+          se.map(
+            giveUp: (_) {
+              context.dependencies.authBloc.add(AuthEvent.signOut());
+              context.dependencies.settingsBloc.add(SettingsEvent.fetch());
             },
           );
-        }
-      },
-      builder: (context, state) {
-        return BlocListener<AuthBloc, AuthState>(
-          bloc: context.dependencies.authBloc,
-          listener: (context, state) {
-            state.mapOrNull(notAuthenticated: (_) {
-              while (context.router.canPop()) {
-                context.router.pop();
-              }
-              context.router.go('/auth');
-            });
-          },
-          child: ValueListenableBuilder(
-              valueListenable: pinIndicatorAnimationController,
-              builder: (context, _, __) {
-                final isPinpadEnabled = !pinIndicatorAnimationController
-                        .isAnimatingNonInterruptible &&
-                    !state.isTimeout;
-                return Scaffold(
-                  backgroundColor: Colors.black,
-                  body: Column(
-                    children: [
-                      SizedBox(width: MediaQuery.sizeOf(context).width),
-                      Spacer(flex: 3),
-                      if (context.dependencies.pinCodeController.isPinCodeSet)
-                        ExamplePinIndicator(
+        },
+        listener: (context, state) {
+          if (state.isError) {
+            pinIndicatorAnimationController.animateError(
+              onInterrupt: clear,
+              delayAfterAnimation: const Duration(milliseconds: 240),
+            );
+            pinIndicatorAnimationController.animateClear(
+              onInterrupt: clear,
+              onComplete: clear,
+            );
+          } else if (state.isSuccess) {
+            setState(() => isLoading = true);
+            pinIndicatorAnimationController.animateLoading(
+              repeatCount: 2,
+              delayAfterAnimation: const Duration(milliseconds: 160),
+              onComplete: () => setState(() => isLoading = false),
+            );
+            pinIndicatorAnimationController.animateSuccess(
+              animation: PinSuccessAnimation.fillLast,
+              onComplete: () {
+                context.router.pushReplacement('/home');
+              },
+            );
+          }
+        },
+        builder: (context, state) {
+          return BlocListener<AuthBloc, AuthState>(
+            bloc: context.dependencies.authBloc,
+            listener: (context, state) {
+              state.mapOrNull(notAuthenticated: (_) {
+                while (context.router.canPop()) {
+                  context.router.pop();
+                }
+                context.router.go('/auth');
+              });
+            },
+            child: ValueListenableBuilder(
+                valueListenable: pinIndicatorAnimationController,
+                builder: (context, _, __) {
+                  final isPinpadEnabled = !pinIndicatorAnimationController
+                          .isAnimatingNonInterruptible &&
+                      !state.isTimeout;
+                  return Scaffold(
+                    backgroundColor: Colors.black,
+                    body: Column(
+                      children: [
+                        SizedBox(width: MediaQuery.sizeOf(context).width),
+                        Spacer(flex: 3),
+                        if (context.dependencies.pinCodeController.isPinCodeSet)
+                          ExamplePinIndicator(
+                            isDark: true,
+                            controller: pinIndicatorAnimationController,
+                            length: context
+                                .dependencies.pinCodeController.pinCodeLength!,
+                            currentLength: pin.length,
+                            isError: state.isError,
+                            isSuccess: state.isSuccess && !isLoading,
+                          ),
+                        SizedBox(height: 64),
+                        ExamplePinpad(
                           isDark: true,
-                          controller: pinIndicatorAnimationController,
-                          length: context
-                              .dependencies.pinCodeController.pinCodeLength!,
-                          currentLength: pin.length,
-                          isError: state.isError,
-                          isSuccess: state.isSuccess && !isLoading,
-                        ),
-                      SizedBox(height: 64),
-                      ExamplePinpad(
-                        isDark: true,
-                        onKeyTap: (key) {
-                          restartIdleTimer();
-                          if (pinIndicatorAnimationController
-                              .isAnimatingNonInterruptible) {
-                            return;
-                          } else {
-                            pinIndicatorAnimationController.stop();
-                          }
-                          if (pin.length < targetPinLength) {
-                            setState(() => pin += key);
-                            pinIndicatorAnimationController.animateInput();
-                          }
-                          if (pin.length == targetPinLength &&
-                              !state.isTestingPin) {
-                            pinBloc.add(PinEvent.testPin(pin: pin));
-                          }
-                        },
-                        enabled: isPinpadEnabled,
-                        isVisible:
-                            !pinIndicatorAnimationController.isAnimatingSuccess,
-                        leftExtraKey: PinpadExtraKey(
-                          child: ForgotPinButton(enabled: isPinpadEnabled),
-                          onTap: () async {
+                          onKeyTap: (key) {
                             restartIdleTimer();
-                            pinIndicatorAnimationController.animateClear(
-                              animation: PinClearAnimation.drop,
-                              onComplete: clear,
-                              onInterrupt: clear,
-                            );
-                            final result = await showOkCancelAlertDialog(
-                              context: context,
-                              title: 'Are you sure',
-                              message: 'You will be logged out',
-                              isDestructiveAction: true,
-                              okLabel: 'Yes',
-                              cancelLabel: 'No',
-                            );
-                            if (result == OkCancelResult.cancel) return;
-                            pinBloc.add(PinEvent.giveUp());
-                            if (pin.isEmpty ||
-                                pinIndicatorAnimationController
-                                    .isAnimatingClear ||
-                                pinIndicatorAnimationController
-                                    .isAnimatingError) {
+                            if (pinIndicatorAnimationController
+                                .isAnimatingNonInterruptible) {
                               return;
+                            } else {
+                              pinIndicatorAnimationController.stop();
+                            }
+                            if (pin.length < targetPinLength) {
+                              setState(() => pin += key);
+                              pinIndicatorAnimationController.animateInput();
+                            }
+                            if (pin.length == targetPinLength &&
+                                !state.isTestingPin) {
+                              pinBloc.add(PinEvent.testPin(pin: pin));
                             }
                           },
-                        ),
-                        rightExtraKey: buildRightPinpadExtraKey(
-                          pinBloc: pinBloc,
                           enabled: isPinpadEnabled,
+                          isVisible: !pinIndicatorAnimationController
+                              .isAnimatingSuccess,
+                          leftExtraKey: PinpadExtraKey(
+                            child: ForgotPinButton(enabled: isPinpadEnabled),
+                            onTap: () async {
+                              restartIdleTimer();
+                              pinIndicatorAnimationController.animateClear(
+                                animation: PinClearAnimation.drop,
+                                onComplete: clear,
+                                onInterrupt: clear,
+                              );
+                              final result = await showOkCancelAlertDialog(
+                                context: context,
+                                title: 'Are you sure',
+                                message: 'You will be logged out',
+                                isDestructiveAction: true,
+                                okLabel: 'Yes',
+                                cancelLabel: 'No',
+                              );
+                              if (result == OkCancelResult.cancel) return;
+                              pinBloc.add(PinEvent.giveUp());
+                              if (pin.isEmpty ||
+                                  pinIndicatorAnimationController
+                                      .isAnimatingClear ||
+                                  pinIndicatorAnimationController
+                                      .isAnimatingError) {
+                                return;
+                              }
+                            },
+                          ),
+                          rightExtraKey: buildRightPinpadExtraKey(
+                            pinBloc: pinBloc,
+                            enabled: isPinpadEnabled,
+                          ),
                         ),
-                      ),
-                      Spacer(flex: 1),
-                    ],
-                  ),
-                );
-              }),
-        );
-      },
+                        Spacer(flex: 1),
+                      ],
+                    ),
+                  );
+                }),
+          );
+        },
+      ),
     );
   }
 
