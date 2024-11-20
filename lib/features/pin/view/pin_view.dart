@@ -38,6 +38,9 @@ class _PinViewState extends State<PinView> {
 
   bool isLoading = false;
 
+  Timer? timeoutTimer;
+  String timerToDisplay = '';
+
   // It will start idle animation if no action has been made in 10 seconds
   void restartIdleTimer() {
     if (idlePinIndicatorAnimationTimer != null &&
@@ -138,29 +141,50 @@ class _PinViewState extends State<PinView> {
           );
         },
         listener: (context, state) {
-          if (state.isError) {
-            pinIndicatorAnimationController.animateError(
-              onInterrupt: clear,
-              delayAfterAnimation: const Duration(milliseconds: 240),
-            );
-            pinIndicatorAnimationController.animateClear(
-              onInterrupt: clear,
-              onComplete: clear,
-            );
-          } else if (state.isSuccess) {
-            setState(() => isLoading = true);
-            pinIndicatorAnimationController.animateLoading(
-              repeatCount: 2,
-              delayAfterAnimation: const Duration(milliseconds: 160),
-              onComplete: () => setState(() => isLoading = false),
-            );
-            pinIndicatorAnimationController.animateSuccess(
-              animation: PinSuccessAnimation.fillLast,
-              onComplete: () {
-                context.router.pushReplacement('/home');
-              },
-            );
-          }
+          state.mapOrNull(
+            error: (state) {
+              pinIndicatorAnimationController.animateError(
+                onInterrupt: clear,
+                delayAfterAnimation: const Duration(milliseconds: 240),
+              );
+              pinIndicatorAnimationController.animateClear(
+                onInterrupt: clear,
+                onComplete: clear,
+              );
+            },
+            success: (state) {
+              setState(() => isLoading = true);
+              pinIndicatorAnimationController.animateLoading(
+                repeatCount: 2,
+                delayAfterAnimation: const Duration(milliseconds: 160),
+                onComplete: () => setState(() => isLoading = false),
+              );
+              pinIndicatorAnimationController.animateSuccess(
+                animation: PinSuccessAnimation.fillLast,
+                onComplete: () {
+                  context.router.pushReplacement('/home');
+                },
+              );
+            },
+            timeout: (state) async {
+              final ticks = state.remainingDuration.inSeconds;
+              timeoutTimer = Timer.periodic(
+                const Duration(seconds: 1),
+                (timer) {
+                  if (timer.tick == ticks) {
+                    timeoutTimer?.cancel();
+                    timeoutTimer = null;
+                    timerToDisplay = '';
+                    return;
+                  }
+                  final duration = Duration(seconds: ticks - timer.tick);
+                  timerToDisplay =
+                      'Timeout: ${duration.inHours}:${duration.inMinutes.remainder(60)}:${(duration.inSeconds.remainder(60))}';
+                  setState(() {});
+                },
+              );
+            },
+          );
         },
         builder: (context, state) {
           return BlocListenerWithSideEffects<AuthBloc, AuthState,
@@ -269,11 +293,8 @@ class _PinViewState extends State<PinView> {
                         Padding(
                           padding: const EdgeInsets.only(top: 32),
                           child: Text(
-                            state.timeoutDuration?.toString() ?? '',
-                            style: TextStyle(
-                              color:
-                                  state.isTimeout ? Colors.white : Colors.black,
-                            ),
+                            timerToDisplay,
+                            style: TextStyle(color: Colors.white),
                           ),
                         ),
                         Spacer(flex: 1),
@@ -293,6 +314,8 @@ class _PinViewState extends State<PinView> {
     pinIndicatorAnimationController.dispose();
     idlePinIndicatorAnimationTimer?.cancel();
     idlePinIndicatorAnimationTimer = null;
+    timeoutTimer?.cancel();
+    timeoutTimer = null;
     super.dispose();
   }
 }
